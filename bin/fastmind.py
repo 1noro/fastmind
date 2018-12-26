@@ -16,8 +16,10 @@ from graphic.player import Player
 
 ### NON EDITABLE VARIABLES #####################################################
 window = 0 # glut window number
-wmap=[] # wall list
-womap=[] # wall object list
+wmap = [] # wall list
+womap = [] # wall object list
+goal = 0 # goal object
+player = 0 # player object
 
 maplist=['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', ' ', '#', '$', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', '@', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
 
@@ -28,7 +30,7 @@ stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize):
-    global wmap, womap
+    global wmap, womap, goal, player
 
     maxx=stdsize*lw
     maxy=stdsize*lh
@@ -45,11 +47,10 @@ def pre_draw_map(maplist,lw,lh,stdsize):
                 womap.append(Wall(x,y,stdsize))
             elif (maplist[i]=='$'):
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
-                womap.append(Goal(x,y,stdsize))
+                goal = Goal(x,y,stdsize)
             elif (maplist[i]=='@'):
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
-                # womap.append(Player(x,y,stdsize))
-                pass
+                player = Player(x,y,stdsize)
             else:
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
                 pass
@@ -66,24 +67,54 @@ def draw_map(womap):
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
-
     # --- EDITABLE -------------------------------------------------------------
-    # a=Wall(20,20,stdsize)
-    #
-    # glColor3f(stdR, stdG, stdB) #color
-    # a.draw()
+    glColor3f(stdR,stdG,stdB)
     draw_map(womap)
+    glColor3f(Color.RED[0],Color.RED[1],Color.RED[2])
+    goal.draw()
+    glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
+    player.draw()
     # --------------------------------------------------------------------------
-
     glFlush()
     glutPostRedisplay()
     glutSwapBuffers()
 
+def checkMove(x,y):
+    out=True
+    if ([x,y] in wmap):
+        print('[FAIL] NO MOVE')
+        out=False
+    return out
+
+def specialkey(key,x,y):
+    xa, ya = player.x, player.y
+
+    if (key==GLUT_KEY_UP):
+        ya+=stdsize
+        if (checkMove(xa,ya)):
+            player.move_up()
+            print('[ UP ] xa:'+str(xa)+' ya:'+str(ya))
+    elif (key==GLUT_KEY_DOWN):
+        ya-=stdsize
+        if (checkMove(xa,ya)):
+            player.move_down()
+            print('[DOWN] xa:'+str(xa)+' ya:'+str(ya))
+    elif (key==GLUT_KEY_LEFT):
+        xa-=stdsize
+        if (checkMove(xa,ya)):
+            player.move_left()
+            print('[LEFT] xa:'+str(xa)+' ya:'+str(ya))
+    elif (key==GLUT_KEY_RIGHT):
+        xa+=stdsize
+        if (checkMove(xa,ya)):
+            player.move_right()
+            print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
+
+    glutPostRedisplay()
+
 ### MAIN #######################################################################
 def main():
-
     pre_draw_map(maplist,20,20,stdsize)
-
     # --- GRAPHIC INIT ---------------------------------------------------------
     glutInit() # initialize glut
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
@@ -95,7 +126,7 @@ def main():
 
     glClearColor(0,0,0,0)
     gluOrtho2D(0.0,width,0.0,height)
-    # glutSpecialFunc(specialkey)
+    glutSpecialFunc(specialkey)
 
     glutMainLoop()
 
