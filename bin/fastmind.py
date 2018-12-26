@@ -7,23 +7,19 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
+from utils.color import Color
+
 from graphic.rectangle import Rectangle
 from graphic.wall import Wall
+
 
 ### NON EDITABLE VARIABLES #####################################################
 window = 0 # glut window number
 
-BLACK   = (0.0, 0.0, 0.0)
-WHITE   = (1.0, 1.0, 1.0)
-RED     = (1.0, 0.0, 0.0)
-GREEN   = (0.0, 1.0, 0.0)
-BLUE    = (0.0, 0.0, 1.0)
-BLUE2   = (0.3, 0.3, 1.0)
-
 ### EDITABLE VARIABLES #########################################################
 width, height = 400, 400 # window size
 stdsize=20
-stdR, stdG, stdB=BLUE2
+stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
 def display():

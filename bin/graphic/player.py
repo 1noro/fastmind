@@ -9,7 +9,7 @@ from OpenGL.GLU import *
 from .Rectangle import Rectangle
 
 ### CLASES #####################################################################
-class Wall(Rectangle):
+class Player(Rectangle):
     def __init__(self, x, y, stdsize):
         self.x=x
         self.y=y
