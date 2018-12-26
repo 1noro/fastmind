@@ -1,0 +1,2 @@
+# fastmind
+Solve mazes.
