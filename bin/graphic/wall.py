@@ -2,10 +2,6 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-
 from .rectangle import Rectangle
 
 ### CLASES #####################################################################

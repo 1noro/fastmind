@@ -2,11 +2,7 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-
-from .Rectangle import Rectangle
+from .rectangle import Rectangle
 
 ### CLASES #####################################################################
 class Player(Rectangle):
@@ -21,5 +17,5 @@ class Player(Rectangle):
         self.height=new_stdsize
 
     def __eq__(self,other):
-		out=False
-		return out
+        out=False
+        return out
