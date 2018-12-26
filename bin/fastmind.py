@@ -6,6 +6,7 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from datetime import datetime
 
 from utils.color import Color
 
@@ -21,6 +22,8 @@ womap = [] # wall object list
 goal = 0 # goal object
 player = 0 # player object
 victory = False
+old_time = 0
+lvl_time = 0
 
 maplist=['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', ' ', '#', '$', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', '@', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
 
@@ -30,6 +33,28 @@ stdsize=20
 stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
+# def refresh2d(width, height):
+#     glViewport(0, 0, width, height)
+#     glMatrixMode(GL_PROJECTION)
+#     glLoadIdentity()
+#     glOrtho(0.0, width, 0.0, height, 0.0, 1.0)
+#     glMatrixMode (GL_MODELVIEW)
+#     glLoadIdentity()
+
+def glut_print( x,  y,  font,  text, r,  g , b , a):
+    blending = False
+    if glIsEnabled(GL_BLEND) :
+        blending = True
+
+    #glEnable(GL_BLEND)
+    glColor3f(1,1,1)
+    glRasterPos2f(x,y)
+    for ch in text :
+        glutBitmapCharacter( font , ctypes.c_int( ord(ch) ) )
+
+    if not blending :
+        glDisable(GL_BLEND)
+
 def pre_draw_map(maplist,lw,lh,stdsize):
     global wmap, womap, goal, player
 
@@ -67,11 +92,13 @@ def draw_map(womap):
         o.draw()
 
 def display():
-    global victory
+    global victory, lvl_time
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
     # --- PREVIOUS CHECKS ------------------------------------------------------
     if (not victory and (player.x, player.y) == (goal.x, goal.y)):
-        print('[GOAL] You pass the level.')
+        new_time = datetime.now()
+        lvl_time = new_time - old_time
+        print('[GOAL] You pass the level in:', lvl_time)
         victory=True
     # --- DRAWING --------------------------------------------------------------
     glColor3f(stdR,stdG,stdB)
@@ -81,6 +108,8 @@ def display():
     if not victory:
         glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
         player.draw()
+    else:
+        glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
     # --------------------------------------------------------------------------
     glFlush()
     glutPostRedisplay()
@@ -122,6 +151,9 @@ def specialkey(key,x,y):
 
 ### MAIN #######################################################################
 def main():
+    global old_time
+    old_time = datetime.now()
+    print('[INFO] Time started at:', old_time)
     pre_draw_map(maplist,20,20,stdsize)
     # --- GRAPHIC INIT ---------------------------------------------------------
     glutInit() # initialize glut
