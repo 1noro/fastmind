@@ -1,4 +1,4 @@
-# ![](https://raw.githubusercontent.com/boot1110001/fastmind/master/media/icons/24x24/fastmind.png)FASTMIND
+# ![](https://raw.githubusercontent.com/boot1110001/fastmind/master/media/icons/32x32/fastmind.png)FASTMIND
 
 Solve mazes.
 
