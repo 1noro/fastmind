@@ -12,7 +12,7 @@ class Wall(Rectangle):
         self.width=stdsize
         self.height=stdsize
 
-    def set_stdsize(new_stdsize):
+    def set_stdsize(self,new_stdsize):
         self.width=new_stdsize
         self.height=new_stdsize
 

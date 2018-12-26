@@ -20,6 +20,7 @@ wmap = [] # wall list
 womap = [] # wall object list
 goal = 0 # goal object
 player = 0 # player object
+victory = False
 
 maplist=['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', '#', '#', '#', ' ', '#', '$', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', '@', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
 
@@ -66,14 +67,20 @@ def draw_map(womap):
         o.draw()
 
 def display():
+    global victory
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
-    # --- EDITABLE -------------------------------------------------------------
+    # --- PREVIOUS CHECKS ------------------------------------------------------
+    if (not victory and (player.x, player.y) == (goal.x, goal.y)):
+        print('[GOAL] You pass the level.')
+        victory=True
+    # --- DRAWING --------------------------------------------------------------
     glColor3f(stdR,stdG,stdB)
     draw_map(womap)
     glColor3f(Color.RED[0],Color.RED[1],Color.RED[2])
     goal.draw()
-    glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
-    player.draw()
+    if not victory:
+        glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
+        player.draw()
     # --------------------------------------------------------------------------
     glFlush()
     glutPostRedisplay()
@@ -87,28 +94,29 @@ def checkMove(x,y):
     return out
 
 def specialkey(key,x,y):
-    xa, ya = player.x, player.y
+    if not victory:
+        xa, ya = player.x, player.y
 
-    if (key==GLUT_KEY_UP):
-        ya+=stdsize
-        if (checkMove(xa,ya)):
-            player.move_up()
-            print('[ UP ] xa:'+str(xa)+' ya:'+str(ya))
-    elif (key==GLUT_KEY_DOWN):
-        ya-=stdsize
-        if (checkMove(xa,ya)):
-            player.move_down()
-            print('[DOWN] xa:'+str(xa)+' ya:'+str(ya))
-    elif (key==GLUT_KEY_LEFT):
-        xa-=stdsize
-        if (checkMove(xa,ya)):
-            player.move_left()
-            print('[LEFT] xa:'+str(xa)+' ya:'+str(ya))
-    elif (key==GLUT_KEY_RIGHT):
-        xa+=stdsize
-        if (checkMove(xa,ya)):
-            player.move_right()
-            print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
+        if (key==GLUT_KEY_UP):
+            ya+=stdsize
+            if (checkMove(xa,ya)):
+                player.move_up()
+                print('[ UP ] xa:'+str(xa)+' ya:'+str(ya))
+        elif (key==GLUT_KEY_DOWN):
+            ya-=stdsize
+            if (checkMove(xa,ya)):
+                player.move_down()
+                print('[DOWN] xa:'+str(xa)+' ya:'+str(ya))
+        elif (key==GLUT_KEY_LEFT):
+            xa-=stdsize
+            if (checkMove(xa,ya)):
+                player.move_left()
+                print('[LEFT] xa:'+str(xa)+' ya:'+str(ya))
+        elif (key==GLUT_KEY_RIGHT):
+            xa+=stdsize
+            if (checkMove(xa,ya)):
+                player.move_right()
+                print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
 
     glutPostRedisplay()
 
@@ -121,13 +129,10 @@ def main():
     glutInitWindowSize(width, height) # set window size
     glutInitWindowPosition(0, 0) # set window position
     window = glutCreateWindow("FASTMIND") # create window with title
-
     glutDisplayFunc(display) # set draw function callback
-
     glClearColor(0,0,0,0)
     gluOrtho2D(0.0,width,0.0,height)
     glutSpecialFunc(specialkey)
-
     glutMainLoop()
 
 ### EXEC #######################################################################
