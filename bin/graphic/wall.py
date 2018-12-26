@@ -1,4 +1,4 @@
-#graphic.Wall
+#graphic.wall
 #by boot1110001
 
 ### IMPORTS ####################################################################
@@ -6,7 +6,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-from .Rectangle import Rectangle
+from .rectangle import Rectangle
 
 ### CLASES #####################################################################
 class Wall(Rectangle):
@@ -21,5 +21,5 @@ class Wall(Rectangle):
         self.height=new_stdsize
 
     def __eq__(self,other):
-		out=False
-		return out
+        out=False
+        return out

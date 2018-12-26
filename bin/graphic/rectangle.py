@@ -1,4 +1,4 @@
-#graphic.Rectangle
+#graphic.rectangle
 #by boot1110001
 
 ### IMPORTS ####################################################################
@@ -23,5 +23,5 @@ class Rectangle:
         glEnd() # done drawing a rectangle
 
     def __eq__(self,other):
-		out=False
-		return out
+        out=False
+        return out
