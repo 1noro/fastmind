@@ -13,9 +13,17 @@ from graphic.wall import Wall
 ### NON EDITABLE VARIABLES #####################################################
 window = 0 # glut window number
 
+BLACK   = (0.0, 0.0, 0.0)
+WHITE   = (1.0, 1.0, 1.0)
+RED     = (1.0, 0.0, 0.0)
+GREEN   = (0.0, 1.0, 0.0)
+BLUE    = (0.0, 0.0, 1.0)
+BLUE2   = (0.3, 0.3, 1.0)
+
 ### EDITABLE VARIABLES #########################################################
 width, height = 400, 400 # window size
 stdsize=20
+stdR, stdG, stdB=BLUE2
 
 ### FUNCTIONS ##################################################################
 def display():
@@ -23,7 +31,7 @@ def display():
 
     a=Wall(20,20,stdsize)
 
-    glColor3f(1,1,1) #color white
+    glColor3f(stdR, stdG, stdB) #color
     a.draw()
 
     glFlush()
