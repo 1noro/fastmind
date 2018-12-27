@@ -1,6 +1,6 @@
 
 def main():
-	str1 = open('1.lv', 'r').read()
+	str1 = open('2.lv', 'r').read()
 	
 	print(str1)
 	print('-'*80)
