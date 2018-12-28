@@ -6,7 +6,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-### CLASES #####################################################################
+### CLASSES ####################################################################
 class Rectangle:
     def __init__(self, x, y, width, height):
         self.x=x
