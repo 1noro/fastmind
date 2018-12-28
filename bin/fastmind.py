@@ -10,6 +10,7 @@ from datetime import datetime
 
 from utils.color import Color
 
+from core.map import Map
 from graphic.rectangle import Rectangle
 from graphic.wall import Wall
 from graphic.goal import Goal
@@ -158,7 +159,8 @@ def main():
     global old_time
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
-    pre_draw_map(maplist,levelw,levelh,stdsize)
+    m=Map(open('lvls/2.lv', 'r').read())
+    pre_draw_map(m.maplist,levelw,levelh,stdsize)
     # --- GRAPHIC INIT ---------------------------------------------------------
     glutInit() # initialize glut
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
