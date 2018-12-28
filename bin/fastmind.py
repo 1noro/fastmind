@@ -4,6 +4,7 @@
 
 ### IMPORTS ####################################################################
 import sys
+import getopt
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *
@@ -11,6 +12,7 @@ from OpenGL.GLU import *
 from datetime import datetime
 
 from utils.color import Color
+from core import func
 from core.map import Map
 from graphic.rectangle import Rectangle
 from graphic.wall import Wall
@@ -33,9 +35,9 @@ maplist=[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '
 ### EDITABLE VARIABLES #########################################################
 stdsize=15 # test with 10
 # levelw, levelh = 20, 20
-levelw, levelh = 36, 46
+# levelw, levelh = 36, 46
 # width, height = 400, 400 # window size
-width, height = stdsize*levelw, stdsize*levelh # window size
+# width, height = stdsize*levelw, stdsize*levelh # window size
 stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
@@ -156,12 +158,31 @@ def specialkey(key,x,y):
     glutPostRedisplay()
 
 ### MAIN #######################################################################
-def main():
+def main(argv):
     global old_time
+
+    lvl_name = ''
+    try:
+        opts, args = getopt.getopt(argv,"hp:l",["help","play=","list"])
+    except getopt.GetoptError:
+        print('test.py -p <level_name>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            print("fastmind.py -l\nfastmind.py -p <level_name>\nfastmind.py -l")
+            sys.exit()
+        elif opt in ("-p", "--play"):
+            lvl_name = arg
+        elif opt in ("-l", "--list"):
+            print('Level list:')
+            func.list_lvls()
+            sys.exit()
+
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
-    m=Map(open('lvls/2.lv', 'r').read())
-    pre_draw_map(m.maplist,levelw,levelh,stdsize)
+    m=Map(open('lvls/'+lvl_name, 'r').read())
+    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize)
+    width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
     # --- GRAPHIC INIT ---------------------------------------------------------
     glutInit() # initialize glut
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
@@ -175,4 +196,5 @@ def main():
     glutMainLoop()
 
 ### EXEC #######################################################################
-main()
+if __name__ == "__main__":
+    main(sys.argv[1:])
