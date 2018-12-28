@@ -1,15 +1,16 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #fastmind
 #by boot1110001
 
 ### IMPORTS ####################################################################
+import sys
+
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from datetime import datetime
 
 from utils.color import Color
-
 from core.map import Map
 from graphic.rectangle import Rectangle
 from graphic.wall import Wall
