@@ -185,6 +185,8 @@ def main(argv):
     glutInitWindowSize(width, height) # set window size
     glutInitWindowPosition(0, 0) # set window position
     window = glutCreateWindow("FASTMIND") # create window with title
+    # glutSetWindowTitle("FASTMIND")
+    glutSetIconTitle("FASTMIND")
     glutDisplayFunc(display) # set draw function callback
     glClearColor(0,0,0,0)
     gluOrtho2D(0.0,width,0.0,height)
