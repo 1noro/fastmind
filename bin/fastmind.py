@@ -31,10 +31,12 @@ victory = False
 old_time = 0
 lvl_time = 0
 
-hstr='''fastmind.py -h\t\t\t--help
-fastmind.py -p <level_name>\t--play=<level_name>
-fastmind.py -s <square_size>\t--size=<square_size>
-fastmind.py -l\t\t\t--list'''
+hstr='''fastmind, solve mazes...
+game options:
+ fastmind.py -h\t\t\t--help\t\t\tShow this help.
+ fastmind.py -l\t\t\t--list\t\t\tList the available levels.
+ fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
+ fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### EDITABLE VARIABLES #########################################################
 stdsize=15 # test with 10
@@ -179,6 +181,7 @@ def main(argv):
     m=Map(open('lvls/'+lvname, 'r').read())
     pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize)
     width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
+
     # --- GRAPHIC INIT ---------------------------------------------------------
     glutInit() # initialize glut
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
