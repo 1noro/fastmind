@@ -75,13 +75,13 @@ def pre_draw_map(maplist,lw,lh,stdsize):
             if (maplist[i]=='#'):
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "#"')
                 wmap.append([x,y])
-                womap.append(Wall(x,y,stdsize))
+                womap.append(Wall(x,y,stdsize,Color.BLUE2))
             elif (maplist[i]=='$'):
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
-                goal = Goal(x,y,stdsize)
+                goal = Goal(x,y,stdsize,Color.RED)
             elif (maplist[i]=='@'):
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
-                player = Player(x,y,stdsize)
+                player = Player(x,y,stdsize,Color.GREEN)
             else:
                 # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
                 pass
