@@ -37,7 +37,7 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### EDITABLE VARIABLES #########################################################
-stdsize=20 # test with 10
+stdsize=15 # test with 10
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize):
@@ -87,10 +87,6 @@ def display(screen):
         #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
         pass
 
-    pygame.draw.rect(screen, Color.BLUE, [0, 0, 20, 20])
-    pygame.draw.rect(screen, Color.RED, [20, 0, 20, 20])
-    pygame.draw.rect(screen, Color.GREEN, [0, 20, 20, 20])
-
     # --------------------------------------------------------------------------
     pygame.display.flip()
 
@@ -101,26 +97,25 @@ def checkMove(x,y):
         out=False
     return out
 
-def specialkey(key,x,y):
+def specialkey(event):
     if not victory:
         xa, ya = player.x, player.y
-
-        if (key==GLUT_KEY_UP):
+        if (event.key==pygame.K_UP):
             ya+=stdsize
             if (checkMove(xa,ya)):
                 player.move_up()
                 print('[ UP ] xa:'+str(xa)+' ya:'+str(ya))
-        elif (key==GLUT_KEY_DOWN):
+        elif (event.key==pygame.K_DOWN):
             ya-=stdsize
             if (checkMove(xa,ya)):
                 player.move_down()
                 print('[DOWN] xa:'+str(xa)+' ya:'+str(ya))
-        elif (key==GLUT_KEY_LEFT):
+        elif (event.key==pygame.K_LEFT):
             xa-=stdsize
             if (checkMove(xa,ya)):
                 player.move_left()
                 print('[LEFT] xa:'+str(xa)+' ya:'+str(ya))
-        elif (key==GLUT_KEY_RIGHT):
+        elif (event.key==pygame.K_RIGHT):
             xa+=stdsize
             if (checkMove(xa,ya)):
                 player.move_right()
@@ -176,12 +171,15 @@ def main(argv):
     # -------- Main Program Loop -----------------------------------------------
     while not done:
         # --- Event Processing
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+            if not victory:
+                if event.type == pygame.KEYDOWN:
+                    specialkey(event)
 
         # --- Logic
-        #specialkey(key,x,y)
 
         # --- Drawing
         # Set the screen background
