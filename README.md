@@ -10,7 +10,7 @@ sudo apt-get install python-opengl python3-opengl
 
 ## Credits
 
-- Created, programmed and maintained by [boot1110001](https://github.com/boot1110001).
+Created, programmed and maintained by [boot1110001](https://github.com/boot1110001).
 
 ## Licenses
 
