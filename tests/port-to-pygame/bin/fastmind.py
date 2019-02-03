@@ -45,32 +45,30 @@ def pre_draw_map(maplist,lw,lh,stdsize):
 
     maxx=stdsize*lw
     maxy=stdsize*lh
-    x=0
-    y=maxy-stdsize
-    i=0
+    x = y = i = 0
 
-    while (y>=0):
+    while (y<maxy):
         while (x<maxx):
 
             if (maplist[i]=='#'):
-                # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "#"')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "#"')
                 wmap.append([x,y])
                 womap.append(Wall(x,y,stdsize,Color.BLUE2))
             elif (maplist[i]=='$'):
-                # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
                 goal = Goal(x,y,stdsize,Color.RED)
             elif (maplist[i]=='@'):
-                # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
                 player = Player(x,y,stdsize,Color.GREEN)
             else:
-                # ~ print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
                 pass
 
             i+=1
             x+=stdsize
 
         x=0
-        y-=stdsize
+        y+=stdsize
 
 def display(screen):
     global victory, lvl_time
@@ -88,6 +86,10 @@ def display(screen):
     else:
         #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
         pass
+
+    pygame.draw.rect(screen, Color.BLUE, [0, 0, 20, 20])
+    pygame.draw.rect(screen, Color.RED, [20, 0, 20, 20])
+    pygame.draw.rect(screen, Color.GREEN, [0, 20, 20, 20])
 
     # --------------------------------------------------------------------------
     pygame.display.flip()
