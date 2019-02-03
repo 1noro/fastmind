@@ -30,10 +30,10 @@ class Player(Rectangle):
         self.x-=self.stdsize
 
     def move_up(self):
-        self.y+=self.stdsize
+        self.y-=self.stdsize
 
     def move_down(self):
-        self.y-=self.stdsize
+        self.y+=self.stdsize
 
     def __eq__(self,other):
         out=False

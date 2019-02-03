@@ -28,6 +28,8 @@ player = 0 # player object
 victory = False
 old_time = 0
 lvl_time = 0
+width = 0
+height = 0
 
 hstr='''fastmind, solve mazes...
 game options:
@@ -101,29 +103,29 @@ def specialkey(event):
     if not victory:
         xa, ya = player.x, player.y
         if (event.key==pygame.K_UP):
-            ya+=stdsize
-            if (checkMove(xa,ya)):
-                player.move_up()
-                print('[ UP ] xa:'+str(xa)+' ya:'+str(ya))
-        elif (event.key==pygame.K_DOWN):
             ya-=stdsize
             if (checkMove(xa,ya)):
+                player.move_up()
+                print('[ UP ] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
+        elif (event.key==pygame.K_DOWN):
+            ya+=stdsize
+            if (checkMove(xa,ya)):
                 player.move_down()
-                print('[DOWN] xa:'+str(xa)+' ya:'+str(ya))
+                print('[DOWN] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
         elif (event.key==pygame.K_LEFT):
             xa-=stdsize
             if (checkMove(xa,ya)):
                 player.move_left()
-                print('[LEFT] xa:'+str(xa)+' ya:'+str(ya))
+                print('[LEFT] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
         elif (event.key==pygame.K_RIGHT):
             xa+=stdsize
             if (checkMove(xa,ya)):
                 player.move_right()
-                print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
+                print('[RIGH] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
 
 ### MAIN #######################################################################
 def main(argv):
-    global stdsize, old_time, lvlist
+    global stdsize, old_time, lvlist, width, height
 
     lvlist=cf.get_lvls()
     lvname = '1.lv'
