@@ -37,29 +37,9 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### EDITABLE VARIABLES #########################################################
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-
 stdsize=20 # test with 10
-stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
-def glut_print( x,  y,  font,  text, r,  g , b , a):
-    blending = False
-    if glIsEnabled(GL_BLEND) :
-        blending = True
-
-    #glEnable(GL_BLEND)
-    glColor3f(1,1,1)
-    glRasterPos2f(x,y)
-    for ch in text :
-        glutBitmapCharacter( font , ctypes.c_int( ord(ch) ) )
-
-    if not blending :
-        glDisable(GL_BLEND)
-
 def pre_draw_map(maplist,lw,lh,stdsize):
     global wmap, womap, goal, player
 
@@ -94,7 +74,6 @@ def pre_draw_map(maplist,lw,lh,stdsize):
 
 def display(screen):
     global victory, lvl_time
-    #~glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
     # --- PREVIOUS CHECKS ------------------------------------------------------
     if (not victory and (player.x, player.y) == (goal.x, goal.y)):
         new_time = datetime.now()
@@ -102,20 +81,15 @@ def display(screen):
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
     # --- DRAWING --------------------------------------------------------------
-    #~glColor3f(stdR,stdG,stdB)
     cf.draw_map(womap, screen)
-    #~glColor3f(Color.RED[0],Color.RED[1],Color.RED[2])
     goal.draw(screen)
     if not victory:
-        #~glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
         player.draw(screen)
     else:
-        pass
         #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
+        pass
+
     # --------------------------------------------------------------------------
-    #~glFlush()
-    #~glutPostRedisplay()
-    #~glutSwapBuffers()
     pygame.display.flip()
 
 def checkMove(x,y):
@@ -149,8 +123,6 @@ def specialkey(key,x,y):
             if (checkMove(xa,ya)):
                 player.move_right()
                 print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
-
-    #~glutPostRedisplay()
 
 ### MAIN #######################################################################
 def main(argv):
@@ -186,20 +158,6 @@ def main(argv):
     m=Map(open('lvls/'+lvname, 'r').read())
     pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize)
     width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
-
-    # --- GRAPHIC INIT ---------------------------------------------------------
-    #~glutInit() # initialize glut
-    #~glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
-    #~glutInitWindowSize(width, height) # set window size
-    #~glutInitWindowPosition(0, 0) # set window position
-    #~window = glutCreateWindow("FASTMIND") # create window with title
-    # glutSetWindowTitle("FASTMIND")
-    #~glutSetIconTitle("FASTMIND")
-    #~glutDisplayFunc(display) # set draw function callback
-    #~glClearColor(0,0,0,0)
-    #~gluOrtho2D(0.0,width,0.0,height)
-    #~glutSpecialFunc(specialkey)
-    #~glutMainLoop()
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
