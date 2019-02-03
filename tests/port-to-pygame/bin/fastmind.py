@@ -5,6 +5,7 @@
 ### IMPORTS ####################################################################
 import sys
 import getopt
+import pygame
 
 from datetime import datetime
 
@@ -36,6 +37,11 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### EDITABLE VARIABLES #########################################################
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+
 stdsize=15 # test with 10
 stdR, stdG, stdB=Color.BLUE2
 
@@ -88,7 +94,7 @@ def pre_draw_map(maplist,lw,lh,stdsize):
 
 def display():
     global victory, lvl_time
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
+    #~glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
     # --- PREVIOUS CHECKS ------------------------------------------------------
     if (not victory and (player.x, player.y) == (goal.x, goal.y)):
         new_time = datetime.now()
@@ -104,11 +110,12 @@ def display():
         glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
         player.draw()
     else:
-        glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
+        pass
+        #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
     # --------------------------------------------------------------------------
-    glFlush()
-    glutPostRedisplay()
-    glutSwapBuffers()
+    #~glFlush()
+    #~glutPostRedisplay()
+    #~glutSwapBuffers()
 
 def checkMove(x,y):
     out=True
@@ -142,7 +149,7 @@ def specialkey(key,x,y):
                 player.move_right()
                 print('[RIGH] xa:'+str(xa)+' ya:'+str(ya))
 
-    glutPostRedisplay()
+    #~glutPostRedisplay()
 
 ### MAIN #######################################################################
 def main(argv):
@@ -180,18 +187,18 @@ def main(argv):
     width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
 
     # --- GRAPHIC INIT ---------------------------------------------------------
-    glutInit() # initialize glut
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
-    glutInitWindowSize(width, height) # set window size
-    glutInitWindowPosition(0, 0) # set window position
-    window = glutCreateWindow("FASTMIND") # create window with title
+    #~glutInit() # initialize glut
+    #~glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
+    #~glutInitWindowSize(width, height) # set window size
+    #~glutInitWindowPosition(0, 0) # set window position
+    #~window = glutCreateWindow("FASTMIND") # create window with title
     # glutSetWindowTitle("FASTMIND")
-    glutSetIconTitle("FASTMIND")
-    glutDisplayFunc(display) # set draw function callback
-    glClearColor(0,0,0,0)
-    gluOrtho2D(0.0,width,0.0,height)
-    glutSpecialFunc(specialkey)
-    glutMainLoop()
+    #~glutSetIconTitle("FASTMIND")
+    #~glutDisplayFunc(display) # set draw function callback
+    #~glClearColor(0,0,0,0)
+    #~gluOrtho2D(0.0,width,0.0,height)
+    #~glutSpecialFunc(specialkey)
+    #~glutMainLoop()
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
@@ -213,9 +220,14 @@ def main(argv):
                 done = True
 
         # --- Logic
+        #specialkey(key,x,y)
+
         # --- Drawing
+        # Set the screen background
+        screen.fill(BLACK)
+
         # --- Wrap-up
-        
+
     # Close everything down
     pygame.quit()
 
