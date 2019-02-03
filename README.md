@@ -4,15 +4,32 @@ Solve mazes.
 
 ## Requirements
 
+### General
+
 ```
-sudo apt-get install python3
 python3 -m pip install -U pygame --user
 ```
 
 ### Debian/Ubuntu/Mint
 
 ```
+sudo apt-get install python3
 sudo apt-get install python3-pygame
+```
+
+### Fedora/Red hat
+
+```
+sudo yum install python3
+sudo yum install python3-pygame
+```
+
+### Windows
+
+Make sure you install python3.6 with the "Add python 3.6 to PATH" option selected. This means that python, and pip will work for you from the command line.
+
+```
+py -m pip install -U pygame --user
 ```
 
 ## Credits
