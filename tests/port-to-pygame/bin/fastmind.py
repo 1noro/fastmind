@@ -42,7 +42,7 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
-stdsize=15 # test with 10
+stdsize=20 # test with 10
 stdR, stdG, stdB=Color.BLUE2
 
 ### FUNCTIONS ##################################################################
@@ -92,7 +92,7 @@ def pre_draw_map(maplist,lw,lh,stdsize):
         x=0
         y-=stdsize
 
-def display():
+def display(screen):
     global victory, lvl_time
     #~glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
     # --- PREVIOUS CHECKS ------------------------------------------------------
@@ -102,13 +102,13 @@ def display():
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
     # --- DRAWING --------------------------------------------------------------
-    glColor3f(stdR,stdG,stdB)
-    cf.draw_map(womap)
-    glColor3f(Color.RED[0],Color.RED[1],Color.RED[2])
-    goal.draw()
+    #~glColor3f(stdR,stdG,stdB)
+    cf.draw_map(womap, screen)
+    #~glColor3f(Color.RED[0],Color.RED[1],Color.RED[2])
+    goal.draw(screen)
     if not victory:
-        glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
-        player.draw()
+        #~glColor3f(Color.GREEN[0],Color.GREEN[1],Color.GREEN[2])
+        player.draw(screen)
     else:
         pass
         #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
@@ -116,6 +116,7 @@ def display():
     #~glFlush()
     #~glutPostRedisplay()
     #~glutSwapBuffers()
+    pygame.display.flip()
 
 def checkMove(x,y):
     out=True
@@ -224,7 +225,8 @@ def main(argv):
 
         # --- Drawing
         # Set the screen background
-        screen.fill(BLACK)
+        screen.fill(Color.BLACK)
+        display(screen)
 
         # --- Wrap-up
 
