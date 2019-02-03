@@ -5,7 +5,14 @@ Solve mazes.
 ## Requirements
 
 ```
-sudo apt-get install python-opengl python3-opengl
+sudo apt-get install python3
+python3 -m pip install -U pygame --user
+```
+
+# Debian/Ubuntu/Mint
+
+```
+sudo apt-get install python3-pygame
 ```
 
 ## Credits

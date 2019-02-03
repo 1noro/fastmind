@@ -6,12 +6,13 @@ from .rectangle import Rectangle
 
 ### CLASSES ####################################################################
 class Player(Rectangle):
-    def __init__(self, x, y, stdsize):
+    def __init__(self, x, y, stdsize, color):
         self.x=x
         self.y=y
         self.width=stdsize
         self.height=stdsize
         self.stdsize=stdsize
+        self.color=color
 
     def set_stdsize(self,new_stdsize):
         self.width=new_stdsize
@@ -29,10 +30,10 @@ class Player(Rectangle):
         self.x-=self.stdsize
 
     def move_up(self):
-        self.y+=self.stdsize
+        self.y-=self.stdsize
 
     def move_down(self):
-        self.y-=self.stdsize
+        self.y+=self.stdsize
 
     def __eq__(self,other):
         out=False
