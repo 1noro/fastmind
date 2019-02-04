@@ -2,20 +2,17 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from .rectangle import Rectangle
+from .square import Square
 
 ### CLASSES ####################################################################
-class Goal(Rectangle):
+class Goal(Square):
     def __init__(self, x, y, stdsize, color):
         self.x=x
         self.y=y
         self.width=stdsize
         self.height=stdsize
         self.color=color
-
-    def set_stdsize(self,new_stdsize):
-        self.width=new_stdsize
-        self.height=new_stdsize
+        self.stdsize=stdsize
 
     def __eq__(self,other):
         out=False

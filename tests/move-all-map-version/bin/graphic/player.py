@@ -2,10 +2,10 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from .rectangle import Rectangle
+from .square import Square
 
 ### CLASSES ####################################################################
-class Player(Rectangle):
+class Player(Square):
     def __init__(self, x, y, stdsize, color):
         self.x=x
         self.y=y
@@ -13,11 +13,6 @@ class Player(Rectangle):
         self.height=stdsize
         self.stdsize=stdsize
         self.color=color
-
-    def set_stdsize(self,new_stdsize):
-        self.width=new_stdsize
-        self.height=new_stdsize
-        self.stdsize=stdsize
 
     def move(self,x,y):
         self.x=x

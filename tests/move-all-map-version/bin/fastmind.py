@@ -39,7 +39,7 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### EDITABLE VARIABLES #########################################################
-stdsize=10 # test with 10 (view with 15)
+stdsize=15 # test with 10 (view with 15)
 scope=20*stdsize
 
 ### FUNCTIONS ##################################################################
@@ -52,21 +52,20 @@ def pre_draw_map(maplist,lw,lh,stdsize):
 
     while (y<maxy):
         while (x<maxx):
-
+            xcell=cf.px2cell(x,width,stdsize)
+            ycell=cf.px2cell(y,height,stdsize)
             if (maplist[i]=='#'):
-                xcell=cf.px2cell(x,width,stdsize)
-                ycell=cf.px2cell(y,height,stdsize)
                 wmap.append([xcell,ycell])
-                womap.append(Wall(x,y,stdsize,Color.BLUE2))
+                womap.append(Wall(xcell,ycell,stdsize,Color.BLUE2))
                 print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
             elif (maplist[i]=='$'):
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
-                goal = Goal(x,y,stdsize,Color.RED)
+                goal = Goal(xcell,ycell,stdsize,Color.RED)
+                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
-                player = Player(x,y,stdsize,Color.GREEN)
+                player = Player(xcell,ycell,stdsize,Color.GREEN)
+                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
+                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
                 pass
 
             i+=1
@@ -124,34 +123,27 @@ def checkMove(x,y):
     return out
 
 def specialkey(event):
-    xa, ya = player.x, player.y
+    xa, ya = cf.px2cell(player.x,width,stdsize), cf.px2cell(player.y,width,stdsize)
+    xcell, ycell = player.x, player.y
     if (event.key==pygame.K_UP):
         ya-=stdsize
-        if (checkMove(xa,ya)):
+        if (checkMove(xcell,ycell)):
             player.move_up()
-            xcell=cf.px2cell(xa,width,stdsize)
-            ycell=cf.px2cell(ya,height,stdsize)
             print('[ UP ] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         ya+=stdsize
-        if (checkMove(xa,ya)):
+        if (checkMove(xcell,ycell)):
             player.move_down()
-            xcell=cf.px2cell(xa,width,stdsize)
-            ycell=cf.px2cell(ya,height,stdsize)
             print('[DOWN] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         xa-=stdsize
-        if (checkMove(xa,ya)):
+        if (checkMove(xcell,ycell)):
             player.move_left()
-            xcell=cf.px2cell(xa,width,stdsize)
-            ycell=cf.px2cell(ya,height,stdsize)
             print('[LEFT] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         xa+=stdsize
-        if (checkMove(xa,ya)):
+        if (checkMove(xcell,ycell)):
             player.move_right()
-            xcell=cf.px2cell(xa,width,stdsize)
-            ycell=cf.px2cell(ya,height,stdsize)
             print('[RIGH] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
 
 ### MAIN #######################################################################
