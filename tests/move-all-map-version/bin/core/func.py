@@ -13,14 +13,26 @@ def get_lvls():
 def draw_map(womap, screen, mwidth, mheight):
     for o in womap: o.draw(screen, mwidth, mheight)
 
+def move_map_left(womap):
+    for o in womap: o.move_left()
+
+def move_map_right(womap):
+    for o in womap: o.move_right()
+
+def move_map_up(womap):
+    for o in womap: o.move_up()
+
+def move_map_down(womap):
+    for o in womap: o.move_down()
+
 def px2cell(xy,wh,stdsize):
     # 10 --> 1
     # 20 --> ?
     # (20*1)/10 = 2
     return int((xy*(wh/stdsize))/wh)+1
 
-def cell2px(xy,wh,stdsize):
-    # 1 --> 10
-    # 2 --> ?
-    # (2*10)/1 = 20
-    return int((xy*wh)/(wh/stdsize))-stdsize
+# def cell2px(xy,wh,stdsize):
+#     # 1 --> 10
+#     # 2 --> ?
+#     # (2*10)/1 = 20
+#     return int((xy*wh)/(wh/stdsize))-stdsize

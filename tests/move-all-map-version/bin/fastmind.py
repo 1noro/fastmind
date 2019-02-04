@@ -40,7 +40,8 @@ game options:
 
 ### EDITABLE VARIABLES #########################################################
 stdsize=15 # test with 10 (view with 15)
-scope=20*stdsize
+cellscope=21
+pxscope=cellscope*stdsize
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize):
@@ -111,7 +112,7 @@ def display(screen):
     cf.draw_map(womap, screen, width, height)
     goal.draw(screen, width, height)
     if not victory:
-        player.draw(screen, width, height)
+        player.draw(screen, 0, 0)
     else:
         print_result(screen)
 
@@ -129,21 +130,25 @@ def specialkey(event):
         ya-=stdsize
         if (checkMove(xcell,ycell)):
             player.move_up()
+            cf.move_map_up(womap)
             print('[ UP ] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         ya+=stdsize
         if (checkMove(xcell,ycell)):
             player.move_down()
+            cf.move_map_down(womap)
             print('[DOWN] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         xa-=stdsize
         if (checkMove(xcell,ycell)):
             player.move_left()
+            cf.move_map_left(womap)
             print('[LEFT] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         xa+=stdsize
         if (checkMove(xcell,ycell)):
             player.move_right()
+            cf.move_map_right(womap)
             print('[RIGH] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
 
 ### MAIN #######################################################################
@@ -176,7 +181,7 @@ def main(argv):
         sys.exit()
 
     # width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
-    width, height = scope, scope # window size
+    width, height = pxscope, pxscope # window size
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
     m=Map(open('lvls/'+lvname, 'r').read())
