@@ -33,8 +33,8 @@ class Player(Square):
     def move_down(self):
         self.ycell+=1
 
-    def draw(self, screen, xpx, ypx):
-        pygame.draw.rect(screen, self.color,[xpx, ypx, self.width, self.height])
+    # def draw(self, screen, xpx, ypx):
+    #     pygame.draw.rect(screen, self.color,[xpx, ypx, self.width, self.height])
 
     def __eq__(self,other):
         out=False

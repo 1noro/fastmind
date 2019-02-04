@@ -57,8 +57,8 @@ def pre_draw_map(maplist,lw,lh,stdsize,xcellgap,ycellgap):
         while (x<maxx):
             xcell=cf.px2cell(x,width,stdsize)
             ycell=cf.px2cell(y,height,stdsize)
-            xgap=cf.cell2px(xcellgap/2,height,stdsize)
-            ygap=cf.cell2px(ycellgap/2,height,stdsize)
+            xgap=cf.cell2px(xcellgap-cellcenter-1,height,stdsize)
+            ygap=cf.cell2px(ycellgap-cellcenter-1,height,stdsize)
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
                 womap.append(Wall(x-xgap,y-ygap,xcell,ycell,stdsize,Color.BLUE2))
@@ -116,7 +116,8 @@ def display(screen):
     cf.draw_map(womap, screen)
     goal.draw(screen)
     if not victory:
-        player.draw(screen, pxcenter, pxcenter)
+        # player.draw(screen, pxcenter, pxcenter)
+        player.draw(screen)
     else:
         print_result(screen)
 
