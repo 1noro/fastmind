@@ -19,8 +19,8 @@ from graphic.goal import Goal
 from graphic.player import Player
 
 ### EDITABLE VARIABLES #########################################################
-stdsize = 5 # test with 10 (view with 15)
-cellscope = 80
+stdsize = 10 # test with 10 (view with 15)
+cellscope = 21
 pxscope = cellscope*stdsize
 cellcenter = (cellscope/2)+0.5
 pxcenter = (pxscope/2)-(stdsize/2)
@@ -46,28 +46,34 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist,lw,lh,stdsize,xcellgap,ycellgap):
+def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
     global wmap, womap, goal, player
 
     maxx=stdsize*lw
     maxy=stdsize*lh
     x = y = i = 0
 
+    xcellgap = startx-(cellcenter-1)
+    ycellgap = starty-cellcenter
+
+    # xgap=cf.cell2px(xcellgap-cellcenter-1-lw,height,stdsize)
+    # ygap=cf.cell2px(ycellgap-cellcenter-1-lh,height,stdsize)
+    xgap=cf.cell2px(xcellgap,height,stdsize)
+    ygap=cf.cell2px(ycellgap,height,stdsize)
+
     while (y<maxy):
         while (x<maxx):
             xcell=cf.px2cell(x,width,stdsize)
             ycell=cf.px2cell(y,height,stdsize)
-            xgap=cf.cell2px(xcellgap-cellcenter-1,height,stdsize)
-            ygap=cf.cell2px(ycellgap-cellcenter-1,height,stdsize)
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
-                womap.append(Wall(x-xgap,y-ygap,xcell,ycell,stdsize,Color.BLUE2))
+                womap.append(Wall(x+xgap,y-ygap,xcell,ycell,stdsize,Color.BLUE2))
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
             elif (maplist[i]=='$'):
-                goal = Goal(x-xgap,y-ygap,xcell,ycell,stdsize,Color.RED)
+                goal = Goal(x+xgap,y-ygap,xcell,ycell,stdsize,Color.RED)
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                player = Player(x-xgap,y-xgap,xcell,ycell,stdsize,Color.GREEN)
+                player = Player(x+xgap,y-ygap,xcell,ycell,stdsize,Color.GREEN)
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
