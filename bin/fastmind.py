@@ -73,12 +73,12 @@ def pre_draw_map(maplist,lw,lh,stdsize):
         y+=stdsize
 
 def print_result(screen):
-    rectw = 12*stdsize
+    rectw = 14*stdsize
     recth = 4*stdsize
     rectx = (width/2)-(rectw/2)
     recty = (height/2)-(recth/2)
     borderw = 10
-    pygame.draw.rect(screen, Color.GREEN, [rectx, recty, rectw, recth])
+    pygame.draw.rect(screen, Color.WHITE, [rectx, recty, rectw, recth])
     pygame.draw.rect(screen, Color.BLACK, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
     basicfont = pygame.font.SysFont('Monospace', stdsize)
 
@@ -128,28 +128,28 @@ def specialkey(event):
             player.move_up()
             xcell=int((xa*(width/stdsize))/width)+1
             ycell=int((ya*(width/stdsize))/width)+1
-            print('[ UP ] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+            print('[ UP ] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         ya+=stdsize
         if (checkMove(xa,ya)):
             player.move_down()
             xcell=int((xa*(width/stdsize))/width)+1
             ycell=int((ya*(width/stdsize))/width)+1
-            print('[DOWN] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+            print('[DOWN] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         xa-=stdsize
         if (checkMove(xa,ya)):
             player.move_left()
             xcell=int((xa*(width/stdsize))/width)+1
             ycell=int((ya*(width/stdsize))/width)+1
-            print('[LEFT] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+            print('[LEFT] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         xa+=stdsize
         if (checkMove(xa,ya)):
             player.move_right()
             xcell=int((xa*(width/stdsize))/width)+1
             ycell=int((ya*(width/stdsize))/width)+1
-            print('[RIGH] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+            print('[RIGH] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
@@ -211,8 +211,10 @@ def main(argv):
             else:
                 if event.type == pygame.KEYDOWN:
                     if (event.key==pygame.K_ESCAPE):
+                        print('[ESCP] Exiting...')
                         done = True
                     elif (event.key==pygame.K_RETURN):
+                        print('[ENTR] Exiting...')
                         done = True
 
         # --- Logic
