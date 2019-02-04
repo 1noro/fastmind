@@ -106,22 +106,30 @@ def specialkey(event):
             ya-=stdsize
             if (checkMove(xa,ya)):
                 player.move_up()
-                print('[ UP ] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
+                xcell=int((xa*(width/stdsize))/width)+1
+                ycell=int((ya*(width/stdsize))/width)+1
+                print('[ UP ] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
         elif (event.key==pygame.K_DOWN):
             ya+=stdsize
             if (checkMove(xa,ya)):
                 player.move_down()
-                print('[DOWN] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
+                xcell=int((xa*(width/stdsize))/width)+1
+                ycell=int((ya*(width/stdsize))/width)+1
+                print('[DOWN] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
         elif (event.key==pygame.K_LEFT):
             xa-=stdsize
             if (checkMove(xa,ya)):
                 player.move_left()
-                print('[LEFT] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
+                xcell=int((xa*(width/stdsize))/width)+1
+                ycell=int((ya*(width/stdsize))/width)+1
+                print('[LEFT] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
         elif (event.key==pygame.K_RIGHT):
             xa+=stdsize
             if (checkMove(xa,ya)):
                 player.move_right()
-                print('[RIGH] xa:'+str(xa)+' ('+str((xa*(width/stdsize))/width)+') ya:'+str(ya)+' ('+str((ya*(width/stdsize))/width)+')')
+                xcell=int((xa*(width/stdsize))/width)+1
+                ycell=int((ya*(width/stdsize))/width)+1
+                print('[RIGH] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
