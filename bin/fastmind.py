@@ -72,6 +72,28 @@ def pre_draw_map(maplist,lw,lh,stdsize):
         x=0
         y+=stdsize
 
+def print_result(screen):
+    rectw = 12*stdsize
+    recth = 4*stdsize
+    rectx = (width/2)-(rectw/2)
+    recty = (height/2)-(recth/2)
+    borderw = 10
+    pygame.draw.rect(screen, Color.RED, [rectx, recty, rectw, recth])
+    pygame.draw.rect(screen, Color.WHITE, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
+    basicfont = pygame.font.SysFont('Monospace', stdsize)
+
+    text = basicfont.render('GOAL! You pass in:', True, Color.RED, (255, 255, 255))
+    textrect = text.get_rect()
+    textrect.centerx = screen.get_rect().centerx
+    textrect.centery = screen.get_rect().centery-(stdsize/2)-2
+    screen.blit(text, textrect)
+
+    text = basicfont.render(str(lvl_time)+'s', True, Color.RED, (255, 255, 255))
+    textrect = text.get_rect()
+    textrect.centerx = screen.get_rect().centerx
+    textrect.centery = screen.get_rect().centery+(stdsize/2)+2
+    screen.blit(text, textrect)
+
 def display(screen):
     global victory, lvl_time
     # --- PREVIOUS CHECKS ------------------------------------------------------
@@ -89,8 +111,7 @@ def display(screen):
     if not victory:
         player.draw(screen)
     else:
-        #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
-        pass
+        print_result(screen)
 
 def checkMove(x,y):
     out=True
