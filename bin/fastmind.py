@@ -78,17 +78,17 @@ def print_result(screen):
     rectx = (width/2)-(rectw/2)
     recty = (height/2)-(recth/2)
     borderw = 10
-    pygame.draw.rect(screen, Color.RED, [rectx, recty, rectw, recth])
-    pygame.draw.rect(screen, Color.WHITE, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
+    pygame.draw.rect(screen, Color.GREEN, [rectx, recty, rectw, recth])
+    pygame.draw.rect(screen, Color.BLACK, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
     basicfont = pygame.font.SysFont('Monospace', stdsize)
 
-    text = basicfont.render('GOAL! You pass in:', True, Color.RED, (255, 255, 255))
+    text = basicfont.render('GOAL! You pass in:', True, Color.WHITE, Color.BLACK)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery-(stdsize/2)-2
     screen.blit(text, textrect)
 
-    text = basicfont.render(str(lvl_time)+'s', True, Color.RED, (255, 255, 255))
+    text = basicfont.render(str(lvl_time)+'s', True, Color.WHITE, Color.BLACK)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize/2)+2
@@ -121,36 +121,35 @@ def checkMove(x,y):
     return out
 
 def specialkey(event):
-    if not victory:
-        xa, ya = player.x, player.y
-        if (event.key==pygame.K_UP):
-            ya-=stdsize
-            if (checkMove(xa,ya)):
-                player.move_up()
-                xcell=int((xa*(width/stdsize))/width)+1
-                ycell=int((ya*(width/stdsize))/width)+1
-                print('[ UP ] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
-        elif (event.key==pygame.K_DOWN):
-            ya+=stdsize
-            if (checkMove(xa,ya)):
-                player.move_down()
-                xcell=int((xa*(width/stdsize))/width)+1
-                ycell=int((ya*(width/stdsize))/width)+1
-                print('[DOWN] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
-        elif (event.key==pygame.K_LEFT):
-            xa-=stdsize
-            if (checkMove(xa,ya)):
-                player.move_left()
-                xcell=int((xa*(width/stdsize))/width)+1
-                ycell=int((ya*(width/stdsize))/width)+1
-                print('[LEFT] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
-        elif (event.key==pygame.K_RIGHT):
-            xa+=stdsize
-            if (checkMove(xa,ya)):
-                player.move_right()
-                xcell=int((xa*(width/stdsize))/width)+1
-                ycell=int((ya*(width/stdsize))/width)+1
-                print('[RIGH] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+    xa, ya = player.x, player.y
+    if (event.key==pygame.K_UP):
+        ya-=stdsize
+        if (checkMove(xa,ya)):
+            player.move_up()
+            xcell=int((xa*(width/stdsize))/width)+1
+            ycell=int((ya*(width/stdsize))/width)+1
+            print('[ UP ] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+    elif (event.key==pygame.K_DOWN):
+        ya+=stdsize
+        if (checkMove(xa,ya)):
+            player.move_down()
+            xcell=int((xa*(width/stdsize))/width)+1
+            ycell=int((ya*(width/stdsize))/width)+1
+            print('[DOWN] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+    elif (event.key==pygame.K_LEFT):
+        xa-=stdsize
+        if (checkMove(xa,ya)):
+            player.move_left()
+            xcell=int((xa*(width/stdsize))/width)+1
+            ycell=int((ya*(width/stdsize))/width)+1
+            print('[LEFT] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
+    elif (event.key==pygame.K_RIGHT):
+        xa+=stdsize
+        if (checkMove(xa,ya)):
+            player.move_right()
+            xcell=int((xa*(width/stdsize))/width)+1
+            ycell=int((ya*(width/stdsize))/width)+1
+            print('[RIGH] xa:'+str(xa)+' ('+str(xcell)+') ya:'+str(ya)+' ('+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
@@ -209,6 +208,12 @@ def main(argv):
             if not victory:
                 if event.type == pygame.KEYDOWN:
                     specialkey(event)
+            else:
+                if event.type == pygame.KEYDOWN:
+                    if (event.key==pygame.K_ESCAPE):
+                        done = True
+                    elif (event.key==pygame.K_RETURN):
+                        done = True
 
         # --- Logic
         # --- Drawing
