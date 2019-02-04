@@ -3,9 +3,7 @@
 
 ### IMPORTS ####################################################################
 import pygame
-
 from .rectangle import Rectangle
-from ...core import func as cf
 
 ### CLASSES ####################################################################
 class Square(Rectangle):
@@ -22,10 +20,16 @@ class Square(Rectangle):
         self.height=new_stdsize
         self.stdsize=new_stdsize
 
+    def cell2px(self,xy,wh,stdsize):
+        # 1 --> 10
+        # 2 --> ?
+        # (2*10)/1 = 20
+        return int((xy*wh)/(wh/stdsize))-stdsize
+
     def draw(self, screen, mwidth, mheight):
         pygame.draw.rect(screen, self.color,
-            [cell2px(self.x,mwidth,self.stdsize),
-                cell2px(self.y,mheight,self.stdsize),
+            [self.cell2px(self.x,mwidth,self.stdsize),
+                self.cell2px(self.y,mheight,self.stdsize),
                 self.width, self.height])
 
     def __eq__(self,other):

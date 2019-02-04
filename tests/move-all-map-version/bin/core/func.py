@@ -23,4 +23,4 @@ def cell2px(xy,wh,stdsize):
     # 1 --> 10
     # 2 --> ?
     # (2*10)/1 = 20
-    return int((xy*wh)/(wh/stdsize))
+    return int((xy*wh)/(wh/stdsize))-stdsize

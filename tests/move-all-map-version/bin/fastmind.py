@@ -108,10 +108,10 @@ def display(screen):
     # Set the screen background
     screen.fill(Color.BLACK)
 
-    cf.draw_map(womap, screen)
-    goal.draw(screen)
+    cf.draw_map(womap, screen, width, height)
+    goal.draw(screen, width, height)
     if not victory:
-        player.draw(screen)
+        player.draw(screen, width, height)
     else:
         print_result(screen)
 
