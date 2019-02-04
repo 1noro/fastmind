@@ -77,7 +77,7 @@ def print_result(screen):
     recth = 4*stdsize
     rectx = (width/2)-(rectw/2)
     recty = (height/2)-(recth/2)
-    borderw = 10
+    borderw = stdsize*0.70
     pygame.draw.rect(screen, Color.WHITE, [rectx, recty, rectw, recth])
     pygame.draw.rect(screen, Color.BLACK, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
     basicfont = pygame.font.SysFont('Monospace', stdsize)
