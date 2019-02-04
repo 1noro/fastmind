@@ -6,7 +6,7 @@ from .square import Square
 
 ### CLASSES ####################################################################
 class Goal(Square):
-    def __init__(self, x, y, xcell, ycell, stdsize, color,):
+    def __init__(self, x, y, xcell, ycell, stdsize, color):
         self.x=x
         self.y=y
         self.xcell=xcell

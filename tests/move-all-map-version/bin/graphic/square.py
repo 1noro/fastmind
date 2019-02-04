@@ -7,7 +7,7 @@ from .rectangle import Rectangle
 
 ### CLASSES ####################################################################
 class Square(Rectangle):
-    def __init__(self, x, y, xcell, ycell, stdsize, color,):
+    def __init__(self, x, y, xcell, ycell, stdsize, color):
         self.x=x
         self.y=y
         self.xcell=xcell

@@ -149,7 +149,7 @@ def specialkey(event):
         _xcell-=1
         if (checkMove(_xcell,ycell)):
             player.move_left()
-            goal.move_left()
+            goal.move_right()
             cf.move_map_right(womap)
             print('[LEFT] xcell: ('+str(_xcell)+') ycell: ('+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
