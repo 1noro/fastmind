@@ -6,11 +6,11 @@ from .square import Square
 
 ### CLASSES ####################################################################
 class Goal(Square):
-    def __init__(self, x, y, stdsize, color, mwidth, mheight):
-        self.x=int((x*mwidth)/(mwidth/stdsize))-stdsize
-        self.y=int((y*mheight)/(mheight/stdsize))-stdsize
-        self.xcell=x
-        self.ycell=y
+    def __init__(self, x, y, xcell, ycell, stdsize, color,):
+        self.x=x
+        self.y=y
+        self.xcell=xcell
+        self.ycell=ycell
         self.width=stdsize
         self.height=stdsize
         self.color=color

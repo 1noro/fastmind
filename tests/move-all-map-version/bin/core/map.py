@@ -31,6 +31,18 @@ class Map:
         self.onelinestr = str2.replace('\n','').replace('\r','')
         self.maplist = list(self.onelinestr)
 
+        self.startindex = self.maplist.index("@")
+        
+        x = y = 0
+        i=self.startindex
+        while i>self.lvwidth:
+            y+=1
+            i-=self.lvwidth
+        x = i
+
+        self.startx = x
+        self.starty = y
+
     def __eq__(self,other):
         out=False
         return out

@@ -46,7 +46,7 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist,lw,lh,stdsize):
+def pre_draw_map(maplist,lw,lh,stdsize,xgap,ygap):
     global wmap, womap, goal, player
 
     maxx=stdsize*lw
@@ -57,18 +57,20 @@ def pre_draw_map(maplist,lw,lh,stdsize):
         while (x<maxx):
             xcell=cf.px2cell(x,width,stdsize)
             ycell=cf.px2cell(y,height,stdsize)
+            xgap=cf.cell2px(xgap,height,stdsize)
+            ygap=cf.cell2px(ygap,height,stdsize)
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
-                womap.append(Wall(xcell,ycell,stdsize,Color.BLUE2,width,height))
-                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
+                womap.append(Wall(x-xgap,y-ygap,xcell,ycell,stdsize,Color.BLUE2))
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
             elif (maplist[i]=='$'):
-                goal = Goal(xcell,ycell,stdsize,Color.RED,width,height)
-                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
+                goal = Goal(x-xgap,y-ygap,xcell,ycell,stdsize,Color.RED)
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                player = Player(xcell,ycell,stdsize,Color.GREEN,width,height)
-                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
+                player = Player(x-xgap,y-xgap,xcell,ycell,stdsize,Color.GREEN)
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
-                print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
                 pass
 
             i+=1
@@ -191,7 +193,8 @@ def main(argv):
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
     m=Map(open('lvls/'+lvname, 'r').read())
-    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize)
+    print(m.startx,m.starty)
+    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
