@@ -46,7 +46,7 @@ game options:
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist,lw,lh,stdsize,xgap,ygap):
+def pre_draw_map(maplist,lw,lh,stdsize,xcellgap,ycellgap):
     global wmap, womap, goal, player
 
     maxx=stdsize*lw
@@ -57,8 +57,8 @@ def pre_draw_map(maplist,lw,lh,stdsize,xgap,ygap):
         while (x<maxx):
             xcell=cf.px2cell(x,width,stdsize)
             ycell=cf.px2cell(y,height,stdsize)
-            xgap=cf.cell2px(xgap,height,stdsize)
-            ygap=cf.cell2px(ygap,height,stdsize)
+            xgap=cf.cell2px(xcellgap/2,height,stdsize)
+            ygap=cf.cell2px(ycellgap/2,height,stdsize)
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
                 womap.append(Wall(x-xgap,y-ygap,xcell,ycell,stdsize,Color.BLUE2))
