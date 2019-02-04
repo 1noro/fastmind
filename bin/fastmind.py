@@ -81,6 +81,9 @@ def display(screen):
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
     # --- DRAWING --------------------------------------------------------------
+    # Set the screen background
+    screen.fill(Color.BLACK)
+
     cf.draw_map(womap, screen)
     goal.draw(screen)
     if not victory:
@@ -88,9 +91,6 @@ def display(screen):
     else:
         #~glut_print(5, 5, GLUT_BITMAP_9_BY_15, 'GOAL!! You pass in: '+str(lvl_time), 1.0, 1.0, 1.0, 1.0)
         pass
-
-    # --------------------------------------------------------------------------
-    pygame.display.flip()
 
 def checkMove(x,y):
     out=True
@@ -178,10 +178,10 @@ def main(argv):
     done = False
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+
     # -------- Main Program Loop -----------------------------------------------
     while not done:
         # --- Event Processing
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -190,13 +190,13 @@ def main(argv):
                     specialkey(event)
 
         # --- Logic
-
         # --- Drawing
-        # Set the screen background
-        screen.fill(Color.BLACK)
         display(screen)
-
         # --- Wrap-up
+        # Limit to 60 frames per second
+        clock.tick(60)
+
+        pygame.display.flip()
 
     # Close everything down
     pygame.quit()
