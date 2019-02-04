@@ -19,8 +19,8 @@ from graphic.goal import Goal
 from graphic.player import Player
 
 ### EDITABLE VARIABLES #########################################################
-stdsize = 20 # test with 10 (view with 15)
-cellscope = 21
+stdsize = 5 # test with 10 (view with 15)
+cellscope = 80
 pxscope = cellscope*stdsize
 cellcenter = (cellscope/2)+0.5
 pxcenter = (pxscope/2)-(stdsize/2)
@@ -194,7 +194,6 @@ def main(argv):
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
     m=Map(open('lvls/'+lvname, 'r').read())
-    print(m.startx,m.starty)
     pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
 
     # --- PYGAME INIT ----------------------------------------------------------
