@@ -18,6 +18,13 @@ from graphic.wall import Wall
 from graphic.goal import Goal
 from graphic.player import Player
 
+### EDITABLE VARIABLES #########################################################
+stdsize = 20 # test with 10 (view with 15)
+cellscope = 21
+pxscope = cellscope*stdsize
+cellcenter = (cellscope/2)+0.5
+pxcenter = (pxscope/2)-(stdsize/2)
+
 ### NON EDITABLE VARIABLES #####################################################
 window = 0 # glut window number
 lvlist = [] # level file list
@@ -38,11 +45,6 @@ game options:
  fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
-### EDITABLE VARIABLES #########################################################
-stdsize=15 # test with 10 (view with 15)
-cellscope=21
-pxscope=cellscope*stdsize
-
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize):
     global wmap, womap, goal, player
@@ -57,13 +59,13 @@ def pre_draw_map(maplist,lw,lh,stdsize):
             ycell=cf.px2cell(y,height,stdsize)
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
-                womap.append(Wall(xcell,ycell,stdsize,Color.BLUE2))
+                womap.append(Wall(xcell,ycell,stdsize,Color.BLUE2,width,height))
                 print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
             elif (maplist[i]=='$'):
-                goal = Goal(xcell,ycell,stdsize,Color.RED)
+                goal = Goal(xcell,ycell,stdsize,Color.RED,width,height)
                 print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                player = Player(xcell,ycell,stdsize,Color.GREEN)
+                player = Player(xcell,ycell,stdsize,Color.GREEN,width,height)
                 print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
                 print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
@@ -109,10 +111,10 @@ def display(screen):
     # Set the screen background
     screen.fill(Color.BLACK)
 
-    cf.draw_map(womap, screen, width, height)
-    goal.draw(screen, width, height)
+    cf.draw_map(womap, screen)
+    goal.draw(screen)
     if not victory:
-        player.draw(screen, 0, 0)
+        player.draw(screen, pxcenter, pxcenter)
     else:
         print_result(screen)
 
@@ -125,30 +127,34 @@ def checkMove(x,y):
 
 def specialkey(event):
     xa, ya = cf.px2cell(player.x,width,stdsize), cf.px2cell(player.y,width,stdsize)
-    xcell, ycell = player.x, player.y
+    xcell, ycell = player.xcell, player.ycell
     if (event.key==pygame.K_UP):
         ya-=stdsize
         if (checkMove(xcell,ycell)):
             player.move_up()
-            cf.move_map_up(womap)
+            goal.move_down()
+            cf.move_map_down(womap)
             print('[ UP ] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         ya+=stdsize
         if (checkMove(xcell,ycell)):
             player.move_down()
-            cf.move_map_down(womap)
+            goal.move_up()
+            cf.move_map_up(womap)
             print('[DOWN] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         xa-=stdsize
         if (checkMove(xcell,ycell)):
             player.move_left()
-            cf.move_map_left(womap)
+            goal.move_left()
+            cf.move_map_right(womap)
             print('[LEFT] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         xa+=stdsize
         if (checkMove(xcell,ycell)):
             player.move_right()
-            cf.move_map_right(womap)
+            goal.move_left()
+            cf.move_map_left(womap)
             print('[RIGH] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
 
 ### MAIN #######################################################################
