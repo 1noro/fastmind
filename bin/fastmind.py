@@ -18,6 +18,13 @@ from graphic.wall import Wall
 from graphic.goal import Goal
 from graphic.player import Player
 
+### EDITABLE VARIABLES #########################################################
+stdsize = 30 # test with 10 (view with 15)
+cellscope = 15 # ODD NUMBER
+pxscope = cellscope*stdsize
+cellcenter = int((cellscope/2)+0.5)
+pxcenter = (pxscope/2)-(stdsize/2)
+
 ### NON EDITABLE VARIABLES #####################################################
 window = 0 # glut window number
 lvlist = [] # level file list
@@ -38,12 +45,14 @@ game options:
  fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
-### EDITABLE VARIABLES #########################################################
-stdsize=15 # test with 10
-
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist,lw,lh,stdsize):
+def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
     global wmap, womap, goal, player
+
+    xcellgap=cellcenter-startx
+    ycellgap=cellcenter-starty
+    xgap=int((xcellgap*width)/(width/stdsize))
+    ygap=int((ycellgap*height)/(height/stdsize))
 
     maxx=stdsize*lw
     maxy=stdsize*lh
@@ -51,24 +60,23 @@ def pre_draw_map(maplist,lw,lh,stdsize):
 
     while (y<maxy):
         while (x<maxx):
-
+            xcell=int((x*(width/stdsize))/width)+1
+            ycell=int((y*(height/stdsize))/height)+1
             if (maplist[i]=='#'):
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "#"')
-                wmap.append([x,y])
-                womap.append(Wall(x,y,stdsize,Color.BLUE2))
+                wmap.append([xcell,ycell])
+                womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,Color.BLUE2))
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') ('+str(xcell+xcellgap)+','+str(ycell+ycellgap)+') "#"')
             elif (maplist[i]=='$'):
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "$"')
-                goal = Goal(x,y,stdsize,Color.RED)
+                goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,Color.RED)
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') "@"')
-                player = Player(x,y,stdsize,Color.GREEN)
+                player = Player(x+xgap,y+ygap,xcell,ycell,stdsize,Color.GREEN)
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') " "')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
                 pass
-
             i+=1
             x+=stdsize
-
         x=0
         y+=stdsize
 
@@ -109,6 +117,7 @@ def display(screen):
     cf.draw_map(womap, screen)
     goal.draw(screen)
     if not victory:
+        # player.draw(screen, pxcenter, pxcenter)
         player.draw(screen)
     else:
         print_result(screen)
@@ -116,40 +125,41 @@ def display(screen):
 def checkMove(x,y):
     out=True
     if ([x,y] in wmap):
-        print('[FAIL] NO MOVE')
+        print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
         out=False
     return out
 
 def specialkey(event):
-    xa, ya = player.x, player.y
+    xcell, ycell = player.xcell, player.ycell
+    _xcell, _ycell = xcell, ycell
     if (event.key==pygame.K_UP):
-        ya-=stdsize
-        if (checkMove(xa,ya)):
+        _ycell-=1
+        if (checkMove(xcell,_ycell)):
             player.move_up()
-            xcell=int((xa*(width/stdsize))/width)+1
-            ycell=int((ya*(width/stdsize))/width)+1
-            print('[ UP ] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
+            goal.move_down()
+            cf.move_map_down(womap)
+            print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
-        ya+=stdsize
-        if (checkMove(xa,ya)):
+        _ycell+=1
+        if (checkMove(xcell,_ycell)):
             player.move_down()
-            xcell=int((xa*(width/stdsize))/width)+1
-            ycell=int((ya*(width/stdsize))/width)+1
-            print('[DOWN] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
+            goal.move_up()
+            cf.move_map_up(womap)
+            print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
-        xa-=stdsize
-        if (checkMove(xa,ya)):
+        _xcell-=1
+        if (checkMove(_xcell,ycell)):
             player.move_left()
-            xcell=int((xa*(width/stdsize))/width)+1
-            ycell=int((ya*(width/stdsize))/width)+1
-            print('[LEFT] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
+            goal.move_right()
+            cf.move_map_right(womap)
+            print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
-        xa+=stdsize
-        if (checkMove(xa,ya)):
+        _xcell+=1
+        if (checkMove(_xcell,ycell)):
             player.move_right()
-            xcell=int((xa*(width/stdsize))/width)+1
-            ycell=int((ya*(width/stdsize))/width)+1
-            print('[RIGH] x: '+str(xa)+'px ('+str(xcell)+') y: '+str(ya)+'px ('+str(ycell)+')')
+            goal.move_left()
+            cf.move_map_left(womap)
+            print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
@@ -180,11 +190,12 @@ def main(argv):
         uf.print_list(' > ',lvlist)
         sys.exit()
 
+    # width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
+    width, height = pxscope, pxscope # window size
     old_time = datetime.now()
     print('[INFO] Time started at:', old_time)
     m=Map(open('lvls/'+lvname, 'r').read())
-    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize)
-    width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
+    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()

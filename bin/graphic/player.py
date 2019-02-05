@@ -2,38 +2,39 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from .rectangle import Rectangle
+import pygame
+from .square import Square
 
 ### CLASSES ####################################################################
-class Player(Rectangle):
-    def __init__(self, x, y, stdsize, color):
+class Player(Square):
+    def __init__(self, x, y, xcell, ycell, stdsize, color):
         self.x=x
         self.y=y
+        self.xcell=xcell
+        self.ycell=ycell
         self.width=stdsize
         self.height=stdsize
-        self.stdsize=stdsize
         self.color=color
-
-    def set_stdsize(self,new_stdsize):
-        self.width=new_stdsize
-        self.height=new_stdsize
         self.stdsize=stdsize
 
     def move(self,x,y):
-        self.x=x
-        self.y=y
-
-    def move_right(self):
-        self.x+=self.stdsize
+        self.xcell=x
+        self.ycell=y
 
     def move_left(self):
-        self.x-=self.stdsize
+        self.xcell-=1
+
+    def move_right(self):
+        self.xcell+=1
 
     def move_up(self):
-        self.y-=self.stdsize
+        self.ycell-=1
 
     def move_down(self):
-        self.y+=self.stdsize
+        self.ycell+=1
+
+    # def draw(self, screen, xpx, ypx):
+    #     pygame.draw.rect(screen, self.color,[xpx, ypx, self.width, self.height])
 
     def __eq__(self,other):
         out=False
