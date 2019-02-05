@@ -49,15 +49,14 @@ game options:
 def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
     global wmap, womap, goal, player
 
+    xcellgap=cellcenter-startx
+    ycellgap=cellcenter-starty
+    xgap=int((xcellgap*width)/(width/stdsize))
+    ygap=int((ycellgap*height)/(height/stdsize))
+
     maxx=stdsize*lw
     maxy=stdsize*lh
     x = y = i = 0
-
-    xcellgap=cellcenter-startx
-    ycellgap=cellcenter-starty
-
-    xgap=int((xcellgap*width)/(width/stdsize))
-    ygap=int((ycellgap*height)/(height/stdsize))
 
     while (y<maxy):
         while (x<maxx):
@@ -76,10 +75,8 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
             else:
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
                 pass
-
             i+=1
             x+=stdsize
-
         x=0
         y+=stdsize
 
@@ -128,7 +125,7 @@ def display(screen):
 def checkMove(x,y):
     out=True
     if ([x,y] in wmap):
-        print('[FAIL] NO MOVE')
+        print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
         out=False
     return out
 
@@ -141,28 +138,28 @@ def specialkey(event):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
-            print('[ UP ] xcell: ('+str(xcell)+') ycell: ('+str(_ycell)+')')
+            print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         _ycell+=1
         if (checkMove(xcell,_ycell)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
-            print('[DOWN] xcell: ('+str(xcell)+') ycell: ('+str(_ycell)+')')
+            print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         _xcell-=1
         if (checkMove(_xcell,ycell)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
-            print('[LEFT] xcell: ('+str(_xcell)+') ycell: ('+str(ycell)+')')
+            print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         _xcell+=1
         if (checkMove(_xcell,ycell)):
             player.move_right()
             goal.move_left()
             cf.move_map_left(womap)
-            print('[RIGH] xcell: ('+str(_xcell)+') ycell: ('+str(ycell)+')')
+            print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
