@@ -1,6 +1,6 @@
 # ![](./media/icons/32x32/fastmind.png) FASTMIND
 
-Solve mazes.
+Solve mazes and measure your time to complete them as fast as you can.
 
 ## Requirements
 
@@ -30,6 +30,21 @@ Make sure you install python3.6 with the "Add python 3.6 to PATH" option selecte
 
 ```
 py -m pip install -U pygame --user
+```
+
+## Run
+
+```
+git clone https://github.com/boot1110001/fastmind
+cd fastmind/bin
+chmod u+x fastmind.py
+./fastmind.py
+```
+
+## Help
+
+```
+./fastmind.py --help
 ```
 
 ## Credits
