@@ -42,10 +42,16 @@ width = 0
 height = 0
 
 # --- State control
-ongame = False
 onmenu = True
-select = 0
-maxselect = 3
+mselect = 0
+mmaxselect = 3
+
+onlevel = False
+lselect = 0
+lmaxselect = 29
+
+ongame = False
+
 victory = False
 
 # --- Run options
@@ -139,7 +145,6 @@ def displaygame(screen):
 
 def displaymenu(screen):
     # --- PREVIOUS CHECKS ------------------------------------------------------
-
     # --- DRAWING --------------------------------------------------------------
     # Set the screen background
     screen.fill(Color.BLACK)
@@ -160,7 +165,7 @@ def displaymenu(screen):
     basicfont = pygame.font.Font("../media/font/ttf/node.ttf", stdsize)
 
     # --- Play
-    if (select==0):
+    if (mselect==0):
         text = basicfont.render('  PLAY  ', True, Color.BLACK, Color.YELLOW)
     else:
         text = basicfont.render('  PLAY  ', True, Color.YELLOW, Color.BLACK)
@@ -169,7 +174,7 @@ def displaymenu(screen):
     textrect.centery = screen.get_rect().centery+(stdsize*0)
     screen.blit(text, textrect)
     # --- Levels
-    if (select==1):
+    if (mselect==1):
         text = basicfont.render(' LEVELS ', True, Color.BLACK, Color.YELLOW)
     else:
         text = basicfont.render(' LEVELS ', True, Color.YELLOW, Color.BLACK)
@@ -178,7 +183,7 @@ def displaymenu(screen):
     textrect.centery = screen.get_rect().centery+(stdsize*1.5)
     screen.blit(text, textrect)
     # --- Credits
-    if (select==2):
+    if (mselect==2):
         text = basicfont.render('  CRED  ', True, Color.BLACK, Color.YELLOW)
     else:
         text = basicfont.render('  CRED  ', True, Color.YELLOW, Color.BLACK)
@@ -187,7 +192,7 @@ def displaymenu(screen):
     textrect.centery = screen.get_rect().centery+(stdsize*3)
     screen.blit(text, textrect)
     # --- Exit
-    if (select==3):
+    if (mselect==3):
         text = basicfont.render('  EXIT  ', True, Color.BLACK, Color.YELLOW)
     else:
         text = basicfont.render('  EXIT  ', True, Color.YELLOW, Color.BLACK)
@@ -195,6 +200,22 @@ def displaymenu(screen):
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*4.5)
     screen.blit(text, textrect)
+
+def displaylevel(screen):
+    # Set the screen background
+    screen.fill(Color.BLACK)
+    i = 0
+    x, y = 1, 1
+    while i<len(lvlist):
+        if (i==lselect):
+            pygame.draw.rect(screen, Color.YELLOW, [x*stdsize, y*stdsize, stdsize, stdsize])
+        else:
+            pygame.draw.rect(screen, Color.BLUE2, [x*stdsize, y*stdsize, stdsize, stdsize])
+        i+=1
+        x+=2
+        if (x>=cellscope):
+            y+=2
+            x=1
 
 def checkMove(x,y):
     out=True
@@ -236,19 +257,54 @@ def ongamekey(event):
             if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
 def onmenukey(event):
-    global select
+    global mselect
     if (event.key==pygame.K_UP):
-        select=select-1
-        if select<0: select=maxselect
+        mselect=mselect-1
+        if mselect<0: mselect=mmaxselect
     elif (event.key==pygame.K_DOWN):
-        select=select+1
-        if select>maxselect: select=0
+        mselect=mselect+1
+        if mselect>mmaxselect: mselect=0
+
+def onlevelkey(event):
+    global lselect
+    if (event.key==pygame.K_LEFT):
+        lselect-=1
+        if lselect<0: lselect=lmaxselect
+    elif (event.key==pygame.K_RIGHT):
+        lselect+=1
+        if lselect>lmaxselect: lselect=0
+
+def reset_game():
+    global victory, wmap, womap, goal, player, old_time, lvl_time
+
+    victory = False
+
+    # --- Level atributes
+    wmap = [] # wall list
+    womap = [] # wall object list
+    goal = 0 # goal object
+    player = 0 # player object
+
+    # --- Time control
+    old_time = 0
+    lvl_time = 0
+
+def play_level(lvname):
+    global old_time
+
+    reset_game()
+    old_time = datetime.now()
+    print('[INFO] Playing level: '+lvname)
+    print('[INFO] Time started at:', old_time)
+    m=Map(open('lvls/'+lvname, 'r').read())
+    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
 
 ### MAIN #######################################################################
 def main(argv):
-    global stdsize, old_time, lvlist, width, height, verbose, ongame, onmenu
+    global stdsize, old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory
 
     lvlist=cf.get_lvls()
+    lmaxselect=len(lvlist)-1
     lvname = '1.lv'
     try:
         opts, args = getopt.getopt(argv,"hp:s:lv",["help","play=","size=","list","verbose"])
@@ -277,10 +333,7 @@ def main(argv):
 
     # width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
     width, height = pxscope, pxscope # window size
-    old_time = datetime.now()
-    print('[INFO] Time started at:', old_time)
-    m=Map(open('lvls/'+lvname, 'r').read())
-    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
+    # play_level(lvname)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
@@ -307,15 +360,48 @@ def main(argv):
                         print('[ESCP] Exiting...')
                         done = True
                     elif (event.key==pygame.K_RETURN):
-                        print('[ENTR] Play level')
-                        onmenu = False
-                        ongame = True
+                        if (mselect==0):
+                            print('[ENTR] Play level')
+                            onmenu = False
+                            ongame = True
+                            play_level(lvname)
+                        elif (mselect==1):
+                            print('[ENTR] Select level')
+                            onmenu = False
+                            onlevel = True
+                        elif (mselect==2):
+                            print('[ENTR] Not implemented :(')
+                        elif (mselect==3):
+                            print('[ENTR] Exiting...')
+                            done = True
+                        else:
+                            print('[ENTR] None')
+                            pass
                     else:
                         onmenukey(event)
+            elif onlevel:
+                if event.type == pygame.KEYDOWN:
+                    if (event.key==pygame.K_ESCAPE):
+                        print('[ESCP] Return to menu')
+                        onlevel = False
+                        onmenu = True
+                    elif (event.key==pygame.K_RETURN):
+                        print('[ENTR] Play level')
+                        onlevel = False
+                        ongame = True
+                        lvname = str(lselect)+'.lv'
+                        play_level(lvname)
+                    else:
+                        onlevelkey(event)
             elif ongame:
                 if not victory:
                     if event.type == pygame.KEYDOWN:
-                        ongamekey(event)
+                        if (event.key==pygame.K_ESCAPE):
+                            print('[ESCP] Return to menu')
+                            onmenu = True
+                            ongame = False
+                        else:
+                            ongamekey(event)
                 else:
                     if event.type == pygame.KEYDOWN:
                         if (event.key==pygame.K_ESCAPE):
@@ -330,6 +416,8 @@ def main(argv):
         # --- Drawing
         if onmenu:
             displaymenu(screen)
+        elif onlevel:
+            displaylevel(screen)
         elif ongame:
             displaygame(screen)
         # --- Wrap-up
