@@ -45,7 +45,7 @@ game options:
  fastmind.py -l\t\t\t--list\t\t\tList the available levels.
  fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
  fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
- fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
+ fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (30) of the basic square.'''
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
