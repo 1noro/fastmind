@@ -10,13 +10,14 @@ import pygame
 from datetime import datetime
 
 from utils import func as uf
-from utils.color import Color
 from core import func as cf
 from core.map import Map
 from graphic.rectangle import Rectangle
 from graphic.wall import Wall
 from graphic.goal import Goal
 from graphic.player import Player
+from graphic.color import Color
+from graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
 stdsize = 30 # test with 10 (view with 15)
@@ -99,30 +100,6 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
         x=0
         y+=stdsize
 
-def print_result(screen):
-    rectw = 14*stdsize
-    recth = 4*stdsize
-    rectx = (width/2)-(rectw/2)
-    recty = (height/2)-(recth/2)
-    borderw = stdsize*0.70
-    pygame.draw.rect(screen, Color.WHITE, [rectx, recty, rectw, recth])
-    pygame.draw.rect(screen, Color.BLACK, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
-
-    # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("../media/font/ttf/node.ttf", stdsize)
-
-    text = basicfont.render('GOAL! You pass in:', True, Color.WHITE, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery-(stdsize/2)-2
-    screen.blit(text, textrect)
-
-    text = basicfont.render(str(lvl_time)+'s', True, Color.WHITE, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery+(stdsize/2)+2
-    screen.blit(text, textrect)
-
 def displaygame(screen):
     global victory, lvl_time
     # --- PREVIOUS CHECKS ------------------------------------------------------
@@ -141,81 +118,7 @@ def displaygame(screen):
         # player.draw(screen, pxcenter, pxcenter)
         player.draw(screen)
     else:
-        print_result(screen)
-
-def displaymenu(screen):
-    # --- PREVIOUS CHECKS ------------------------------------------------------
-    # --- DRAWING --------------------------------------------------------------
-    # Set the screen background
-    screen.fill(Color.BLACK)
-
-    # --- Logo background
-    pygame.draw.rect(screen, Color.YELLOW, [0, 0, width, 6*stdsize])
-    # --- F
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter-(4*stdsize), 1*stdsize, 3*stdsize, stdsize])
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter-(4*stdsize), 2*stdsize, stdsize, 3*stdsize])
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter-(3*stdsize), 3*stdsize, stdsize, stdsize])
-    # --- M
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter+(0*stdsize), 1*stdsize, 5*stdsize, stdsize])
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter+(0*stdsize), 2*stdsize, stdsize, 3*stdsize])
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter+(2*stdsize), 2*stdsize, stdsize, 2*stdsize])
-    pygame.draw.rect(screen, Color.BLACK, [pxcenter+(4*stdsize), 2*stdsize, stdsize, 3*stdsize])
-
-    # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("../media/font/ttf/node.ttf", stdsize)
-
-    # --- Play
-    if (mselect==0):
-        text = basicfont.render('  PLAY  ', True, Color.BLACK, Color.YELLOW)
-    else:
-        text = basicfont.render('  PLAY  ', True, Color.YELLOW, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery+(stdsize*0)
-    screen.blit(text, textrect)
-    # --- Levels
-    if (mselect==1):
-        text = basicfont.render(' LEVELS ', True, Color.BLACK, Color.YELLOW)
-    else:
-        text = basicfont.render(' LEVELS ', True, Color.YELLOW, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery+(stdsize*1.5)
-    screen.blit(text, textrect)
-    # --- Credits
-    if (mselect==2):
-        text = basicfont.render('  CRED  ', True, Color.BLACK, Color.YELLOW)
-    else:
-        text = basicfont.render('  CRED  ', True, Color.YELLOW, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery+(stdsize*3)
-    screen.blit(text, textrect)
-    # --- Exit
-    if (mselect==3):
-        text = basicfont.render('  EXIT  ', True, Color.BLACK, Color.YELLOW)
-    else:
-        text = basicfont.render('  EXIT  ', True, Color.YELLOW, Color.BLACK)
-    textrect = text.get_rect()
-    textrect.centerx = screen.get_rect().centerx
-    textrect.centery = screen.get_rect().centery+(stdsize*4.5)
-    screen.blit(text, textrect)
-
-def displaylevel(screen):
-    # Set the screen background
-    screen.fill(Color.BLACK)
-    i = 0
-    x, y = 1, 1
-    while i<len(lvlist):
-        if (i==lselect):
-            pygame.draw.rect(screen, Color.YELLOW, [x*stdsize, y*stdsize, stdsize, stdsize])
-        else:
-            pygame.draw.rect(screen, Color.BLUE2, [x*stdsize, y*stdsize, stdsize, stdsize])
-        i+=1
-        x+=2
-        if (x>=cellscope):
-            y+=2
-            x=1
+        displays.print_result(screen, stdsize, width, height, lvl_time)
 
 def checkMove(x,y):
     out=True
@@ -274,7 +177,7 @@ def onlevelkey(event):
         lselect+=1
         if lselect>lmaxselect: lselect=0
 
-def reset_game():
+def reset_level():
     global victory, wmap, womap, goal, player, old_time, lvl_time
 
     victory = False
@@ -292,7 +195,7 @@ def reset_game():
 def play_level(lvname):
     global old_time
 
-    reset_game()
+    reset_level()
     old_time = datetime.now()
     print('[INFO] Playing level: '+lvname)
     print('[INFO] Time started at:', old_time)
@@ -306,6 +209,9 @@ def main(argv):
     lvlist=cf.get_lvls()
     lmaxselect=len(lvlist)-1
     lvname = '1.lv'
+
+    width, height = pxscope, pxscope # window size
+
     try:
         opts, args = getopt.getopt(argv,"hp:s:lv",["help","play=","size=","list","verbose"])
     except getopt.GetoptError:
@@ -317,6 +223,9 @@ def main(argv):
             sys.exit()
         elif opt in ("-p", "--play"):
             lvname = arg
+            onmenu = False
+            ongame = True
+            play_level(lvname)
         elif opt in ("-s", "--size"):
             stdsize = int(arg)
         elif opt in ("-v", "--verbose"):
@@ -330,10 +239,6 @@ def main(argv):
         print("[FAIL] The selected level isn't in the list:")
         uf.print_list(' > ',lvlist)
         sys.exit()
-
-    # width, height = stdsize*m.lvwidth, stdsize*m.lvheight # window size
-    width, height = pxscope, pxscope # window size
-    # play_level(lvname)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
@@ -405,8 +310,9 @@ def main(argv):
                 else:
                     if event.type == pygame.KEYDOWN:
                         if (event.key==pygame.K_ESCAPE):
-                            print('[ESCP] Exiting...')
-                            done = True
+                            print('[ESCP] Return to menu')
+                            onmenu = True
+                            ongame = False
                         elif (event.key==pygame.K_RETURN):
                             print('[ENTR] Return to menu')
                             onmenu = True
@@ -415,9 +321,9 @@ def main(argv):
         # --- Logic
         # --- Drawing
         if onmenu:
-            displaymenu(screen)
+            displays.displaymenu(screen, width, stdsize, pxcenter, mselect)
         elif onlevel:
-            displaylevel(screen)
+            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope)
         elif ongame:
             displaygame(screen)
         # --- Wrap-up
