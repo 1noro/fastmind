@@ -9,3 +9,4 @@ class Color:
     GREEN   = (  0, 255,   0)
     BLUE    = (  0,   0, 255)
     BLUE2   = ( 76,  76, 255)
+    YELLOW  = (250, 255,   2)
