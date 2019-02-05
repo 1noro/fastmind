@@ -32,7 +32,7 @@ Make sure you install python3.6 with the "Add python 3.6 to PATH" option selecte
 py -m pip install -U pygame --user
 ```
 
-## Run
+## Run :rocket:
 
 ```
 git clone https://github.com/boot1110001/fastmind
