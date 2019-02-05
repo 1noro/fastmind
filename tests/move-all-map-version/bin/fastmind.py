@@ -55,13 +55,9 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
 
     xcellgap=cellcenter-startx
     ycellgap=cellcenter-starty
-    print(xcellgap,'=',cellcenter,'-',startx)
-    print(ycellgap,'=',cellcenter,'-',starty)
 
-    print(xcellgap,ycellgap)
     xgap=cf.cell2px(xcellgap,width,stdsize)
     ygap=cf.cell2px(ycellgap,height,stdsize)
-    print(xgap,ygap)
 
     while (y<maxy):
         while (x<maxx):
