@@ -32,13 +32,15 @@ class Map:
         self.maplist = list(self.onelinestr)
 
         self.startindex = self.maplist.index("@")
-        
-        x = y = 0
-        i=self.startindex
+
+        y = 1
+        i=self.startindex+1
         while i>self.lvwidth:
             y+=1
             i-=self.lvwidth
         x = i
+
+        print(x,y)
 
         self.startx = x
         self.starty = y

@@ -53,17 +53,11 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
     maxy=stdsize*lh
     x = y = i = 0
 
-    if (lw<=lh):
-        xcellgap=cellcenter-(lw-startx)
-        ycellgap=starty+(lh-cellcenter)
-        print(xcellgap,'=',cellcenter,'-(',lw,'-',startx,')')
-        print(ycellgap,'=',starty,'+(',lh,'-',cellcenter,')')
-    else:
-        xcellgap = startx-(cellcenter-2)
-        ycellgap = cellcenter-starty
+    xcellgap=cellcenter-startx
+    ycellgap=cellcenter-starty
+    print(xcellgap,'=',cellcenter,'-',startx)
+    print(ycellgap,'=',cellcenter,'-',starty)
 
-    # xgap=cf.cell2px(xcellgap-cellcenter-1-lw,width,stdsize)
-    # ygap=cf.cell2px(ycellgap-cellcenter-1-lh,height,stdsize)
     print(xcellgap,ycellgap)
     xgap=cf.cell2px(xcellgap,width,stdsize)
     ygap=cf.cell2px(ycellgap,height,stdsize)
@@ -76,7 +70,7 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
                 womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,Color.BLUE2))
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "#"')
+                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') ('+str(xcell+xcellgap)+','+str(ycell+ycellgap)+') "#"')
             elif (maplist[i]=='$'):
                 goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,Color.RED)
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
