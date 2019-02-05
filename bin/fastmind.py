@@ -37,6 +37,7 @@ old_time = 0
 lvl_time = 0
 width = 0
 height = 0
+verbose = False
 
 hstr='''fastmind, solve mazes...
 game options:
@@ -125,7 +126,7 @@ def display(screen):
 def checkMove(x,y):
     out=True
     if ([x,y] in wmap):
-        print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
+        if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
         out=False
     return out
 
@@ -138,37 +139,37 @@ def specialkey(event):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
-            print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
+            if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         _ycell+=1
         if (checkMove(xcell,_ycell)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
-            print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
+            if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         _xcell-=1
         if (checkMove(_xcell,ycell)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
-            print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
+            if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         _xcell+=1
         if (checkMove(_xcell,ycell)):
             player.move_right()
             goal.move_left()
             cf.move_map_left(womap)
-            print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
+            if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
 ### MAIN #######################################################################
 def main(argv):
-    global stdsize, old_time, lvlist, width, height
+    global stdsize, old_time, lvlist, width, height, verbose
 
     lvlist=cf.get_lvls()
     lvname = '1.lv'
     try:
-        opts, args = getopt.getopt(argv,"hp:s:l",["help","play=","size=","list"])
+        opts, args = getopt.getopt(argv,"hp:s:lv",["help","play=","size=","list","verbose"])
     except getopt.GetoptError:
         print(hstr)
         sys.exit(2)
@@ -180,6 +181,8 @@ def main(argv):
             lvname = arg
         elif opt in ("-s", "--size"):
             stdsize = int(arg)
+        elif opt in ("-v", "--verbose"):
+            verbose = True
         elif opt in ("-l", "--list"):
             print('[INFO] Level list:')
             uf.print_list(' > ',lvlist)
@@ -225,7 +228,7 @@ def main(argv):
                         print('[ESCP] Exiting...')
                         done = True
                     elif (event.key==pygame.K_RETURN):
-                        print('[ENTR] Exiting...')
+                        print('[ENTR] Next level not implemented, exiting...')
                         done = True
 
         # --- Logic
