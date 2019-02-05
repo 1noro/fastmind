@@ -20,7 +20,7 @@ from graphic.color import Color
 from graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
-stdsize = 30 # test with 10 (view with 15)
+stdsize = 40 # test with 10 (view with 15)
 cellscope = 15 # ODD NUMBER def=15
 pxscope = cellscope*stdsize
 cellcenter = int((cellscope/2)+0.5)
