@@ -19,8 +19,8 @@ from graphic.goal import Goal
 from graphic.player import Player
 
 ### EDITABLE VARIABLES #########################################################
-stdsize = 20 # test with 10 (view with 15)
-cellscope = 21 # debe ser impar
+stdsize = 30 # test with 10 (view with 15)
+cellscope = 15 # ODD NUMBER
 pxscope = cellscope*stdsize
 cellcenter = int((cellscope/2)+0.5)
 pxcenter = (pxscope/2)-(stdsize/2)
