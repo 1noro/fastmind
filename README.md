@@ -41,10 +41,17 @@ chmod u+x fastmind.py
 ./fastmind.py
 ```
 
-## Help
+### Run options
 
 ```
-./fastmind.py --help
+$./fastmind.py --help
+fastmind, solve mazes and measure your time...
+game options:
+ fastmind.py -h			--help			Show this help.
+ fastmind.py -l			--list			List the available levels.
+ fastmind.py -v			--list			Enables verbose mode.
+ fastmind.py -p <level_name>	--play=<level_name>	Play the level.
+ fastmind.py -s <square_size>	--size=<square_size>	Modify the default size (15) of the basic square.
 ```
 
 ## Credits
