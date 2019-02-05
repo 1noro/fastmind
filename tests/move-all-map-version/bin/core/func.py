@@ -24,17 +24,3 @@ def move_map_up(womap):
 
 def move_map_down(womap):
     for o in womap: o.move_down()
-
-def px2cell(xy,wh,stdsize):
-    # 10 --> 1
-    # 20 --> ?
-    # (20*1)/10 = 2
-    return int((xy*(wh/stdsize))/wh)+1
-    # return int((xy*(wh/stdsize))/wh)
-
-def cell2px(xy,wh,stdsize):
-    # 1 --> 10
-    # 2 --> ?
-    # (2*10)/1 = 20
-    # return int((xy*wh)/(wh/stdsize))-stdsize
-    return int((xy*wh)/(wh/stdsize))

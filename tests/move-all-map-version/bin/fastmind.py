@@ -56,13 +56,13 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
     xcellgap=cellcenter-startx
     ycellgap=cellcenter-starty
 
-    xgap=cf.cell2px(xcellgap,width,stdsize)
-    ygap=cf.cell2px(ycellgap,height,stdsize)
+    xgap=int((xcellgap*width)/(width/stdsize))
+    ygap=int((ycellgap*height)/(height/stdsize))
 
     while (y<maxy):
         while (x<maxx):
-            xcell=cf.px2cell(x,width,stdsize)
-            ycell=cf.px2cell(y,height,stdsize)
+            xcell=int((x*(width/stdsize))/width)+1
+            ycell=int((y*(height/stdsize))/height)+1
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
                 womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,Color.BLUE2))

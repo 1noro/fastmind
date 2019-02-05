@@ -40,8 +40,6 @@ class Map:
             i-=self.lvwidth
         x = i
 
-        print(x,y)
-
         self.startx = x
         self.starty = y
 
