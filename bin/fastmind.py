@@ -43,7 +43,7 @@ hstr='''fastmind, solve mazes and measure your time...
 game options:
  fastmind.py -h\t\t\t--help\t\t\tShow this help.
  fastmind.py -l\t\t\t--list\t\t\tList the available levels.
- fastmind.py -v\t\t\t--list\t\t\tEnables verbose mode.
+ fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
  fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
  fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (15) of the basic square.'''
 
