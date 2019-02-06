@@ -10,6 +10,9 @@ def get_lvls():
     onlyfiles = [f for f in listdir('lvls') if isfile(join('lvls', f))]
     return onlyfiles
 
+def print_list(string,list):
+    for i in list: print(string+str(i))
+
 def draw_map(womap, screen):
     for o in womap: o.draw(screen)
 

@@ -9,7 +9,6 @@ import pygame
 
 from datetime import datetime
 
-from utils import func as uf
 from core import func as cf
 from core.map import Map
 from graphic.rectangle import Rectangle
@@ -237,7 +236,7 @@ def main(argv):
 
     if not (lvname in lvlist):
         print("[FAIL] The selected level isn't in the list:")
-        uf.print_list(' > ',lvlist)
+        cf.print_list(' > ',lvlist)
         sys.exit()
 
     # --- PYGAME INIT ----------------------------------------------------------
