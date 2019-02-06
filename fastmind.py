@@ -9,14 +9,15 @@ import pygame
 
 from datetime import datetime
 
-from core import func as cf
-from core.map import Map
-from graphic.rectangle import Rectangle
-from graphic.wall import Wall
-from graphic.goal import Goal
-from graphic.player import Player
-from graphic.color import Color
-from graphic import displays
+import bin
+from bin.core import func as cf
+from bin.core.map import Map
+from bin.graphic.rectangle import Rectangle
+from bin.graphic.wall import Wall
+from bin.graphic.goal import Goal
+from bin.graphic.player import Player
+from bin.graphic.color import Color
+from bin.graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
 stdsize = 40 # test with 10 (view with 15)

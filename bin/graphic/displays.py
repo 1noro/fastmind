@@ -26,7 +26,7 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect):
     pygame.draw.rect(screen, Color.BLACK, [pxcenter+(4*stdsize), 2*stdsize, stdsize, 3*stdsize])
 
     # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("../media/font/ttf/node.ttf", stdsize)
+    basicfont = pygame.font.Font("media/font/ttf/node.ttf", stdsize)
 
     # --- Play
     if (mselect==0):
@@ -91,7 +91,7 @@ def print_result(screen, stdsize, width, height, lvl_time):
     pygame.draw.rect(screen, Color.BLACK, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
 
     # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("../media/font/ttf/node.ttf", stdsize)
+    basicfont = pygame.font.Font("media/font/ttf/node.ttf", stdsize)
 
     text = basicfont.render('GOAL! You pass in:', True, Color.WHITE, Color.BLACK)
     textrect = text.get_rect()
