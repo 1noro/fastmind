@@ -231,7 +231,7 @@ def main(argv):
             verbose = True
         elif opt in ("-l", "--list"):
             print('[INFO] Level list:')
-            uf.print_list(' > ',lvlist)
+            cf.print_list(' > ',lvlist)
             sys.exit()
 
     if not (lvname in lvlist):
