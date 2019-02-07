@@ -14,14 +14,16 @@ The program uses the pygame library for its full operation, so it is mandatory t
 python3 -m pip install -U pygame --user
 ```
 
-#### For Debian/Ubuntu/Mint
+> If you do not have pip installed for python3 in Ubuntu: `sudo apt-get install python3-pip`
+
+#### Another option for Debian/Ubuntu/Mint
 
 ```
 sudo apt-get install python3
 sudo apt-get install python3-pygame
 ```
 
-#### For Fedora/Red hat
+#### Another option for Fedora/Red hat
 
 ```
 sudo yum install python3
