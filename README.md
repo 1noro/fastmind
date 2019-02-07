@@ -50,8 +50,8 @@ python3 fastmind.py
 
 ### Getting a .zip/.tar.gz file from GitHub
 
-- Extract the fastmind-x.zip/.tar.gz in the current folder.
-- Open a terminal and navigate to the folder where the content of the fastmind-x.zip/.tar.gz has been extracted (using the `cd` command).
+- Extract the `fastmind-x.zip/.tar.gz` in the current folder.
+- Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `python3 fastmind.py`
 
 ### Run options
