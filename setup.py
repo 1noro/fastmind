@@ -16,7 +16,11 @@ setup(
     author_email="nothing@addr.ess",
 
     # Packages
-    packages=["bin"],
+    packages=[
+        "bin",
+        "bin.core",
+        "bin.graphic"
+    ],
 
     # Include additional files into the package
     include_package_data=True,
@@ -32,6 +36,6 @@ setup(
 
     # Dependent packages (distributions)
     install_requires=[
-        "pygame",
+        "pygame"
     ],
 )
