@@ -30,7 +30,7 @@ sudo yum install python3-pygame
 
 ### Windows
 
-Make sure you [install python3.x](https://www.python.org/downloads/windows/) with the _Add python 3.x to PATH_ option selected. This means that python, and pip will work for you from the command line.
+Make sure you [__install python3.x__](https://www.python.org/downloads/windows/) with the _Add python 3.x to PATH_ option selected. This means that python, and pip will work for you from the command line.
 
 ```
 python -m pip install -U pygame --user
