@@ -38,7 +38,7 @@ python -m pip install -U pygame --user
 
 ## Get and run the program :rocket:
 
-Currently the project is at a very early stage of its development (_ALPHA_), you can install it on your PC, but future versions may delete previous configurations in the program.
+Currently the project is at a very early stage of its development (_alpha_), you can install it on your PC, but future versions may delete previous configurations in the program.
 
 ### Assuming you have git installed
 
