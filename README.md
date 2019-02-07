@@ -6,6 +6,8 @@ Solve mazes and measure your time to complete them as fast as you can.
 
 The program uses the pygame library for its full operation, so it is mandatory to install it on your computer before running the program.
 
+> For more questions, go to the official pygame website: https://www.pygame.org/wiki/GettingStarted
+
 ### Generic Unix pygame installation
 
 ```
