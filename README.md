@@ -19,14 +19,12 @@ python3 -m pip install -U pygame --user
 #### Another option for Debian/Ubuntu/Mint
 
 ```
-sudo apt-get install python3
 sudo apt-get install python3-pygame
 ```
 
 #### Another option for Fedora/Red hat
 
 ```
-sudo yum install python3
 sudo yum install python3-pygame
 ```
 
