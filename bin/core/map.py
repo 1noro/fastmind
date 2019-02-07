@@ -9,7 +9,7 @@ class Map:
         self.str=str
 
         lv_info=str.split('\n', 1)[0].split('::')
-        self.lvname=lv_info[0]
+        self.lvrealname=lv_info[0]
         self.lvwidth=int(lv_info[1])
         self.lvheight=int(lv_info[2])
 

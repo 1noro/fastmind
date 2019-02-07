@@ -62,8 +62,7 @@ game options:
  fastmind.py -h\t\t\t--help\t\t\tShow this help.
  fastmind.py -l\t\t\t--list\t\t\tList the available levels.
  fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
- fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.
- fastmind.py -s <square_size>\t--size=<square_size>\tModify the default size (30) of the basic square.'''
+ fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.'''
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
@@ -197,14 +196,15 @@ def play_level(lvname):
 
     reset_level()
     old_time = datetime.now()
-    print('[INFO] Playing level: '+lvname)
-    print('[INFO] Time started at:', old_time)
+
     m=Map(open('lvls/'+lvname, 'r').read())
     pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
+    print('[INFO] Playing: '+m.lvrealname+' ('+lvname+')')
+    print('[INFO] Time started at:', old_time)
 
 ### MAIN #######################################################################
 def main(argv):
-    global stdsize, old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory
+    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory
 
     lvlist=cf.get_lvls()
     lmaxselect=len(lvlist)-1
@@ -213,7 +213,7 @@ def main(argv):
     width, height = pxscope, pxscope # window size
 
     try:
-        opts, args = getopt.getopt(argv,"hp:s:lv",["help","play=","size=","list","verbose"])
+        opts, args = getopt.getopt(argv,"hp:lv",["help","play=","list","verbose"])
     except getopt.GetoptError:
         print(hstr)
         sys.exit(2)
@@ -222,23 +222,20 @@ def main(argv):
             print(hstr)
             sys.exit()
         elif opt in ("-p", "--play"):
-            lvname = arg
+            lvname = arg+".lv"
             onmenu = False
             ongame = True
+            if not (lvname in lvlist):
+                print("[FAIL] The selected level isn't in the list:")
+                cf.print_level_list(lvlist)
+                sys.exit()
             play_level(lvname)
-        elif opt in ("-s", "--size"):
-            stdsize = int(arg)
         elif opt in ("-v", "--verbose"):
             verbose = True
         elif opt in ("-l", "--list"):
             print('[INFO] Level list:')
-            cf.print_list(' > ',lvlist)
+            cf.print_level_list(lvlist)
             sys.exit()
-
-    if not (lvname in lvlist):
-        print("[FAIL] The selected level isn't in the list:")
-        cf.print_list(' > ',lvlist)
-        sys.exit()
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()

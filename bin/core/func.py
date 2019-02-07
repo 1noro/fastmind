@@ -13,6 +13,12 @@ def get_lvls():
 def print_list(string,list):
     for i in list: print(string+str(i))
 
+def print_level_list(lvlist):
+    _lvlist=[]
+    for lv in lvlist:
+        _lvlist.append(lv.replace('.lv',''))
+    print_list(' > ',_lvlist)
+
 def draw_map(womap, screen):
     for o in womap: o.draw(screen)
 

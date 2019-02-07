@@ -51,7 +51,6 @@ game options:
  fastmind.py -l			--list			List the available levels.
  fastmind.py -v			--verbose		Enables verbose mode.
  fastmind.py -p <level_name>	--play=<level_name>	Play the level.
- fastmind.py -s <square_size>	--size=<square_size>	Modify the default size (30) of the basic square.
 ```
 
 ## Credits
