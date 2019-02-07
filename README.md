@@ -22,7 +22,7 @@ python3 -m pip install -U pygame --user
 sudo apt-get install python3-pygame
 ```
 
-#### Another option for Fedora/Red hat
+#### Another option for Fedora/Red Hat
 
 ```
 sudo yum install python3-pygame
@@ -30,7 +30,7 @@ sudo yum install python3-pygame
 
 ### Windows
 
-Make sure you install python3.X with the "Add python 3.X to PATH" option selected. This means that python, and pip will work for you from the command line.
+Make sure you install python3.x with the _Add python 3.x to PATH_ option selected. This means that python, and pip will work for you from the command line.
 
 ```
 python -m pip install -U pygame --user
@@ -48,7 +48,7 @@ cd fastmind
 python3 fastmind.py
 ```
 
-### Getting a .zip file from GitHub
+### Getting a .zip/.tar.gz file from GitHub
 
 - Extract the .zip in the current folder.
 - Open a terminal and navigate to the folder where the content of the .zip has been extracted (using the `cd` command).
