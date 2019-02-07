@@ -66,6 +66,16 @@ game options:
  fastmind.py -p <level_name>	--play=<level_name>	Play the level directly.
 ```
 
+## Things that I would like to add in the future
+
+- Add more levels.
+- Improve the gameplay.
+- Rethink the graphics (but keeping the retro style).
+- Save the results locally.
+- Show results table after each level and be able to compare with others.
+- Add teleports.
+- Put the most efficient and understandable code.
+
 ## Credits
 
 Created, programmed and maintained by [boot1110001](https://github.com/boot1110001).
