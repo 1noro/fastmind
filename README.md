@@ -28,7 +28,7 @@ sudo yum install python3
 sudo yum install python3-pygame
 ```
 
-### For Windows
+### Windows
 
 Make sure you install python3.X with the "Add python 3.X to PATH" option selected. This means that python, and pip will work for you from the command line.
 
@@ -36,19 +36,28 @@ Make sure you install python3.X with the "Add python 3.X to PATH" option selecte
 python -m pip install -U pygame --user
 ```
 
-## Run :rocket:
+## Get and run the program :rocket:
+
+Currently the project is at a very early stage of its development (_ALPHA_), you can install it on your PC, but future versions may delete previous configurations in the program.
+
+### Assuming you have git installed
 
 ```
 git clone https://github.com/boot1110001/fastmind
 cd fastmind
-chmod u+x fastmind.py
-./fastmind.py
+python3 fastmind.py
 ```
+
+### Getting a .zip file from GitHub
+
+- Extract the .zip in the current folder.
+- Open a terminal and navigate to the folder where the content of the .zip has been extracted (using the `cd` command).
+- Execute the following command: `python3 fastmind.py`
 
 ### Run options
 
 ```
-$./fastmind.py --help
+python3 fastmind.py --help
 fastmind, solve mazes and measure your time...
 game options:
  fastmind.py -h			--help			Show this help.
