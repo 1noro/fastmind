@@ -40,7 +40,7 @@ python -m pip install -U pygame --user
 
 ```
 git clone https://github.com/boot1110001/fastmind
-cd fastmind/bin
+cd fastmind
 chmod u+x fastmind.py
 ./fastmind.py
 ```
@@ -51,10 +51,10 @@ chmod u+x fastmind.py
 $./fastmind.py --help
 fastmind, solve mazes and measure your time...
 game options:
- fastmind.py -h			--help			Show this help.
- fastmind.py -l			--list			List the available levels.
- fastmind.py -v			--verbose		Enables verbose mode.
- fastmind.py -p <level_name>	--play=<level_name>	Play the level.
+ fastmind.py -h			        --help			    Show this help.
+ fastmind.py -l			        --list			    List the available levels.
+ fastmind.py -v			        --verbose		    Enables verbose mode.
+ fastmind.py -p <level_name>    --play=<level_name> Play the level.
 ```
 
 ## Credits
