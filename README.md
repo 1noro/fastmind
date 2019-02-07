@@ -4,32 +4,34 @@ Solve mazes and measure your time to complete them as fast as you can.
 
 ## Requirements
 
-### General
+The program uses the pygame library for its full operation, so it is mandatory to install it on your computer before running the program.
+
+### Generic Unix pygame installation
 
 ```
 python3 -m pip install -U pygame --user
 ```
 
-### Debian/Ubuntu/Mint
+#### For Debian/Ubuntu/Mint
 
 ```
 sudo apt-get install python3
 sudo apt-get install python3-pygame
 ```
 
-### Fedora/Red hat
+#### For Fedora/Red hat
 
 ```
 sudo yum install python3
 sudo yum install python3-pygame
 ```
 
-### Windows
+### For Windows
 
-Make sure you install python3.6 with the "Add python 3.6 to PATH" option selected. This means that python, and pip will work for you from the command line.
+Make sure you install python3.X with the "Add python 3.X to PATH" option selected. This means that python, and pip will work for you from the command line.
 
 ```
-py -m pip install -U pygame --user
+python -m pip install -U pygame --user
 ```
 
 ## Run :rocket:
