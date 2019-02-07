@@ -2,6 +2,10 @@
 
 Solve mazes and measure your time to complete them as fast as you can.
 
+![Start menu](./media/caps/menu.png)
+
+![In-game example](./media/caps/game1.png)
+
 ## Requirements
 
 The program uses the pygame library for its full operation, so it is mandatory to install it on your computer before running the program.
