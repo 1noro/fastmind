@@ -13,7 +13,7 @@ setup(
 
     # Application author details:
     author="boot1110001",
-    author_email="notthing@addr.ess",
+    author_email="nothing@addr.ess",
 
     # Packages
     packages=["bin"],
@@ -22,13 +22,13 @@ setup(
     include_package_data=True,
 
     # Details
-    url="http://null.null",
+    url="https://github.com/boot1110001/fastmind",
 
     #
-    license="LICENSE",
+    license="GPL v3.0",
     description="Solve mazes and measure your time to complete them as fast as you can.",
 
-    long_description=open("README.txt").read(),
+    long_description=open("README.md").read(),
 
     # Dependent packages (distributions)
     install_requires=[
