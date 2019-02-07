@@ -54,7 +54,7 @@ game options:
  fastmind.py -h			--help			Show this help.
  fastmind.py -l			--list			List the available levels.
  fastmind.py -v			--verbose		Enables verbose mode.
- fastmind.py -p <level_name>	--play=<level_name>	Play the level.
+ fastmind.py -p <level_name>	--play=<level_name>	Play the level directly.
 ```
 
 ## Credits

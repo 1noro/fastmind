@@ -62,7 +62,7 @@ game options:
  fastmind.py -h\t\t\t--help\t\t\tShow this help.
  fastmind.py -l\t\t\t--list\t\t\tList the available levels.
  fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
- fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level.'''
+ fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.'''
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
