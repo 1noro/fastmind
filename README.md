@@ -4,7 +4,7 @@ Solve mazes and measure your time to complete them as fast as you can.
 
 ![Start menu](./media/caps/menu.png)
 
-![In-game example](./media/caps/game1.png)
+![In-game example](./media/caps/game2.png)
 
 ## Requirements
 
