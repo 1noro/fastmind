@@ -106,27 +106,27 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
         x=0
         y+=stdsize
 
-def displaygame(screen):
+def checkvictory():
     global victory, lvl_time
-    # --- PREVIOUS CHECKS ------------------------------------------------------
     if (not victory and (player.x, player.y) == (goal.x, goal.y)):
         new_time = datetime.now()
         lvl_time = new_time - old_time
+        print('[INFO] Time stopped at:', new_time)
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
-    # --- DRAWING --------------------------------------------------------------
+
+def displaygame(screen):
     # Set the screen background
     screen.fill(game_color_scheme.BG)
 
     cf.draw_map(womap, screen)
     goal.draw(screen)
     if not victory:
-        # player.draw(screen, pxcenter, pxcenter)
         player.draw(screen)
     else:
         displays.print_result(screen, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2)
 
-def checkMove(x,y):
+def checkmove(x,y):
     out=True
     if ([x,y] in wmap):
         if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
@@ -138,28 +138,28 @@ def ongamekey(event):
     _xcell, _ycell = xcell, ycell
     if (event.key==pygame.K_UP):
         _ycell-=1
-        if (checkMove(xcell,_ycell)):
+        if (checkmove(xcell,_ycell)):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
             if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         _ycell+=1
-        if (checkMove(xcell,_ycell)):
+        if (checkmove(xcell,_ycell)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
             if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         _xcell-=1
-        if (checkMove(_xcell,ycell)):
+        if (checkmove(_xcell,ycell)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
             if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         _xcell+=1
-        if (checkMove(_xcell,ycell)):
+        if (checkmove(_xcell,ycell)):
             player.move_right()
             goal.move_left()
             cf.move_map_left(womap)
@@ -188,13 +188,13 @@ def reset_level():
 
     victory = False
 
-    # --- Level atributes
+    # --- Level atributes ---
     wmap = [] # wall list
     womap = [] # wall object list
     goal = 0 # goal object
     player = 0 # player object
 
-    # --- Time control
+    # --- Time control ---
     old_time = 0
     lvl_time = 0
 
@@ -218,12 +218,17 @@ def main(argv):
     except:
         print("[WARN] The 'version.txt' file could not be read")
 
+    # --- CMD INIT -------------------------------------------------------------
+    print("[INIT] Wellcome to FASTMIND ("+version+")")
+    print("[INFO] Using pygame ("+pygame.version.ver+")")
+
     lvlist=cf.get_lvls()
     lmaxselect=len(lvlist)-1
     lvname = '1.lv'
 
     width, height = pxscope, pxscope # window size
 
+    # --- Parameters -----------------------------------------------------------
     try:
         opts, args = getopt.getopt(argv,"hp:lv",["help","play=","list","verbose"])
     except getopt.GetoptError:
@@ -249,11 +254,6 @@ def main(argv):
             print('[INFO] Level list:')
             cf.print_level_list(lvlist)
             sys.exit()
-
-    # --- CMD INIT -------------------------------------------------------------
-
-    print("[INIT] Wellcome to FASTMIND ("+version+")")
-    print("[INFO] Using pygame ("+pygame.version.ver+")")
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
@@ -340,6 +340,7 @@ def main(argv):
         elif onlevel:
             displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope)
         elif ongame:
+            checkvictory()
             displaygame(screen)
         # --- Wrap-up
         # Limit to 60 frames per second
