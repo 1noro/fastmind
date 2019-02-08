@@ -5,11 +5,13 @@
 ### IMPORTS ####################################################################
 import sys
 import getopt
+from datetime import datetime
+import re
+
+# To not show the default message of pygame import
 import contextlib
 with contextlib.redirect_stdout(None):
     import pygame
-
-from datetime import datetime
 
 import bin
 from bin.core import func as cf
@@ -22,17 +24,20 @@ from bin.graphic import color
 from bin.graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
-stdsize = 40 # test with 10 (view with 15)
+game_color_scheme = color.Scheme2
+
+stdsize = 40 # 10/15/40...
 cellscope = 15 # ODD NUMBER def=15
+
+### AUTOMATIC VARIABLES ########################################################
 pxscope = cellscope*stdsize
 cellcenter = int((cellscope/2)+0.5)
 pxcenter = (pxscope/2)-(stdsize/2)
 
-game_color_scheme = color.Scheme2
-
 ### NON EDITABLE VARIABLES #####################################################
 # --- Version
 version = ""
+shortversion = ""
 
 # --- Level atributes
 lvlist = [] # level file list
@@ -91,16 +96,10 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
                 womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.WALL))
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') ('+str(xcell+xcellgap)+','+str(ycell+ycellgap)+') "#"')
             elif (maplist[i]=='$'):
                 goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.GOAL)
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
                 player = Player(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.PLAYER1,game_color_scheme.PLAYER2)
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
-            else:
-                # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
-                pass
             i+=1
             x+=stdsize
         x=0
@@ -211,10 +210,12 @@ def play_level(lvname):
 
 ### MAIN #######################################################################
 def main(argv):
-    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version
+    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version, shortversion
 
     try:
         version = open('version.txt', 'r').read().replace('\n','')
+        patron=re.compile(r'(.*\..*\..*)\.')
+        shortversion = patron.search(version).group(1)
     except:
         print("[WARN] The 'version.txt' file could not be read")
 
@@ -260,7 +261,7 @@ def main(argv):
     # Set the height and width of the screen
     size = [width, height]
     screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("FASTMIND")
+    pygame.display.set_caption("FASTMIND "+shortversion)
     logo = pygame.image.load('fastmind.png')
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
