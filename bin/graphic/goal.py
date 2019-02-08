@@ -2,6 +2,7 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
+import pygame
 from .square import Square
 
 ### CLASSES ####################################################################
@@ -31,6 +32,14 @@ class Goal(Square):
 
     def move_down(self):
         self.y+=self.stdsize
+
+    def draw(self, screen):
+        p1 = ( self.x+(self.width/2), self.y+(self.height*0.15) )
+        p2 = ( self.x+(self.width*0.15), self.y+(self.height/2) )
+        p3 = ( self.x+(self.width/2), self.y+(self.height*0.85) )
+        p4 = ( self.x+(self.width*0.85), self.y+(self.height/2) )
+
+        pygame.draw.polygon(screen, self.color, [p1, p2, p3, p4], 0)
 
     def __eq__(self,other):
         out=False
