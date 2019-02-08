@@ -2,12 +2,9 @@
 
 Solve mazes and measure your time to complete them as fast as you can.
 
-> No habrá nunca una puerta. Estás adentro
->
->y el alcázar abarca el universo
->
-> y no tiene ni anverso ni reverso
->
+> No habrá nunca una puerta. Estás adentro\
+> y el alcázar abarca el universo\
+> y no tiene ni anverso ni reverso\
 > ni externo muro ni secreto centro.
 >
 > Fragment of the poem _Laberinto_ of _Jorge Luis Borges_
