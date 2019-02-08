@@ -16,7 +16,6 @@ from bin.graphic.rectangle import Rectangle
 from bin.graphic.wall import Wall
 from bin.graphic.goal import Goal
 from bin.graphic.player import Player
-# from bin.graphic.color import Color
 from bin.graphic import color
 from bin.graphic import displays
 
