@@ -55,3 +55,11 @@ class Scheme2:
     GOAL            = ROSE_RED
     RESULT1         = BABY_POWDER
     RESULT2         = Color.BLACK333
+
+class Scheme3:
+
+    DESIRE          = (230,  57,  70)
+    HENEYDEW        = (241, 250, 238)
+    LIGHT_BLUE2     = (168, 218, 220)
+    QUEEN_BLUE2     = ( 69, 123, 157)
+    SPACE_CADET     = ( 29,  53,  87)
