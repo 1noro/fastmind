@@ -27,7 +27,7 @@ pxscope = cellscope*stdsize
 cellcenter = int((cellscope/2)+0.5)
 pxcenter = (pxscope/2)-(stdsize/2)
 
-game_color_scheme = color.Color
+game_color_scheme = color.Scheme2
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Level atributes

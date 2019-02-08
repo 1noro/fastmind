@@ -39,3 +39,19 @@ class Scheme1:
     GOAL            = SMOKY_TOPAZ
     RESULT1         = LIGHT_BLUE
     RESULT2         = Color.BLACK333
+
+class Scheme2:
+
+    YANKEES_BLUE    = ( 37,  40,  61)
+    BABY_POWDER     = (251, 254, 249)
+    LIGHT_BLUE      = (173, 217, 244)
+    STAR_COMMAND_BLUE = ( 14, 121, 178)
+    ROSE_RED        = (191,  19,  99)
+
+    BG              = YANKEES_BLUE
+    WALL            = STAR_COMMAND_BLUE
+    PLAYER1         = LIGHT_BLUE
+    PLAYER2         = YANKEES_BLUE
+    GOAL            = ROSE_RED
+    RESULT1         = BABY_POWDER
+    RESULT2         = Color.BLACK333
