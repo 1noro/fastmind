@@ -16,7 +16,8 @@ from bin.graphic.rectangle import Rectangle
 from bin.graphic.wall import Wall
 from bin.graphic.goal import Goal
 from bin.graphic.player import Player
-from bin.graphic.color import Color
+# from bin.graphic.color import Color
+from bin.graphic import color
 from bin.graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
@@ -25,6 +26,8 @@ cellscope = 15 # ODD NUMBER def=15
 pxscope = cellscope*stdsize
 cellcenter = int((cellscope/2)+0.5)
 pxcenter = (pxscope/2)-(stdsize/2)
+
+game_color_scheme = color.Color
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Level atributes
@@ -83,13 +86,13 @@ def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
             ycell=int((y*(height/stdsize))/height)+1
             if (maplist[i]=='#'):
                 wmap.append([xcell,ycell])
-                womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,Color.BLUE2))
+                womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.WALL))
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') ('+str(xcell+xcellgap)+','+str(ycell+ycellgap)+') "#"')
             elif (maplist[i]=='$'):
-                goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,Color.RED)
+                goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.GOAL)
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "$"')
             elif (maplist[i]=='@'):
-                player = Player(x+xgap,y+ygap,xcell,ycell,stdsize,Color.GREEN)
+                player = Player(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.PLAYER1,game_color_scheme.PLAYER2)
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') "@"')
             else:
                 # print('['+str(i)+'] ('+str(x)+','+str(y)+') ('+str(xcell)+','+str(ycell)+') " "')
@@ -109,7 +112,7 @@ def displaygame(screen):
         victory=True
     # --- DRAWING --------------------------------------------------------------
     # Set the screen background
-    screen.fill(Color.BLACK)
+    screen.fill(game_color_scheme.BG)
 
     cf.draw_map(womap, screen)
     goal.draw(screen)
@@ -117,7 +120,7 @@ def displaygame(screen):
         # player.draw(screen, pxcenter, pxcenter)
         player.draw(screen)
     else:
-        displays.print_result(screen, stdsize, width, height, lvl_time)
+        displays.print_result(screen, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2)
 
 def checkMove(x,y):
     out=True
