@@ -37,10 +37,16 @@ class Player(Square):
     def draw(self, screen):
         pygame.draw.rect(screen, self.color1, [self.x, self.y, self.width, self.height])
 
-        p1 = ( self.x+(self.width/2), self.y+(self.height*0.25) )
-        p2 = ( self.x+(self.width*0.25), self.y+(self.height/2) )
-        p3 = ( self.x+(self.width/2), self.y+(self.height*0.75) )
-        p4 = ( self.x+(self.width*0.75), self.y+(self.height/2) )
+        # p1 = ( self.x+(self.width/2), self.y+(self.height*0.25) )
+        # p2 = ( self.x+(self.width*0.25), self.y+(self.height/2) )
+        # p3 = ( self.x+(self.width/2), self.y+(self.height*0.75) )
+        # p4 = ( self.x+(self.width*0.75), self.y+(self.height/2) )
+
+        p1 = ( self.x+(self.width/2), self.y+(self.height*0.15) )
+        p2 = ( self.x+(self.width*0.15), self.y+(self.height/2) )
+        p3 = ( self.x+(self.width/2), self.y+(self.height*0.85) )
+        p4 = ( self.x+(self.width*0.85), self.y+(self.height/2) )
+
         pygame.draw.polygon(screen, self.color2, [p1, p2, p3, p4], 0)
 
     def __eq__(self,other):
