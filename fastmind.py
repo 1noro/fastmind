@@ -5,7 +5,9 @@
 ### IMPORTS ####################################################################
 import sys
 import getopt
-import pygame
+import contextlib
+with contextlib.redirect_stdout(None):
+    import pygame
 
 from datetime import datetime
 
@@ -29,6 +31,9 @@ pxcenter = (pxscope/2)-(stdsize/2)
 game_color_scheme = color.Scheme2
 
 ### NON EDITABLE VARIABLES #####################################################
+# --- Version
+version = ""
+
 # --- Level atributes
 lvlist = [] # level file list
 wmap = [] # wall list
@@ -206,7 +211,12 @@ def play_level(lvname):
 
 ### MAIN #######################################################################
 def main(argv):
-    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory
+    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version
+
+    try:
+        version = open('version.txt', 'r').read().replace('\n','')
+    except:
+        print("[WARN] The 'version.txt' file could not be read")
 
     lvlist=cf.get_lvls()
     lmaxselect=len(lvlist)-1
@@ -219,6 +229,7 @@ def main(argv):
     except getopt.GetoptError:
         print(hstr)
         sys.exit(2)
+
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             print(hstr)
@@ -238,6 +249,11 @@ def main(argv):
             print('[INFO] Level list:')
             cf.print_level_list(lvlist)
             sys.exit()
+
+    # --- CMD INIT -------------------------------------------------------------
+
+    print("[INIT] Wellcome to FASTMIND ("+version+")")
+    print("[INFO] Using pygame ("+pygame.version.ver+")")
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()

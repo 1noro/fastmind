@@ -9,7 +9,7 @@ setup(
     name="fastmind",
 
     # Version number (initial):
-    version="0.0.1",
+    version=open("version.txt").read().replace('\n',''),
 
     # Application author details:
     author="boot1110001",
