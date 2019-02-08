@@ -25,7 +25,7 @@ The program uses the __pygame__ library for its full operation, so it is mandato
 python3 -m pip install -U pygame --user
 ```
 
-> If you do not have pip installed for python3 in Ubuntu: `sudo apt-get install python3-pip`
+> If you do not have pip installed for python3 in Debian/Ubuntu/Mint: `sudo apt-get install python3-pip`
 
 #### Another option for Debian/Ubuntu/Mint
 
