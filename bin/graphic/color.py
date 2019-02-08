@@ -45,16 +45,24 @@ class Scheme2:
     YANKEES_BLUE    = ( 37,  40,  61)
     BABY_POWDER     = (251, 254, 249)
     LIGHT_BLUE      = (173, 217, 244)
-    STAR_COMMAND_BLUE = ( 14, 121, 178)
+    STAR_CMD_BLUE   = ( 14, 121, 178) #STAR_COMMAND_BLUE
     ROSE_RED        = (191,  19,  99)
 
     BG              = YANKEES_BLUE
-    WALL            = STAR_COMMAND_BLUE
+    WALL            = STAR_CMD_BLUE
     PLAYER1         = LIGHT_BLUE
     PLAYER2         = YANKEES_BLUE
     GOAL            = ROSE_RED
     RESULT1         = BABY_POWDER
     RESULT2         = Color.BLACK333
+
+    MENU1           = LIGHT_BLUE
+    MENU2           = YANKEES_BLUE
+    BG_MENU         = MENU2
+
+    LEVEL1          = LIGHT_BLUE
+    LEVEL2          = STAR_CMD_BLUE
+    BG_LEVEL        = YANKEES_BLUE
 
 class Scheme3:
 

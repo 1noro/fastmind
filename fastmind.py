@@ -24,6 +24,8 @@ from bin.graphic import color
 from bin.graphic import displays
 
 ### EDITABLE VARIABLES #########################################################
+menu_color_scheme = color.Scheme2
+level_color_scheme = color.Scheme2
 game_color_scheme = color.Scheme2
 
 stdsize = 40 # 10/15/40...
@@ -337,9 +339,9 @@ def main(argv):
         # --- Logic
         # --- Drawing
         if onmenu:
-            displays.displaymenu(screen, width, stdsize, pxcenter, mselect)
+            displays.displaymenu(screen, width, stdsize, pxcenter, mselect, menu_color_scheme.MENU1, menu_color_scheme.MENU2, menu_color_scheme.BG_MENU)
         elif onlevel:
-            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope)
+            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope, level_color_scheme.LEVEL1, level_color_scheme.LEVEL2, level_color_scheme.BG_LEVEL)
         elif ongame:
             checkvictory()
             displaygame(screen)
