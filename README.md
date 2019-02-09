@@ -12,7 +12,7 @@ y no tiene ni anverso ni reverso<br>
 ni externo muro ni secreto centro.<br><br>
 </i>
 Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
-<br>
+<br><br>
 
 <img src="./media/caps/together1.jpg" width="90%" />
 
