@@ -12,30 +12,15 @@ y no tiene ni anverso ni reverso<br>
 ni externo muro ni secreto centro.<br><br>
 </i>
 Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
+<br>
 
-<img src="./media/caps/menu2.png" width="80%" />
-<img src="./media/caps/game3.png" width="80%" />
+<img src="./media/caps/together1.jpg" width="90%" />
 
 </div>
 
-# ![](./media/icons/32x32/fastmind.png) FASTMIND
-
-Solve mazes and measure your time to complete them as fast as you can.
+## Requirements
 
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-
-> No habrá nunca una puerta. Estás adentro\
-> y el alcázar abarca el universo\
-> y no tiene ni anverso ni reverso\
-> ni externo muro ni secreto centro.
->
-> Fragment of the poem _Laberinto_ of _Jorge Luis Borges_.
-
-![Start menu](./media/caps/menu2.png)
-
-![In-game example](./media/caps/game3.png)
-
-## Requirements
 
 The program uses the __pygame__ library for its full operation, so it is mandatory to install it on your computer before running the program.
 
