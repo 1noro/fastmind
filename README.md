@@ -1,6 +1,28 @@
+<div align="center">
+
+<img src="./media/icons/512x512/fastmind.png" width="20%" />
+<br><br>
+
+Solve mazes and measure your time to complete them as fast as you can.
+
+<i>
+No habrá nunca una puerta. Estás adentro<br>
+y el alcázar abarca el universo<br>
+y no tiene ni anverso ni reverso<br>
+ni externo muro ni secreto centro.<br><br>
+</i>
+Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
+
+<img src="./media/caps/menu2.png" width="80%" />
+<img src="./media/caps/game3.png" width="80%" />
+
+</div>
+
 # ![](./media/icons/32x32/fastmind.png) FASTMIND
 
 Solve mazes and measure your time to complete them as fast as you can.
+
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 > No habrá nunca una puerta. Estás adentro\
 > y el alcázar abarca el universo\
