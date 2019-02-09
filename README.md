@@ -21,6 +21,7 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 ## Requirements
 
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![pygame 1.8.0](https://img.shields.io/badge/pygame-%3E1.8.0-blue.svg)](https://www.pygame.org/wiki/GettingStarted)
 
 The program uses the __pygame__ library for its full operation, so it is mandatory to install it on your computer before running the program.
 
