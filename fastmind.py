@@ -14,7 +14,7 @@ with contextlib.redirect_stdout(None):
     import pygame
 
 import bin
-from bin.core import func as cf
+from bin.core import cfunc as cf
 from bin.core.map import Map
 from bin.graphic.rectangle import Rectangle
 from bin.graphic.wall import Wall
@@ -115,17 +115,6 @@ def checkvictory():
         print('[INFO] Time stopped at:', new_time)
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
-
-def displaygame(screen):
-    # Set the screen background
-    screen.fill(game_color_scheme.BG)
-
-    cf.draw_map(womap, screen)
-    goal.draw(screen)
-    if not victory:
-        player.draw(screen)
-    else:
-        displays.print_result(screen, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2)
 
 def checkmove(x,y):
     out=True
@@ -344,7 +333,7 @@ def main(argv):
             displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope, level_color_scheme.LEVEL1, level_color_scheme.LEVEL2, level_color_scheme.BG_LEVEL)
         elif ongame:
             checkvictory()
-            displaygame(screen)
+            displays.displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2, game_color_scheme.BG)
         # --- Wrap-up
         # Limit to 60 frames per second
         clock.tick(60)
