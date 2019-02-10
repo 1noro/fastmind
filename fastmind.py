@@ -31,9 +31,9 @@ stdsize = 40 # 10/15/40...
 cellscope = 15 # ODD NUMBER def=15
 
 ### AUTOMATIC VARIABLES ########################################################
-pxscope = cellscope*stdsize
-cellcenter = int((cellscope/2)+0.5)
-pxcenter = (pxscope/2)-(stdsize/2)
+pxscope = cellscope * stdsize
+cellcenter = int((cellscope / 2) + 0.5)
+pxcenter = (pxscope / 2) - (stdsize / 2)
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Version
@@ -72,7 +72,7 @@ victory = False
 
 # --- Run options
 verbose = False
-hstr='''fastmind, solve mazes and measure your time...
+hstr = '''fastmind, solve mazes and measure your time...
 game options:
  fastmind.py -h\t\t\t--help\t\t\tShow this help.
  fastmind.py -l\t\t\t--list\t\t\tList the available levels.
@@ -80,29 +80,30 @@ game options:
  fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.'''
 
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist,lw,lh,stdsize,startx,starty):
+def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
+    # Consider turning this into a class
     global wmap, womap, goal, player
 
-    xcellgap=cellcenter-startx
-    ycellgap=cellcenter-starty
-    xgap=int((xcellgap*width)/(width/stdsize))
-    ygap=int((ycellgap*height)/(height/stdsize))
+    xcellgap = cellcenter - startx
+    ycellgap = cellcenter - starty
+    xgap = int((xcellgap * width) / (width / stdsize))
+    ygap = int((ycellgap * height) / (height / stdsize))
 
-    maxx=stdsize*lw
-    maxy=stdsize*lh
+    maxx = stdsize * lw
+    maxy = stdsize * lh
     x = y = i = 0
 
-    while (y<maxy):
-        while (x<maxx):
-            xcell=int((x*(width/stdsize))/width)+1
-            ycell=int((y*(height/stdsize))/height)+1
-            if (maplist[i]=='#'):
-                wmap.append([xcell,ycell])
-                womap.append(Wall(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.WALL))
-            elif (maplist[i]=='$'):
-                goal = Goal(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.GOAL)
-            elif (maplist[i]=='@'):
-                player = Player(x+xgap,y+ygap,xcell,ycell,stdsize,game_color_scheme.PLAYER1,game_color_scheme.PLAYER2)
+    while (y < maxy):
+        while (x < maxx):
+            xcell = int((x * (width / stdsize)) / width) + 1
+            ycell = int((y * (height / stdsize)) / height) + 1
+            if (maplist[i] == '#'):
+                wmap.append([xcell, ycell])
+                womap.append(Wall(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.WALL))
+            elif (maplist[i] == '$'):
+                goal = Goal(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.GOAL)
+            elif (maplist[i] == '@'):
+                player = Player(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.PLAYER1, game_color_scheme.PLAYER2)
             i+=1
             x+=stdsize
         x=0
@@ -115,33 +116,33 @@ def checkvictory():
         lvl_time = new_time - old_time
         print('[INFO] Time stopped at:', new_time)
         print('[GOAL] You pass the level in:', lvl_time)
-        victory=True
+        victory = True
 
 def ongamekey(event):
     xcell, ycell = player.xcell, player.ycell
     _xcell, _ycell = xcell, ycell
-    if (event.key==pygame.K_UP):
+    if (event.key == pygame.K_UP):
         _ycell-=1
         if (cf.checkmove(xcell, _ycell, wmap, verbose)):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
             if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key==pygame.K_DOWN):
+    elif (event.key == pygame.K_DOWN):
         _ycell+=1
         if (cf.checkmove(xcell, _ycell, wmap, verbose)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
             if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key==pygame.K_LEFT):
+    elif (event.key == pygame.K_LEFT):
         _xcell-=1
         if (cf.checkmove(_xcell, ycell, wmap, verbose)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
             if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key==pygame.K_RIGHT):
+    elif (event.key == pygame.K_RIGHT):
         _xcell+=1
         if (cf.checkmove(_xcell, ycell, wmap, verbose)):
             player.move_right()
@@ -151,21 +152,21 @@ def ongamekey(event):
 
 def onmenukey(event):
     global mselect
-    if (event.key==pygame.K_UP):
-        mselect=mselect-1
-        if mselect<0: mselect=mmaxselect
-    elif (event.key==pygame.K_DOWN):
-        mselect=mselect+1
-        if mselect>mmaxselect: mselect=0
+    if (event.key == pygame.K_UP):
+        mselect = mselect - 1
+        if mselect < 0: mselect = mmaxselect
+    elif (event.key == pygame.K_DOWN):
+        mselect = mselect + 1
+        if mselect > mmaxselect: mselect=0
 
 def onlevelkey(event):
     global lselect
-    if (event.key==pygame.K_LEFT):
+    if (event.key == pygame.K_LEFT):
         lselect-=1
-        if lselect<0: lselect=lmaxselect
-    elif (event.key==pygame.K_RIGHT):
+        if lselect < 0: lselect = lmaxselect
+    elif (event.key == pygame.K_RIGHT):
         lselect+=1
-        if lselect>lmaxselect: lselect=0
+        if lselect > lmaxselect: lselect = 0
 
 def reset_level():
     global victory, wmap, womap, goal, player, old_time, lvl_time
@@ -188,8 +189,8 @@ def play_level(lvname):
     reset_level()
     old_time = datetime.now()
 
-    m=Map(open('lvls/'+lvname, 'r').read())
-    pre_draw_map(m.maplist,m.lvwidth,m.lvheight,stdsize,m.startx,m.starty)
+    m = Map(open('lvls/'+lvname, 'r').read())
+    pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
     print('[INFO] Playing: '+m.lvrealname+' ('+lvname+')')
     print('[INFO] Time started at:', old_time)
 
@@ -199,7 +200,7 @@ def main(argv):
 
     try:
         version = open('version.txt', 'r').read().replace('\n','')
-        patron=re.compile(r'(.*\..*\..*)\.')
+        patron = re.compile(r'(.*\..*\..*)\.')
         shortversion = patron.search(version).group(1)
     except:
         print("[WARN] The 'version.txt' file could not be read")
@@ -208,15 +209,15 @@ def main(argv):
     print("[INIT] Wellcome to FASTMIND ("+version+")")
     print("[INFO] Using pygame ("+pygame.version.ver+")")
 
-    lvlist=cf.get_lvls()
-    lmaxselect=len(lvlist)-1
+    lvlist = cf.get_lvls()
+    lmaxselect = len(lvlist) - 1
     lvname = '1.lv'
 
     width, height = pxscope, pxscope # window size
 
     # --- Parameters -----------------------------------------------------------
     try:
-        opts, args = getopt.getopt(argv,"hp:lv",["help","play=","list","verbose"])
+        opts, args = getopt.getopt(argv, "hp:lv", ["help","play=","list","verbose"])
     except getopt.GetoptError:
         print(hstr)
         sys.exit(2)
@@ -246,7 +247,7 @@ def main(argv):
     # Set the height and width of the screen
     size = [width, height]
     screen = pygame.display.set_mode(size)
-    pygame.display.set_caption("FASTMIND "+shortversion)
+    pygame.display.set_caption("FASTMIND " + shortversion)
     logo = pygame.image.load('fastmind.png')
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
