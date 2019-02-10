@@ -23,7 +23,7 @@ from bin.graphic.elements.player import Player
 from bin.languages import *
 
 ### EDITABLE VARIABLES #########################################################
-lang = en.EN
+lang = es.ES
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
@@ -74,12 +74,7 @@ victory = False
 
 # --- Run options
 verbose = False
-hstr = '''fastmind, solve mazes and measure your time...
-game options:
- fastmind.py -h\t\t\t--help\t\t\tShow this help.
- fastmind.py -l\t\t\t--list\t\t\tList the available levels.
- fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
- fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.'''
+hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
 def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
@@ -205,11 +200,11 @@ def main(argv):
         patron = re.compile(r'(.*\..*\..*)\.')
         shortversion = patron.search(version).group(1)
     except:
-        print("[WARN] The 'version.txt' file could not be read")
+        print(lang.version_warning)
 
     # --- CMD INIT -------------------------------------------------------------
-    print("[INIT] Wellcome to FASTMIND ("+version+")")
-    print("[INFO] Using pygame ("+pygame.version.ver+")")
+    print(lang.wellcome_msg+version+")")
+    print(lang.wellcome_info+pygame.version.ver+")")
 
     lvlist = cf.get_lvls()
     lmaxselect = len(lvlist) - 1
@@ -233,14 +228,14 @@ def main(argv):
             onmenu = False
             ongame = True
             if not (lvname in lvlist):
-                print("[FAIL] The selected level isn't in the list:")
+                print(lang.select_level_fail)
                 cf.print_level_list(lvlist)
                 sys.exit()
             play_level(lvname)
         elif opt in ("-v", "--verbose"):
             verbose = True
         elif opt in ("-l", "--list"):
-            print('[INFO] Level list:')
+            print(lang.level_list_msg)
             cf.print_level_list(lvlist)
             sys.exit()
 
