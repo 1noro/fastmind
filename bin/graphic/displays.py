@@ -15,9 +15,9 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, color
     # --- Logo background
     pygame.draw.rect(screen, color1, [0, 0, width, 6*stdsize])
     # --- F
-    pygame.draw.rect(screen, color2, [pxcenter-(4*stdsize), 1*stdsize, 3*stdsize, stdsize])
-    pygame.draw.rect(screen, color2, [pxcenter-(4*stdsize), 2*stdsize, stdsize, 3*stdsize])
-    pygame.draw.rect(screen, color2, [pxcenter-(3*stdsize), 3*stdsize, stdsize, stdsize])
+    pygame.draw.rect(screen, color2, [pxcenter-(4*stdsize), 1*stdsize, 4*stdsize, 1*stdsize])
+    pygame.draw.rect(screen, color2, [pxcenter-(4*stdsize), 2*stdsize, 1*stdsize, 3*stdsize])
+    pygame.draw.rect(screen, color2, [pxcenter-(3*stdsize), 3*stdsize, 1*stdsize, 1*stdsize])
     # --- M
     pygame.draw.rect(screen, color2, [pxcenter+(0*stdsize), 1*stdsize, 5*stdsize, stdsize])
     pygame.draw.rect(screen, color2, [pxcenter+(0*stdsize), 2*stdsize, stdsize, 3*stdsize])
