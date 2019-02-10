@@ -111,8 +111,8 @@ def checkvictory():
     if (not victory and (player.x, player.y) == (goal.x, goal.y)):
         new_time = datetime.now()
         lvl_time = new_time - old_time
-        print('[INFO] Time stopped at:', new_time)
-        print('[GOAL] You pass the level in:', lvl_time)
+        print('[INFO] '+lang.time_stopped_at, new_time)
+        print('[GOAL] '+lang.you_pass_the_level_in, lvl_time)
         victory = True
 
 def ongamekey(event):
@@ -120,28 +120,28 @@ def ongamekey(event):
     _xcell, _ycell = xcell, ycell
     if (event.key == pygame.K_UP):
         _ycell-=1
-        if (cf.checkmove(xcell, _ycell, wmap, verbose)):
+        if (cf.checkmove(xcell, _ycell, wmap, verbose, lang.no_move_wall)):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
             if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_DOWN):
         _ycell+=1
-        if (cf.checkmove(xcell, _ycell, wmap, verbose)):
+        if (cf.checkmove(xcell, _ycell, wmap, verbose, lang.no_move_wall)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
             if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_LEFT):
         _xcell-=1
-        if (cf.checkmove(_xcell, ycell, wmap, verbose)):
+        if (cf.checkmove(_xcell, ycell, wmap, verbose, lang.no_move_wall)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
             if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_RIGHT):
         _xcell+=1
-        if (cf.checkmove(_xcell, ycell, wmap, verbose)):
+        if (cf.checkmove(_xcell, ycell, wmap, verbose, lang.no_move_wall)):
             player.move_right()
             goal.move_left()
             cf.move_map_left(womap)
@@ -188,8 +188,8 @@ def play_level(lvname):
 
     m = Map(open('lvls/'+lvname, 'r').read())
     pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
-    print('[INFO] Playing: '+m.lvrealname+' ('+lvname+')')
-    print('[INFO] Time started at:', old_time)
+    print('[INFO] '+lang.playing+m.lvrealname+' ('+lvname+')')
+    print('[INFO] '+lang.time_started_at, old_time)
 
 ### MAIN #######################################################################
 def main(argv):

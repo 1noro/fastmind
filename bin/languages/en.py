@@ -28,6 +28,11 @@ class EN:
     none = "None"
     return_to_menu = "Return to menu"
     key_pressed_return_to_menu = "Return to menu"
+    time_stopped_at = "Time stopped at:"
+    you_pass_the_level_in = "You pass the level in:"
+    playing = "Playing: "
+    time_started_at = "Time started at:"
+    no_move_wall = "No move. There is a wall there."
 
     help_string = '''fastmind, solve mazes and measure your time...
 game options:
