@@ -20,11 +20,10 @@ from bin.graphic import displays
 from bin.graphic.elements.wall import Wall
 from bin.graphic.elements.goal import Goal
 from bin.graphic.elements.player import Player
-from bin.languages.english import English
-from bin.languages.spanish import Spanish
+from bin.languages import *
 
 ### EDITABLE VARIABLES #########################################################
-lang = Spanish
+lang = es.GL
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2

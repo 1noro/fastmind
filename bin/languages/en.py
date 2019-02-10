@@ -2,7 +2,7 @@
 #by boot1110001
 
 ### CLASSES ####################################################################
-class English:
+class EN:
     menu_play =         "  PLAY  "
     menu_levels =       " LEVELS "
     menu_credits =      "  CRED  "
