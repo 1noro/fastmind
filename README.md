@@ -88,6 +88,8 @@ game options:
 ## Things that I would like to add in the future
 
 - Add more levels.
+- Add a configuration section to the main menu.
+- Add spannish traduction.
 - Improve the gameplay.
 - Rethink the graphics (but keeping the retro style).
 - Save the results locally.
