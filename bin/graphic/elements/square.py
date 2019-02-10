@@ -1,4 +1,4 @@
-#graphic.square
+#bin.graphic.elements.square
 #by boot1110001
 
 ### IMPORTS ####################################################################

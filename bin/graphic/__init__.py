@@ -1,2 +1,2 @@
-#package graphic __init__
+#package bin.graphic __init__
 #by boot1110001

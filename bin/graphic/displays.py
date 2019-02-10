@@ -1,4 +1,4 @@
-#graphic.displays
+#bin.graphic.displays
 #by boot1110001
 
 ### IMPORTS ####################################################################

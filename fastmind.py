@@ -5,9 +5,8 @@
 ### IMPORTS ####################################################################
 import sys
 import getopt
-from datetime import datetime
 import re
-
+from datetime import datetime
 # To not show the default message of pygame import
 import contextlib
 with contextlib.redirect_stdout(None):

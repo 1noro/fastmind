@@ -1,4 +1,4 @@
-#graphic.goal
+#bin.graphic.elements.goal
 #by boot1110001
 
 ### IMPORTS ####################################################################
