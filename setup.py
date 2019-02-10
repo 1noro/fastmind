@@ -19,7 +19,8 @@ setup(
     packages=[
         "bin",
         "bin.core",
-        "bin.graphic"
+        "bin.graphic",
+        "bin.graphic.elements"
     ],
 
     # Include additional files into the package
@@ -27,15 +28,12 @@ setup(
 
     # Details
     url="https://github.com/boot1110001/fastmind",
-
-    #
     license="GPL v3.0",
     description="Solve mazes and measure your time to complete them as fast as you can.",
-
     long_description=open("README.md").read(),
 
     # Dependent packages (distributions)
     install_requires=[
         "pygame"
-    ],
+    ]
 )

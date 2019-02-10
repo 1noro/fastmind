@@ -16,12 +16,11 @@ with contextlib.redirect_stdout(None):
 import bin
 from bin.core import cfunc as cf
 from bin.core.map import Map
-from bin.graphic.rectangle import Rectangle
-from bin.graphic.wall import Wall
-from bin.graphic.goal import Goal
-from bin.graphic.player import Player
 from bin.graphic import color
 from bin.graphic import displays
+from bin.graphic.elements.wall import Wall
+from bin.graphic.elements.goal import Goal
+from bin.graphic.elements.player import Player
 
 ### EDITABLE VARIABLES #########################################################
 menu_color_scheme = color.Scheme2
