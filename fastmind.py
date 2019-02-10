@@ -23,7 +23,7 @@ from bin.graphic.elements.player import Player
 from bin.languages import *
 
 ### EDITABLE VARIABLES #########################################################
-lang = es.ES
+lang = en.EN
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
