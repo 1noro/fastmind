@@ -293,9 +293,10 @@ def main(argv):
                         else:
                             ongamekey(event)
                 else:
-                    if event.type == pygame.KEYDOWN:
-                        print('[INFO] Key pressed, return to menu')
-                        display_state = 0
+                    if (event.type == pygame.KEYDOWN):
+                        if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
+                            print('[INFO] Key pressed, return to menu')
+                            display_state = 0
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
