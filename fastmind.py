@@ -117,40 +117,33 @@ def checkvictory():
         print('[GOAL] You pass the level in:', lvl_time)
         victory=True
 
-def checkmove(x,y):
-    out=True
-    if ([x,y] in wmap):
-        if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
-        out=False
-    return out
-
 def ongamekey(event):
     xcell, ycell = player.xcell, player.ycell
     _xcell, _ycell = xcell, ycell
     if (event.key==pygame.K_UP):
         _ycell-=1
-        if (checkmove(xcell,_ycell)):
+        if (cf.checkmove(xcell, _ycell, wmap, verbose)):
             player.move_up()
             goal.move_down()
             cf.move_map_down(womap)
             if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_DOWN):
         _ycell+=1
-        if (checkmove(xcell,_ycell)):
+        if (cf.checkmove(xcell, _ycell, wmap, verbose)):
             player.move_down()
             goal.move_up()
             cf.move_map_up(womap)
             if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_LEFT):
         _xcell-=1
-        if (checkmove(_xcell,ycell)):
+        if (cf.checkmove(_xcell, ycell, wmap, verbose)):
             player.move_left()
             goal.move_right()
             cf.move_map_right(womap)
             if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key==pygame.K_RIGHT):
         _xcell+=1
-        if (checkmove(_xcell,ycell)):
+        if (cf.checkmove(_xcell, ycell, wmap, verbose)):
             player.move_right()
             goal.move_left()
             cf.move_map_left(womap)

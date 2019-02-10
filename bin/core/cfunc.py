@@ -33,3 +33,10 @@ def move_map_up(womap):
 
 def move_map_down(womap):
     for o in womap: o.move_down()
+
+def checkmove(x, y, wmap, verbose):
+    out=True
+    if ([x,y] in wmap):
+        if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') No move. There is a wall there.')
+        out=False
+    return out
