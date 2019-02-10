@@ -62,15 +62,11 @@ height = 0
 # 3 - credits
 display_state = 0
 
-onmenu = True
 mselect = 0
 mmaxselect = 3
 
-onlevel = False
 lselect = 0
-lmaxselect = 29
-
-ongame = False
+lmaxselect = 0
 
 victory = False
 
@@ -206,7 +202,7 @@ def play_level(lvname):
 
 ### MAIN #######################################################################
 def main(argv):
-    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version, shortversion, display_state
+    global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
 
     try:
         version = open('version.txt', 'r').read().replace('\n','')
@@ -279,14 +275,10 @@ def main(argv):
                     elif (event.key == pygame.K_RETURN):
                         if (mselect == 0):
                             print('[ENTR] Play level')
-                            # onmenu = False
-                            # ongame = True
                             display_state = 1
                             play_level(lvname)
                         elif (mselect == 1):
                             print('[ENTR] Select level')
-                            # onmenu = False
-                            # onlevel = True
                             display_state = 2
                         elif (mselect == 2):
                             print('[ENTR] Not implemented :(')
@@ -303,28 +295,20 @@ def main(argv):
                     if event.type == pygame.KEYDOWN:
                         if (event.key == pygame.K_ESCAPE):
                             print('[ESCP] Return to menu')
-                            # onmenu = True
-                            # ongame = False
                             display_state = 0
                         else:
                             ongamekey(event)
                 else:
                     if event.type == pygame.KEYDOWN:
                         print('[INFO] Key pressed, return to menu')
-                        # onmenu = True
-                        # ongame = False
                         display_state = 0
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
                         print('[ESCP] Return to menu')
-                        # onlevel = False
-                        # onmenu = True
                         display_state = 0
                     elif (event.key == pygame.K_RETURN):
                         print('[ENTR] Play level')
-                        # onlevel = False
-                        # ongame = True
                         display_state = 1
                         lvname = str(lselect)+'.lv'
                         play_level(lvname)
