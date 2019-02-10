@@ -17,10 +17,17 @@ class EN:
     wellcome_info = "[INFO] Using pygame ("
 
     version_warning = "[WARN] The 'version.txt' file could not be read"
-
     select_level_fail = "[FAIL] The selected level isn't in the list:"
-
     level_list_msg = "[INFO] Level list:"
+
+    exiting = "Exiting..."
+    play_level = "Play level"
+    select_level = "Select level"
+    credits = "Credits"
+    not_implemented = "Not implemented yet :("
+    none = "None"
+    return_to_menu = "Return to menu"
+    key_pressed_return_to_menu = "Return to menu"
 
     help_string = '''fastmind, solve mazes and measure your time...
 game options:

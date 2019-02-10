@@ -261,23 +261,24 @@ def main(argv):
             elif (display_state == 0): # on menu
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
-                        print('[ESCP] Exiting...')
+                        print('[ESCP] '+lang.exiting)
                         done = True
                     elif (event.key == pygame.K_RETURN):
                         if (mselect == 0):
-                            print('[ENTR] Play level')
+                            print('[ENTR] '+lang.play_level)
                             display_state = 1
                             play_level(lvname)
                         elif (mselect == 1):
-                            print('[ENTR] Select level')
+                            print('[ENTR] '+lang.select_level)
                             display_state = 2
                         elif (mselect == 2):
-                            print('[ENTR] Not implemented :(')
+                            print('[ENTR] '+lang.credits)
+                            print('[FAIL] '+lang.not_implemented)
                         elif (mselect == 3):
-                            print('[ENTR] Exiting...')
+                            print('[ENTR] '+lang.exiting)
                             done = True
                         else:
-                            print('[ENTR] None')
+                            print('[ENTR] '+lang.none)
                             pass
                     else:
                         onmenukey(event)
@@ -285,22 +286,22 @@ def main(argv):
                 if not victory:
                     if event.type == pygame.KEYDOWN:
                         if (event.key == pygame.K_ESCAPE):
-                            print('[ESCP] Return to menu')
+                            print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
                             ongamekey(event)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
-                            print('[INFO] Key pressed, return to menu')
+                            print('[INFO] '+lang.key_pressed_return_to_menu)
                             display_state = 0
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
-                        print('[ESCP] Return to menu')
+                        print('[ESCP] '+lang.return_to_menu)
                         display_state = 0
                     elif (event.key == pygame.K_RETURN):
-                        print('[ENTR] Play level')
+                        print('[ENTR] '+lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
                         play_level(lvname)
