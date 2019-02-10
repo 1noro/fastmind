@@ -3,4 +3,7 @@
 
 ### CLASSES ####################################################################
 class English:
-    a = "a"
+    menu_play =     "  PLAY  "
+    menu_levels =   " LEVELS "
+    menu_credits =  "  CRED  "
+    menu_exit =     "  EXIT  "

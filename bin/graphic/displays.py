@@ -6,7 +6,7 @@ import pygame
 from . import gfunc as gf
 
 ### FUNCTIONS ##################################################################
-def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, colorbg):
+def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, colorbg, names):
     # --- PREVIOUS CHECKS ------------------------------------------------------
     # --- DRAWING --------------------------------------------------------------
     # Set the screen background
@@ -29,36 +29,36 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, color
 
     # --- Play
     if (mselect==0):
-        text = basicfont.render('  PLAY  ', True, color2, color1)
+        text = basicfont.render(names[0], True, color2, color1)
     else:
-        text = basicfont.render('  PLAY  ', True, color1, color2)
+        text = basicfont.render(names[0], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*0)
     screen.blit(text, textrect)
     # --- Levels
     if (mselect==1):
-        text = basicfont.render(' LEVELS ', True, color2, color1)
+        text = basicfont.render(names[1], True, color2, color1)
     else:
-        text = basicfont.render(' LEVELS ', True, color1, color2)
+        text = basicfont.render(names[1], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*1.5)
     screen.blit(text, textrect)
     # --- Credits
     if (mselect==2):
-        text = basicfont.render('  CRED  ', True, color2, color1)
+        text = basicfont.render(names[2], True, color2, color1)
     else:
-        text = basicfont.render('  CRED  ', True, color1, color2)
+        text = basicfont.render(names[2], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*3)
     screen.blit(text, textrect)
     # --- Exit
     if (mselect==3):
-        text = basicfont.render('  EXIT  ', True, color2, color1)
+        text = basicfont.render(names[3], True, color2, color1)
     else:
-        text = basicfont.render('  EXIT  ', True, color1, color2)
+        text = basicfont.render(names[3], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*4.5)

@@ -20,8 +20,12 @@ from bin.graphic import displays
 from bin.graphic.elements.wall import Wall
 from bin.graphic.elements.goal import Goal
 from bin.graphic.elements.player import Player
+from bin.languages.english import English
+from bin.languages.spanish import Spanish
 
 ### EDITABLE VARIABLES #########################################################
+lang = Spanish
+
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
 game_color_scheme = color.Scheme2
@@ -311,12 +315,33 @@ def main(argv):
         # --- Logic
         # --- Drawing
         if (display_state == 0):
-            displays.displaymenu(screen, width, stdsize, pxcenter, mselect, menu_color_scheme.MENU1, menu_color_scheme.MENU2, menu_color_scheme.BG_MENU)
+            displays.displaymenu(
+                screen, width, stdsize, pxcenter, mselect,
+                menu_color_scheme.MENU1,
+                menu_color_scheme.MENU2,
+                menu_color_scheme.BG_MENU,
+                [   lang.menu_play,
+                    lang.menu_levels,
+                    lang.menu_credits,
+                    lang.menu_exit
+                ]
+            )
         elif (display_state == 1):
             checkvictory()
-            displays.displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2, game_color_scheme.BG)
+            displays.displaygame(
+                screen, womap, goal, player, victory,
+                stdsize, width, height, lvl_time,
+                game_color_scheme.RESULT1,
+                game_color_scheme.RESULT2,
+                game_color_scheme.BG
+            )
         elif (display_state == 2):
-            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope, level_color_scheme.LEVEL1, level_color_scheme.LEVEL2, level_color_scheme.BG_LEVEL)
+            displays.displaylevel(
+                screen, lvlist, lselect, stdsize, cellscope,
+                level_color_scheme.LEVEL1,
+                level_color_scheme.LEVEL2,
+                level_color_scheme.BG_LEVEL
+            )
         # --- Wrap-up
         # Limit to 60 frames per second
         clock.tick(60)
