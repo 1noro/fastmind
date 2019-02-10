@@ -1,8 +1,11 @@
 #package bin.languages.spanish __init__
 #by boot1110001
 
+### IMPORTS ####################################################################
+from .__init__ import default
+
 ### CLASSES ####################################################################
-class ES:
+class ES(default):
     menu_play =     "  JUGAR  "
     menu_levels =   " NIVELES "
     menu_credits =  " TÍTULOS "
@@ -11,7 +14,7 @@ class ES:
     result_txt =        "META!! Conseguido en:"
     result_seconds =    "s"
 
-class GL:
+class GL(default):
     menu_play =     "  XOGO  "
     menu_levels =   "  MAPA  "
     menu_credits =  "  CRED  "
