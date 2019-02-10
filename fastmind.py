@@ -56,6 +56,12 @@ width = 0
 height = 0
 
 # --- State control
+# 0 - menu
+# 1 - game
+# 2 - level menu
+# 3 - credits
+display_state = 0
+
 onmenu = True
 mselect = 0
 mmaxselect = 3
@@ -200,7 +206,7 @@ def play_level(lvname):
 
 ### MAIN #######################################################################
 def main(argv):
-    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version, shortversion
+    global old_time, lvlist, width, height, verbose, ongame, onlevel, onmenu, lmaxselect, victory, version, shortversion, display_state
 
     try:
         version = open('version.txt', 'r').read().replace('\n','')
@@ -265,24 +271,26 @@ def main(argv):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            elif onmenu:
+            elif (display_state == 0): # on menu
                 if event.type == pygame.KEYDOWN:
-                    if (event.key==pygame.K_ESCAPE):
+                    if (event.key == pygame.K_ESCAPE):
                         print('[ESCP] Exiting...')
                         done = True
-                    elif (event.key==pygame.K_RETURN):
-                        if (mselect==0):
+                    elif (event.key == pygame.K_RETURN):
+                        if (mselect == 0):
                             print('[ENTR] Play level')
-                            onmenu = False
-                            ongame = True
+                            # onmenu = False
+                            # ongame = True
+                            display_state = 1
                             play_level(lvname)
-                        elif (mselect==1):
+                        elif (mselect == 1):
                             print('[ENTR] Select level')
-                            onmenu = False
-                            onlevel = True
-                        elif (mselect==2):
+                            # onmenu = False
+                            # onlevel = True
+                            display_state = 2
+                        elif (mselect == 2):
                             print('[ENTR] Not implemented :(')
-                        elif (mselect==3):
+                        elif (mselect == 3):
                             print('[ENTR] Exiting...')
                             done = True
                         else:
@@ -290,49 +298,47 @@ def main(argv):
                             pass
                     else:
                         onmenukey(event)
-            elif onlevel:
-                if event.type == pygame.KEYDOWN:
-                    if (event.key==pygame.K_ESCAPE):
-                        print('[ESCP] Return to menu')
-                        onlevel = False
-                        onmenu = True
-                    elif (event.key==pygame.K_RETURN):
-                        print('[ENTR] Play level')
-                        onlevel = False
-                        ongame = True
-                        lvname = str(lselect)+'.lv'
-                        play_level(lvname)
-                    else:
-                        onlevelkey(event)
-            elif ongame:
+            elif (display_state == 1): # on game
                 if not victory:
                     if event.type == pygame.KEYDOWN:
-                        if (event.key==pygame.K_ESCAPE):
+                        if (event.key == pygame.K_ESCAPE):
                             print('[ESCP] Return to menu')
-                            onmenu = True
-                            ongame = False
+                            # onmenu = True
+                            # ongame = False
+                            display_state = 0
                         else:
                             ongamekey(event)
                 else:
                     if event.type == pygame.KEYDOWN:
-                        if (event.key==pygame.K_ESCAPE):
-                            print('[ESCP] Return to menu')
-                            onmenu = True
-                            ongame = False
-                        elif (event.key==pygame.K_RETURN):
-                            print('[ENTR] Return to menu')
-                            onmenu = True
-                            ongame = False
-
+                        print('[INFO] Key pressed, return to menu')
+                        # onmenu = True
+                        # ongame = False
+                        display_state = 0
+            elif (display_state == 2): # on menu level
+                if event.type == pygame.KEYDOWN:
+                    if (event.key == pygame.K_ESCAPE):
+                        print('[ESCP] Return to menu')
+                        # onlevel = False
+                        # onmenu = True
+                        display_state = 0
+                    elif (event.key == pygame.K_RETURN):
+                        print('[ENTR] Play level')
+                        # onlevel = False
+                        # ongame = True
+                        display_state = 1
+                        lvname = str(lselect)+'.lv'
+                        play_level(lvname)
+                    else:
+                        onlevelkey(event)
         # --- Logic
         # --- Drawing
-        if onmenu:
+        if (display_state == 0):
             displays.displaymenu(screen, width, stdsize, pxcenter, mselect, menu_color_scheme.MENU1, menu_color_scheme.MENU2, menu_color_scheme.BG_MENU)
-        elif onlevel:
-            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope, level_color_scheme.LEVEL1, level_color_scheme.LEVEL2, level_color_scheme.BG_LEVEL)
-        elif ongame:
+        elif (display_state == 1):
             checkvictory()
             displays.displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, game_color_scheme.RESULT1, game_color_scheme.RESULT2, game_color_scheme.BG)
+        elif (display_state == 2):
+            displays.displaylevel(screen, lvlist, lselect, stdsize, cellscope, level_color_scheme.LEVEL1, level_color_scheme.LEVEL2, level_color_scheme.BG_LEVEL)
         # --- Wrap-up
         # Limit to 60 frames per second
         clock.tick(60)
