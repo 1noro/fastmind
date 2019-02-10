@@ -333,7 +333,8 @@ def main(argv):
                 stdsize, width, height, lvl_time,
                 game_color_scheme.RESULT1,
                 game_color_scheme.RESULT2,
-                game_color_scheme.BG
+                game_color_scheme.BG,
+                [lang.result_txt, lang.result_seconds]
             )
         elif (display_state == 2):
             displays.displaylevel(

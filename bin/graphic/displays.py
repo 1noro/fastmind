@@ -81,7 +81,7 @@ def displaylevel(screen, lvlist, lselect, stdsize, cellscope, color1, color2, co
             y+=2
             x=1
 
-def print_result(screen, stdsize, width, height, lvl_time, color1, color2):
+def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt):
     rectw = 14*stdsize
     recth = 4*stdsize
     rectx = (width/2)-(rectw/2)
@@ -93,19 +93,19 @@ def print_result(screen, stdsize, width, height, lvl_time, color1, color2):
     # basicfont = pygame.font.SysFont('Monospace', stdsize)
     basicfont = pygame.font.Font("media/font/ttf/node.ttf", stdsize)
 
-    text = basicfont.render('GOAL! You pass in:', True, color1, color2)
+    text = basicfont.render(txt[0], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery-(stdsize/2)-2
     screen.blit(text, textrect)
 
-    text = basicfont.render(str(lvl_time)+'s', True, color1, color2)
+    text = basicfont.render(str(lvl_time)+txt[1], True, color1, color2)
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize/2)+2
     screen.blit(text, textrect)
 
-def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, color1, color2, colorbg):
+def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, color1, color2, colorbg, txt):
     # Set the screen background
     screen.fill(colorbg)
 
@@ -114,4 +114,4 @@ def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lv
     if not victory:
         player.draw(screen)
     else:
-        print_result(screen, stdsize, width, height, lvl_time, color1, color2)
+        print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt)

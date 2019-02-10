@@ -7,3 +7,6 @@ class Spanish:
     menu_levels =   " NIVELES "
     menu_credits =  " TÍTULOS "
     menu_exit =     "  SALIR  "
+
+    result_txt =        "META!! Conseguido en:"
+    result_seconds =    "s"
