@@ -54,7 +54,7 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, color
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*3)
     screen.blit(text, textrect)
-    # --- Exit
+    # --- Config
     if (mselect==3):
         text = basicfont.render(names[3], True, color2, color1)
     else:
@@ -62,6 +62,15 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, color
     textrect = text.get_rect()
     textrect.centerx = screen.get_rect().centerx
     textrect.centery = screen.get_rect().centery+(stdsize*4.5)
+    screen.blit(text, textrect)
+    # --- Exit
+    if (mselect==4):
+        text = basicfont.render(names[4], True, color2, color1)
+    else:
+        text = basicfont.render(names[4], True, color1, color2)
+    textrect = text.get_rect()
+    textrect.centerx = screen.get_rect().centerx
+    textrect.centery = screen.get_rect().centery+(stdsize*6)
     screen.blit(text, textrect)
 
 def displaylevel(screen, lvlist, lselect, stdsize, cellscope, color1, color2, colorbg):

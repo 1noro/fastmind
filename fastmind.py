@@ -65,7 +65,7 @@ height = 0
 display_state = 0
 
 mselect = 0
-mmaxselect = 3
+mmaxselect = 4
 
 lselect = 0
 lmaxselect = 0
@@ -291,10 +291,13 @@ def main(argv):
                             print('[ENTR] '+lang.credits)
                             print('[FAIL] '+lang.not_implemented)
                         elif (mselect == 3):
+                            print('[ENTR] '+lang.config)
+                            print('[FAIL] '+lang.not_implemented)
+                        elif (mselect == 4):
                             print('[ENTR] '+lang.exiting)
                             done = True
                         else:
-                            print('[ENTR] '+lang.none)
+                            print('[ENTR] '+lang.nothing)
                             pass
                     else:
                         onmenukey(event)
@@ -334,6 +337,7 @@ def main(argv):
                 [   lang.menu_play,
                     lang.menu_levels,
                     lang.menu_credits,
+                    lang.menu_config,
                     lang.menu_exit
                 ]
             )

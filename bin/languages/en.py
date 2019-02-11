@@ -7,6 +7,7 @@ class EN:
     menu_play =         "  PLAY  "
     menu_levels =       " LEVELS "
     menu_credits =      "  CRED  "
+    menu_config =       " CONFIG "
     menu_exit =         "  EXIT  "
 
     result_txt =        "GOAL!! You pass in:"
@@ -26,8 +27,9 @@ class EN:
     play_level = "Play level"
     select_level = "Select level"
     credits = "Credits"
+    config = "Config"
     not_implemented = "Not implemented yet :("
-    none = "Nothing"
+    nothing = "Nothing"
     return_to_menu = "Return to menu"
     key_pressed_return_to_menu = "Return to menu"
     time_stopped_at = "Time stopped at:"
