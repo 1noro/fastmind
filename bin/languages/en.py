@@ -19,6 +19,8 @@ class EN:
     version_warning = "[WARN] The 'version.txt' file could not be read"
     select_level_fail = "[FAIL] The selected level isn't in the list:"
     level_list_msg = "[INFO] Level list:"
+    set_lang_error = "is not a recognizable language, reassigned the language by default"
+    set_lang_info = "Changing language to:"
 
     exiting = "Exiting..."
     play_level = "Play level"
@@ -37,6 +39,7 @@ class EN:
     help_string = '''fastmind, solve mazes and measure your time...
 game options:
  fastmind.py -h\t\t\t--help\t\t\tShow this help.
- fastmind.py -l\t\t\t--list\t\t\tList the available levels.
  fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
- fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.'''
+ fastmind.py -l <lang_name>\t--lang=<lang_name>\tChange the language.
+ fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.
+ fastmind.py -s\t\t\t--show\t\t\tShow the available levels.'''

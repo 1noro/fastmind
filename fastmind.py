@@ -23,7 +23,7 @@ from bin.graphic.elements.player import Player
 from bin.languages import *
 
 ### EDITABLE VARIABLES #########################################################
-lang = es.ES
+lang = en.EN
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
@@ -191,6 +191,21 @@ def play_level(lvname):
     print('[INFO] '+lang.playing+m.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
 
+def set_lang(str):
+    global lang
+    if str == "en.EN":
+        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
+        lang = en.EN
+    elif str == "es.ES":
+        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
+        lang = es.ES
+    elif str == "es.GL":
+        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
+        lang = es.GL
+    else:
+        print("[FAIL] '"+str+"' "+lang.set_lang_error)
+
+
 ### MAIN #######################################################################
 def main(argv):
     global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
@@ -214,7 +229,7 @@ def main(argv):
 
     # --- Parameters -----------------------------------------------------------
     try:
-        opts, args = getopt.getopt(argv, "hp:lv", ["help","play=","list","verbose"])
+        opts, args = getopt.getopt(argv, "hvl:p:s", ["help","verbose","lang=","play=","show"])
     except getopt.GetoptError:
         print(hstr)
         sys.exit(2)
@@ -223,18 +238,19 @@ def main(argv):
         if opt in ("-h", "--help"):
             print(hstr)
             sys.exit()
+        elif opt in ("-v", "--verbose"):
+            verbose = True
+        elif opt in ("-l", "--lang"):
+            set_lang(arg)
         elif opt in ("-p", "--play"):
             lvname = arg+".lv"
-            onmenu = False
-            ongame = True
+            display_state = 1
             if not (lvname in lvlist):
                 print(lang.select_level_fail)
                 cf.print_level_list(lvlist)
                 sys.exit()
             play_level(lvname)
-        elif opt in ("-v", "--verbose"):
-            verbose = True
-        elif opt in ("-l", "--list"):
+        elif opt in ("-s", "--show"):
             print(lang.level_list_msg)
             cf.print_level_list(lvlist)
             sys.exit()
@@ -245,7 +261,7 @@ def main(argv):
     size = [width, height]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("FASTMIND " + shortversion)
-    logo = pygame.image.load('fastmind.png')
+    logo = pygame.image.load('icon.png')
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
     done = False
