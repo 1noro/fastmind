@@ -1,4 +1,6 @@
 include CHANGES.txt
 include LICENSE
 include README.md
+include linux-run.sh
+include win-run.sh
 recursive-include media *
