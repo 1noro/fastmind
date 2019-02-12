@@ -38,14 +38,14 @@ cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
 ### NON EDITABLE VARIABLES #####################################################
-# --- Version
-version = ""
-shortversion = ""
-
 # --- Files and folders
 icon_file = 'icon.ico'
 version_file = 'version.txt'
 lvls_folder = 'lvls'
+
+# --- Version
+version = ""
+shortversion = ""
 
 # --- Level atributes
 lvlist = [] # level file list
@@ -266,7 +266,7 @@ def main(argv):
     size = [width, height]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("FASTMIND " + shortversion)
-    logo = pygame.image.load(icon)
+    logo = pygame.image.load(icon_file)
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
     done = False
