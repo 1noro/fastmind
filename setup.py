@@ -9,7 +9,7 @@ setup(
     name="fastmind",
 
     # Version number (initial):
-    version=open("version.txt").read().replace('\n',''),
+    version=open("fmind/version.txt").read().replace('\n',''),
 
     # Application author details:
     author="boot1110001",
@@ -18,11 +18,11 @@ setup(
 
     # Packages
     packages=[
-        "bin",
-        "bin.core",
-        "bin.graphic",
-        "bin.graphic.elements",
-        "bin.languages"
+        "fmind",
+        "fmind.core",
+        "fmind.graphic",
+        "fmind.graphic.elements",
+        "fmind.languages"
     ],
 
     python_requires=">=3.5",
@@ -44,13 +44,13 @@ setup(
     entry_points={  # Optional
         "console_scripts": [
             #'sample=sample:main',
-            "fastmind=fastmind.py",
-        ],
+            "fastmind=fmind:main"
+        ]
     },
 
     # scripts=["fastmind.py"],
 
     project_urls={  # Optional
-        "Source": "https://github.com/boot1110001/fastmind",
+        "Source": "https://github.com/boot1110001/fastmind"
     }
 )

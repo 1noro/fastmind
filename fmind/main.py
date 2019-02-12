@@ -12,15 +12,17 @@ import contextlib
 with contextlib.redirect_stdout(None):
     import pygame
 
-import bin
-from bin.core import cfunc as cf
-from bin.core.map import Map
-from bin.graphic import color
-from bin.graphic import displays
-from bin.graphic.elements.wall import Wall
-from bin.graphic.elements.goal import Goal
-from bin.graphic.elements.player import Player
-from bin.languages import *
+import core
+from core import cfunc as cf
+from core.map import Map
+import graphic
+from graphic import color
+from graphic import displays
+from graphic.elements.wall import Wall
+from graphic.elements.goal import Goal
+from graphic.elements.player import Player
+import languages
+from languages import *
 
 ### EDITABLE VARIABLES #########################################################
 lang = en.EN
