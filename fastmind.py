@@ -42,6 +42,9 @@ pxcenter = (pxscope / 2) - (stdsize / 2)
 version = ""
 shortversion = ""
 
+# --- Icon
+icon = 'icon.ico'
+
 # --- Level atributes
 lvlist = [] # level file list
 wmap = [] # wall list
@@ -261,7 +264,7 @@ def main(argv):
     size = [width, height]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("FASTMIND " + shortversion)
-    logo = pygame.image.load('icon.ico')
+    logo = pygame.image.load(icon)
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
     done = False
