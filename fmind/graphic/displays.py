@@ -6,7 +6,7 @@ import pygame
 from . import gfunc as gf
 
 ### FUNCTIONS ##################################################################
-def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, colorbg, names):
+def displaymenu(screen, width, stdsize, pxcenter, mselect, font_file, color1, color2, colorbg, names):
     # --- PREVIOUS CHECKS ------------------------------------------------------
     # --- DRAWING --------------------------------------------------------------
     # Set the screen background
@@ -25,7 +25,7 @@ def displaymenu(screen, width, stdsize, pxcenter, mselect, color1, color2, color
     pygame.draw.rect(screen, color2, [pxcenter+(4*stdsize), 2*stdsize, stdsize, 3*stdsize])
 
     # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("media/font/ttf/node.ttf", stdsize)
+    basicfont = pygame.font.Font(font_file, stdsize)
 
     # --- Play
     if (mselect==0):
@@ -90,7 +90,7 @@ def displaylevel(screen, lvlist, lselect, stdsize, cellscope, color1, color2, co
             y+=2
             x=1
 
-def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt):
+def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt, font_file):
     rectw = 14*stdsize
     recth = 4*stdsize
     rectx = (width/2)-(rectw/2)
@@ -100,7 +100,7 @@ def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt):
     pygame.draw.rect(screen, color2, [rectx+borderw, recty+borderw, rectw-(borderw*2), recth-(borderw*2)])
 
     # basicfont = pygame.font.SysFont('Monospace', stdsize)
-    basicfont = pygame.font.Font("media/font/ttf/node.ttf", stdsize)
+    basicfont = pygame.font.Font(font_file, stdsize)
 
     text = basicfont.render(txt[0], True, color1, color2)
     textrect = text.get_rect()
@@ -114,7 +114,7 @@ def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt):
     textrect.centery = screen.get_rect().centery+(stdsize/2)+2
     screen.blit(text, textrect)
 
-def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, color1, color2, colorbg, txt):
+def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, font_file, color1, color2, colorbg, txt):
     # Set the screen background
     screen.fill(colorbg)
 
@@ -123,4 +123,4 @@ def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lv
     if not victory:
         player.draw(screen)
     else:
-        print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt)
+        print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt, font_file)

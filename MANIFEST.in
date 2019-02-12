@@ -1,7 +1,9 @@
 include CHANGES.txt
-
 include LICENSE
 include README.md
-
-
 recursive-include media *
+
+include fmind/version.txt
+include fmind/icon.ico
+include fmind/node.ttf
+recursive-include fmind/lvls *

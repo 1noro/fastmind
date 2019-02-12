@@ -41,8 +41,9 @@ pxcenter = (pxscope / 2) - (stdsize / 2)
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
-icon_file = 'icon.ico'
 version_file = 'version.txt'
+icon_file = 'icon.ico'
+font_file = 'node.ttf'
 lvls_folder = 'lvls'
 
 # --- Version
@@ -337,7 +338,7 @@ def main(argv):
         # --- Drawing
         if (display_state == 0):
             displays.displaymenu(
-                screen, width, stdsize, pxcenter, mselect,
+                screen, width, stdsize, pxcenter, mselect, font_file,
                 menu_color_scheme.MENU1,
                 menu_color_scheme.MENU2,
                 menu_color_scheme.BG_MENU,
@@ -352,7 +353,7 @@ def main(argv):
             checkvictory()
             displays.displaygame(
                 screen, womap, goal, player, victory,
-                stdsize, width, height, lvl_time,
+                stdsize, width, height, lvl_time, font_file,
                 game_color_scheme.RESULT1,
                 game_color_scheme.RESULT2,
                 game_color_scheme.BG,
