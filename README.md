@@ -59,6 +59,8 @@ python -m pip install -U pygame --user
 
 Currently the project is at a very early stage of its development (_alpha_), you can install it on your PC, but future versions may delete previous configurations in the program.
 
+> At the moment this program has not been tested in __Mac OS__, so I still can not specify whether it works or how to install it correctly.
+
 ### Assuming you have git installed
 
 ```
@@ -84,8 +86,6 @@ win-run.bat
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `bash linux-run.sh` for __GNU/Linux__ and `win-run.bat` for __Windows__.
-
-> At the moment this program has not been tested in __Mac OS__, so I still can not specify whether it works or how to install it correctly.
 
 ### Run options
 
