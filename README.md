@@ -66,7 +66,8 @@ Currently the project is at a very early stage of its development (_alpha_), you
 ```
 git clone https://github.com/boot1110001/fastmind
 cd fastmind
-bash linux-run.sh
+chmod u+x linux-run.sh
+./linux-run.sh
 ```
 
 #### Getting a .zip or a .tar.gz file from GitHub
