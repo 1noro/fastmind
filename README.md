@@ -61,11 +61,14 @@ Currently the project is at a very early stage of its development (_alpha_), you
 
 ### Assuming you have git installed
 
-#### GNU/Linux
-
 ```
 git clone https://github.com/boot1110001/fastmind
 cd fastmind
+```
+
+#### GNU/Linux
+
+```
 chmod u+x linux-run.sh
 ./linux-run.sh
 ```
@@ -73,8 +76,6 @@ chmod u+x linux-run.sh
 #### Windows
 
 ```
-git clone https://github.com/boot1110001/fastmind
-cd fastmind
 win-run.bat
 ```
 
@@ -82,7 +83,7 @@ win-run.bat
 
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `bash linux-run.sh` (GNU/Linux), `win-run.bat` (Windows)
+- Execute the following command: `bash linux-run.sh` for __GNU/Linux__ and `win-run.bat` for __Windows__.
 
 ### Run options
 
