@@ -97,7 +97,7 @@ win-run.bat
 ```
  -h			--help			Show this help.
  -v			--verbose		Enables verbose mode.
- -l <lang_name>     --lang=<lang_name>	Change the language.
+ -l <lang_name>		--lang=<lang_name>	Change the language.
  -p <level_name>	--play=<level_name>	Play the level directly.
  -s			--show			Show the available levels.
 ```
