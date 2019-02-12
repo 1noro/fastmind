@@ -14,14 +14,18 @@ setup(
     # Application author details:
     author="boot1110001",
     author_email="nothing@addr.ess",
+    keywords="solve-mazes game libre-software mazes labyrinth labyrinth-game 2d-game minimalist pygame",
 
     # Packages
     packages=[
         "bin",
         "bin.core",
         "bin.graphic",
-        "bin.graphic.elements"
+        "bin.graphic.elements",
+        "bin.languages"
     ],
+
+    python_requires=">=3.5",
 
     # Include additional files into the package
     include_package_data=True,
@@ -35,5 +39,15 @@ setup(
     # Dependent packages (distributions)
     install_requires=[
         "pygame"
-    ]
+    ],
+
+    entry_points={  # Optional
+        "console_scripts": [
+            "fastmind=fastmind",
+        ],
+    },
+
+    project_urls={  # Optional
+        "Source": "https://github.com/boot1110001/fastmind",
+    }
 )
