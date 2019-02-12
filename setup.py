@@ -41,6 +41,20 @@ setup(
         "pygame"
     ],
 
+    data_files=[
+        ('fmind', [
+            'fmind/version.txt',
+            'fmind/node.ttf',
+            'fmind/icon.ico'
+        ]),
+        ('fmind/lvls', [
+            'fmind/lvls/0.lv',
+            'fmind/lvls/1.lv',
+            'fmind/lvls/2.lv',
+            'fmind/lvls/3.lv'
+        ])
+    ],
+
     entry_points={  # Optional
         "console_scripts": [
             #'sample=sample:main',

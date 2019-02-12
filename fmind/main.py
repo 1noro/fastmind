@@ -6,6 +6,8 @@
 import sys
 import getopt
 import re
+import os
+import platform
 from datetime import datetime
 # To not show the default message of pygame import
 import contextlib
@@ -39,12 +41,28 @@ pxscope = cellscope * stdsize
 cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
+home = os.path.expanduser("~")
+
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
+pkg_folder = 'fmind'
 version_file = 'version.txt'
 icon_file = 'icon.ico'
 font_file = 'node.ttf'
 lvls_folder = 'lvls'
+
+if platform.system() == 'Linux': # GNU/Linux
+    if not os.path.isfile(version_file): version_file = home+'/.local/'+pkg_folder+'/'+version_file
+    if not os.path.isfile(icon_file): icon_file = home+'/.local/'+pkg_folder+'/'+icon_file
+    if not os.path.isfile(font_file): font_file = home+'/.local/'+pkg_folder+'/'+font_file
+    if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'/.local/'+pkg_folder+'/'+lvls_folder
+elif platform.system() == 'Windows': # Microsoft Windows
+    if not os.path.isfile(version_file): version_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+version_file
+    if not os.path.isfile(icon_file): icon_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+icon_file
+    if not os.path.isfile(font_file): font_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+font_file
+    if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+lvls_folder
+elif platform.system() == 'Darwin': # Mac OS
+    pass
 
 # --- Version
 version = ""
@@ -160,18 +178,22 @@ def onmenukey(event):
     if (event.key == pygame.K_UP):
         mselect = mselect - 1
         if mselect < 0: mselect = mmaxselect
+        if verbose : print('[ UP ] mselect = '+str(mselect))
     elif (event.key == pygame.K_DOWN):
         mselect = mselect + 1
         if mselect > mmaxselect: mselect=0
+        if verbose : print('[DOWN] mselect = '+str(mselect))
 
 def onlevelkey(event):
     global lselect
     if (event.key == pygame.K_LEFT):
         lselect-=1
         if lselect < 0: lselect = lmaxselect
+        if verbose : print('[LEFT] lselect = '+str(lselect))
     elif (event.key == pygame.K_RIGHT):
         lselect+=1
         if lselect > lmaxselect: lselect = 0
+        if verbose : print('[RIGH] lselect = '+str(lselect))
 
 def reset_level():
     global victory, wmap, womap, goal, player, old_time, lvl_time
@@ -213,6 +235,12 @@ def set_lang(str):
     else:
         print("[FAIL] '"+str+"' "+lang.set_lang_error)
 
+def print_file_vars():
+    print("[INFO] pkg_folder = '"+pkg_folder+"'")
+    print("[INFO] version_file = '"+version_file+"'")
+    print("[INFO] icon_file = '"+icon_file+"'")
+    print("[INFO] font_file = '"+font_file+"'")
+    print("[INFO] lvls_folder = '"+lvls_folder+"'")
 
 ### MAIN #######################################################################
 def main(argv):
@@ -228,6 +256,7 @@ def main(argv):
     # --- CMD INIT -------------------------------------------------------------
     print(lang.wellcome_msg+version+")")
     print(lang.wellcome_info+pygame.version.ver+")")
+    print_file_vars()
 
     lvlist = cf.get_lvls(lvls_folder)
     lmaxselect = len(lvlist) - 1
