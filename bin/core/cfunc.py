@@ -6,8 +6,8 @@ from os import listdir
 from os.path import isfile, join
 
 ### FUNCTIONS ##################################################################
-def get_lvls():
-    onlyfiles = [f for f in listdir('lvls') if isfile(join('lvls', f))]
+def get_lvls(dir):
+    onlyfiles = [f for f in listdir(dir) if isfile(join('lvls', f))]
     return onlyfiles
 
 def print_list(string,list):

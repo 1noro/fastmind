@@ -42,8 +42,10 @@ pxcenter = (pxscope / 2) - (stdsize / 2)
 version = ""
 shortversion = ""
 
-# --- Icon
-icon = 'icon.ico'
+# --- Files and folders
+icon_file = 'icon.ico'
+version_file = 'version.txt'
+lvls_folder = 'lvls'
 
 # --- Level atributes
 lvlist = [] # level file list
@@ -189,7 +191,7 @@ def play_level(lvname):
     reset_level()
     old_time = datetime.now()
 
-    m = Map(open('lvls/'+lvname, 'r').read())
+    m = Map(open(lvls_folder+'/'+lvname, 'r').read())
     pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
     print('[INFO] '+lang.playing+m.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
@@ -214,7 +216,7 @@ def main(argv):
     global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
 
     try:
-        version = open('version.txt', 'r').read().replace('\n','')
+        version = open(version_file, 'r').read().replace('\n','')
         patron = re.compile(r'(.*\..*\..*)\.')
         shortversion = patron.search(version).group(1)
     except:
@@ -224,7 +226,7 @@ def main(argv):
     print(lang.wellcome_msg+version+")")
     print(lang.wellcome_info+pygame.version.ver+")")
 
-    lvlist = cf.get_lvls()
+    lvlist = cf.get_lvls(lvls_folder)
     lmaxselect = len(lvlist) - 1
     lvname = '1.lv'
 
