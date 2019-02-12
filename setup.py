@@ -2,7 +2,7 @@
 #setup
 #by boot1110001
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     # Application name:
@@ -58,7 +58,7 @@ setup(
     entry_points={  # Optional
         "console_scripts": [
             #'sample=sample:main',
-            "fastmind=fmind:main"
+            "fastmind=fmind"
         ]
     },
 

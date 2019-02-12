@@ -40,8 +40,8 @@ class EN:
 
     help_string = '''fastmind, solve mazes and measure your time...
 game options:
- fastmind.py -h\t\t\t--help\t\t\tShow this help.
- fastmind.py -v\t\t\t--verbose\t\tEnables verbose mode.
- fastmind.py -l <lang_name>\t--lang=<lang_name>\tChange the language.
- fastmind.py -p <level_name>\t--play=<level_name>\tPlay the level directly.
- fastmind.py -s\t\t\t--show\t\t\tShow the available levels.'''
+ -h\t\t\t--help\t\t\tShow this help.
+ -v\t\t\t--verbose\t\tEnables verbose mode.
+ -l <lang_name>\t--lang=<lang_name>\tChange the language.
+ -p <level_name>\t--play=<level_name>\tPlay the level directly.
+ -s\t\t\t--show\t\t\tShow the available levels.'''
