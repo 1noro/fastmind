@@ -261,7 +261,7 @@ def main(argv):
     size = [width, height]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("FASTMIND " + shortversion)
-    logo = pygame.image.load('icon.png')
+    logo = pygame.image.load('icon.ico')
     pygame.display.set_icon(logo)
     # Loop until the user clicks the close button.
     done = False
