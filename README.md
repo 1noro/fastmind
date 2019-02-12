@@ -59,9 +59,9 @@ python -m pip install -U pygame --user
 
 Currently the project is at a very early stage of its development (_alpha_), you can install it on your PC, but future versions may delete previous configurations in the program.
 
-### GNU/Linux
+### Assuming you have git installed
 
-#### Assuming you have git installed
+#### GNU/Linux
 
 ```
 git clone https://github.com/boot1110001/fastmind
@@ -70,15 +70,7 @@ chmod u+x linux-run.sh
 ./linux-run.sh
 ```
 
-#### Getting a .zip or a .tar.gz file from GitHub
-
-- Extract the `fastmind-x.zip/.tar.gz` in the current folder.
-- Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `bash linux-run.sh`
-
-### Windows
-
-#### Assuming you have git installed
+#### Windows
 
 ```
 git clone https://github.com/boot1110001/fastmind
@@ -86,11 +78,11 @@ cd fastmind
 win-run.bat
 ```
 
-#### Getting a .zip or a .tar.gz file from GitHub
+### Getting a .zip or a .tar.gz file from GitHub
 
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `win-run.bat`
+- Execute the following command: `bash linux-run.sh` (GNU/Linux), `win-run.bat` (Windows)
 
 ### Run options
 
