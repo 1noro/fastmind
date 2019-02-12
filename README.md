@@ -104,9 +104,9 @@ win-run.bat
 
 #### Languages avaliable
 
-- __en.EN:__ English (UK).
-- __es.ES:__ Spanish (Spain).
-- __es.GL:__ Galician.
+- __en.EN__ English (UK).
+- __es.ES__ Spanish (Spain).
+- __es.GL__ Galician.
 
 ## Things that I would like to add in the future
 
