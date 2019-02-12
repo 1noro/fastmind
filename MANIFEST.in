@@ -1,3 +1,7 @@
+include CHANGES.txt
 include icon.ico
+include LICENSE
+include README.md
+include version.txt
 recursive-include lvls *
 recursive-include media *

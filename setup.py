@@ -41,11 +41,13 @@ setup(
         "pygame"
     ],
 
-    entry_points={  # Optional
-        "console_scripts": [
-            "fastmind=fastmind",
-        ],
-    },
+    # entry_points={  # Optional
+    #     "console_scripts": [
+    #         "fastmind=fastmind",
+    #     ],
+    # },
+
+    scripts=["fastmind.py"],
 
     project_urls={  # Optional
         "Source": "https://github.com/boot1110001/fastmind",
