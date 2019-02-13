@@ -53,7 +53,7 @@ class GL(default):
     menu_levels =       " NIVEIS "
     menu_credits =      " CRÉDITOS "
     menu_config =       " CONFIG "
-    menu_exit =         " SAIR  "
+    menu_exit =         " SAIR "
 
     result_txt =        "META!! Conseguido en:"
     result_seconds =    "s"
