@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#main
+#start.__init__
 #by boot1110001
 
 ### IMPORTS ####################################################################
@@ -245,7 +244,9 @@ def print_file_vars():
     print("[INFO] lvls_folder = '"+lvls_folder+"'")
 
 ### MAIN #######################################################################
+# def main(argv):
 def main(argv):
+    # argv = '' # temporal
     global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
 
     try:

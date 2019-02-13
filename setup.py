@@ -44,6 +44,7 @@ setup(
 
     data_files=[
         ('', [
+            'fastmind.py',
             'version.txt'
         ]),
         ('lvls', [
