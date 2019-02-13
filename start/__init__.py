@@ -245,8 +245,10 @@ def print_file_vars():
 
 ### MAIN #######################################################################
 # def main(argv):
-def main(argv):
-    # argv = '' # temporal
+# READ: https://stackoverflow.com/questions/2853088/setuptools-not-passing-arguments-for-entry-points
+# READ: https://docs.python.org/3/library/optparse.html
+def main():
+    argv = '' # temporal
     global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
 
     try:
