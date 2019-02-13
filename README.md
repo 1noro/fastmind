@@ -73,7 +73,7 @@ python3 fastmind.py
 
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `bash linux-run.sh` for __GNU/Linux__ and `win-run.bat` for __Windows__.
+- Execute the following command: `python3 fastmind.py`.
 
 ### Run options
 
