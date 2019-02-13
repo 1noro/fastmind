@@ -5,6 +5,7 @@
 import sys, os, re
 import getopt
 from datetime import datetime
+from optparse import OptionParser
 # To not show the default message of pygame import
 import contextlib
 with contextlib.redirect_stdout(None):
@@ -251,32 +252,76 @@ def main():
     width, height = pxscope, pxscope # window size
 
     # --- Parameters -----------------------------------------------------------
-    try:
-        opts, args = getopt.getopt(argv, "hvl:p:s", ["help","verbose","lang=","play=","show"])
-    except getopt.GetoptError:
-        print(hstr)
-        sys.exit(2)
 
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            print(hstr)
-            sys.exit()
-        elif opt in ("-v", "--verbose"):
-            verbose = True
-        elif opt in ("-l", "--lang"):
-            set_lang(arg)
-        elif opt in ("-p", "--play"):
-            lvname = arg+".lv"
-            display_state = 1
-            if not (lvname in lvlist):
-                print(lang.select_level_fail)
-                cf.print_level_list(lvlist)
-                sys.exit()
-            play_level(lvname)
-        elif opt in ("-s", "--show"):
-            print(lang.level_list_msg)
+    parser = OptionParser()
+    parser.add_option(
+        "-v", "--verbose", dest="verbose",
+        action="store_true", default=False,
+        help="print status messages to stdout.")
+    parser.add_option(
+        "-l", "--lang", dest="lang",
+        help="changes the default language."
+    )
+    parser.add_option(
+        "-p", "--play", dest="lvshortname",
+        help="play the instantly."
+    )
+    parser.add_option(
+        "-s", "--show", dest="show_level_list",
+        action="store_true", default=False,
+        help="show the available levels.")
+
+    (options, args) = parser.parse_args()
+
+    # --- Verbose
+    verbose = options.verbose
+
+    # --- Language
+    if options.lang:
+        set_lang(options.lang)
+
+    # --- Play instantly
+    if options.lvshortname:
+        lvname = options.lvshortname+".lv"
+        display_state = 1
+        if not (lvname in lvlist):
+            print(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
+        play_level(lvname)
+
+    # --- Show level-list
+    if  options.show_level_list:
+        print(lang.level_list_msg)
+        cf.print_level_list(lvlist)
+        sys.exit()
+
+    # try:
+    #     opts, args = getopt.getopt(argv, "hvl:p:s", ["help","verbose","lang=","play=","show"])
+    # except getopt.GetoptError:
+    #     print(hstr)
+    #     sys.exit(2)
+    #
+    # for opt, arg in opts:
+    #     if opt in ("-h", "--help"):
+    #         print(hstr)
+    #         sys.exit()
+    #     elif opt in ("-v", "--verbose"):
+    #         verbose = True
+    #     elif opt in ("-l", "--lang"):
+    #         set_lang(arg)
+    #     elif opt in ("-p", "--play"):
+    #         lvname = arg+".lv"
+    #         display_state = 1
+    #         if not (lvname in lvlist):
+    #             print(lang.select_level_fail)
+    #             cf.print_level_list(lvlist)
+    #             sys.exit()
+    #         play_level(lvname)
+    #     elif opt in ("-s", "--show"):
+    #         print(lang.level_list_msg)
+    #         cf.print_level_list(lvlist)
+    #         sys.exit()
 
     # --- Post-parameters ------------------------------------------------------
     if verbose: print_file_vars()
