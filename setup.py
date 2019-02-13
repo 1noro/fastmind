@@ -9,7 +9,7 @@ setup(
     name="fastmind",
 
     # Version number (initial):
-    version=open("fmind/version.txt").read().replace('\n',''),
+    version=open("version.txt").read().replace('\n',''),
 
     # Application author details:
     author="boot1110001",
@@ -43,16 +43,17 @@ setup(
     ],
 
     data_files=[
-        ('fmind', [
-            'fmind/version.txt',
-            'fmind/node.ttf',
-            'fmind/icon.ico'
+        ('', [
+            'fastmind',
+            'version.txt',
+            'node.ttf',
+            'icon.ico'
         ]),
-        ('fmind/lvls', [
-            'fmind/lvls/0.lv',
-            'fmind/lvls/1.lv',
-            'fmind/lvls/2.lv',
-            'fmind/lvls/3.lv'
+        ('lvls', [
+            'lvls/0.lv',
+            'lvls/1.lv',
+            'lvls/2.lv',
+            'lvls/3.lv'
         ])
     ],
 
@@ -60,7 +61,7 @@ setup(
         "console_scripts": [
             # 'sample=sample:main',
             # "fastmind=fmind:main"
-            "fastmind=fmind"
+            "fastmind"
         ]
     },
 

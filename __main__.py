@@ -45,26 +45,26 @@ psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.ver
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
-pkg_folder = 'fmind'
+# pkg_folder = 'fmind'
 version_file = 'version.txt'
 icon_file = 'icon.ico'
 font_file = 'node.ttf'
 lvls_folder = 'lvls'
 
-if platform.system() == 'Linux': # GNU/Linux
-    if not os.path.isfile(version_file): version_file = home+'/.local/'+pkg_folder+'/'+version_file
-    # if not os.path.isfile(version_file): version_file = '/usr/local/lib/python'+psv+'/dist-packages'+pkg_folder+'/'+version_file
-
-    if not os.path.isfile(icon_file): icon_file = home+'/.local/'+pkg_folder+'/'+icon_file
-    if not os.path.isfile(font_file): font_file = home+'/.local/'+pkg_folder+'/'+font_file
-    if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'/.local/'+pkg_folder+'/'+lvls_folder
-elif platform.system() == 'Windows': # Microsoft Windows
-    if not os.path.isfile(version_file): version_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+version_file
-    if not os.path.isfile(icon_file): icon_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+icon_file
-    if not os.path.isfile(font_file): font_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+font_file
-    if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+lvls_folder
-elif platform.system() == 'Darwin': # Mac OS
-    pass
+# if platform.system() == 'Linux': # GNU/Linux
+#     if not os.path.isfile(version_file): version_file = home+'/.local/'+pkg_folder+'/'+version_file
+#     # if not os.path.isfile(version_file): version_file = '/usr/local/lib/python'+psv+'/dist-packages'+pkg_folder+'/'+version_file
+#
+#     if not os.path.isfile(icon_file): icon_file = home+'/.local/'+pkg_folder+'/'+icon_file
+#     if not os.path.isfile(font_file): font_file = home+'/.local/'+pkg_folder+'/'+font_file
+#     if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'/.local/'+pkg_folder+'/'+lvls_folder
+# elif platform.system() == 'Windows': # Microsoft Windows
+#     if not os.path.isfile(version_file): version_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+version_file
+#     if not os.path.isfile(icon_file): icon_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+icon_file
+#     if not os.path.isfile(font_file): font_file = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+font_file
+#     if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'\\AppData\\Roaming\\Python\\'+pkg_folder+'\\'+lvls_folder
+# elif platform.system() == 'Darwin': # Mac OS
+#     pass
 
 # --- Version
 version = ""
@@ -238,7 +238,7 @@ def set_lang(str):
         print("[FAIL] '"+str+"' "+lang.set_lang_error)
 
 def print_file_vars():
-    print("[INFO] pkg_folder = '"+pkg_folder+"'")
+    # print("[INFO] pkg_folder = '"+pkg_folder+"'")
     print("[INFO] version_file = '"+version_file+"'")
     print("[INFO] icon_file = '"+icon_file+"'")
     print("[INFO] font_file = '"+font_file+"'")
