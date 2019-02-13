@@ -1,4 +1,4 @@
 @echo off
 cd fmind
-python fastmind.py %*
+python __init__.py %*
 cd ..

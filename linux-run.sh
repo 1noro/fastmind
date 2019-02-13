@@ -1,3 +1,3 @@
 #!/bin/bash
 cd fmind
-python3 fastmind.py "$@"
+python3 __init__.py "$@"

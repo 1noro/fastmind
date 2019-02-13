@@ -17,13 +17,14 @@ setup(
     keywords="solve-mazes game libre-software mazes labyrinth labyrinth-game 2d-game minimalist pygame",
 
     # Packages
-    packages=[
-        "fmind",
-        "fmind.core",
-        "fmind.graphic",
-        "fmind.graphic.elements",
-        "fmind.languages"
-    ],
+    # packages=[
+    #     "fmind",
+    #     "fmind.core",
+    #     "fmind.graphic",
+    #     "fmind.graphic.elements",
+    #     "fmind.languages"
+    # ],
+    packages=find_packages(),
 
     python_requires=">=3.5",
 
@@ -57,7 +58,8 @@ setup(
 
     entry_points={  # Optional
         "console_scripts": [
-            #'sample=sample:main',
+            # 'sample=sample:main',
+            # "fastmind=fmind:main"
             "fastmind=fmind"
         ]
     },
