@@ -227,9 +227,6 @@ def print_file_vars():
     print("[INFO] lvls_folder = '"+lvls_folder+"'")
 
 ### MAIN #######################################################################
-# def main(argv):
-# READ: https://stackoverflow.com/questions/2853088/setuptools-not-passing-arguments-for-entry-points
-# READ: https://docs.python.org/3/library/optparse.html
 def main():
     argv = '' # temporal
     global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
@@ -252,7 +249,6 @@ def main():
     width, height = pxscope, pxscope # window size
 
     # --- Parameters -----------------------------------------------------------
-
     parser = OptionParser()
     parser.add_option(
         "-v", "--verbose", dest="verbose",
@@ -295,33 +291,6 @@ def main():
         print(lang.level_list_msg)
         cf.print_level_list(lvlist)
         sys.exit()
-
-    # try:
-    #     opts, args = getopt.getopt(argv, "hvl:p:s", ["help","verbose","lang=","play=","show"])
-    # except getopt.GetoptError:
-    #     print(hstr)
-    #     sys.exit(2)
-    #
-    # for opt, arg in opts:
-    #     if opt in ("-h", "--help"):
-    #         print(hstr)
-    #         sys.exit()
-    #     elif opt in ("-v", "--verbose"):
-    #         verbose = True
-    #     elif opt in ("-l", "--lang"):
-    #         set_lang(arg)
-    #     elif opt in ("-p", "--play"):
-    #         lvname = arg+".lv"
-    #         display_state = 1
-    #         if not (lvname in lvlist):
-    #             print(lang.select_level_fail)
-    #             cf.print_level_list(lvlist)
-    #             sys.exit()
-    #         play_level(lvname)
-    #     elif opt in ("-s", "--show"):
-    #         print(lang.level_list_msg)
-    #         cf.print_level_list(lvlist)
-    #         sys.exit()
 
     # --- Post-parameters ------------------------------------------------------
     if verbose: print_file_vars()
@@ -437,7 +406,3 @@ def main():
 
     # Close everything down
     pygame.quit()
-
-### EXEC #######################################################################
-# if __name__ == "__main__":
-#     main(sys.argv[1:])
