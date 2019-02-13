@@ -44,7 +44,8 @@ setup(
             'lvls/0.lv',
             'lvls/1.lv',
             'lvls/2.lv',
-            'lvls/3.lv'
+            'lvls/3.lv',
+            'lvls/4.lv'
         ]),
         ('media', [
             'media/icon.ico',
@@ -55,7 +56,7 @@ setup(
     entry_points={  # Optional
         "console_scripts": [
             # 'sample=sample:main',
-            "fastmind=start:main"
+            "fastmind=core:main"
         ]
     },
 
