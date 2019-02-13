@@ -44,7 +44,8 @@ setup(
 
     data_files=[
         ('', [
-            'fastmind',
+            'fastmind.py',
+            '__init__.py',
             'version.txt',
             'node.ttf',
             'icon.ico'
@@ -61,7 +62,7 @@ setup(
         "console_scripts": [
             # 'sample=sample:main',
             # "fastmind=fmind:main"
-            "fastmind"
+            "fastmind=fastmind"
         ]
     },
 

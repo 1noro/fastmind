@@ -5,7 +5,7 @@
 ### IMPORTS ####################################################################
 import sys, os, re
 import getopt
-import platform
+# import platform
 from datetime import datetime
 # To not show the default message of pygame import
 import contextlib
@@ -47,8 +47,8 @@ psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.ver
 # --- Files and folders
 # pkg_folder = 'fmind'
 version_file = 'version.txt'
-icon_file = 'icon.ico'
-font_file = 'node.ttf'
+icon_file = 'media/icons/icon.ico'
+font_file = 'media/font/ttf/node.ttf'
 lvls_folder = 'lvls'
 
 # if platform.system() == 'Linux': # GNU/Linux
