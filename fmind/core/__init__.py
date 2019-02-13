@@ -1,2 +1,2 @@
-#package bin.core __init__
+#package fmind.core __init__
 #by boot1110001
