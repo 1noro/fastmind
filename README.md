@@ -66,19 +66,7 @@ Currently the project is at a very early stage of its development (_alpha_), you
 ```
 git clone https://github.com/boot1110001/fastmind
 cd fastmind
-```
-
-#### GNU/Linux
-
-```
-chmod u+x linux-run.sh
-./linux-run.sh
-```
-
-#### Windows
-
-```
-win-run.bat
+python3 fastmind.py
 ```
 
 ### Getting a .zip or a .tar.gz file from GitHub
@@ -88,6 +76,8 @@ win-run.bat
 - Execute the following command: `bash linux-run.sh` for __GNU/Linux__ and `win-run.bat` for __Windows__.
 
 ### Run options
+
+> At this time they do not work.
 
 ```
  -h			--help			Show this help.
