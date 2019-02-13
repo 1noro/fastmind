@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-#fastmind
+#main
 #by boot1110001
 
 ### IMPORTS ####################################################################
-import sys
+import sys, os, re
 import getopt
-import re
-import os
 import platform
 from datetime import datetime
 # To not show the default message of pygame import
@@ -42,6 +40,8 @@ cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
 home = os.path.expanduser("~")
+psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
+
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
@@ -53,6 +53,8 @@ lvls_folder = 'lvls'
 
 if platform.system() == 'Linux': # GNU/Linux
     if not os.path.isfile(version_file): version_file = home+'/.local/'+pkg_folder+'/'+version_file
+    # if not os.path.isfile(version_file): version_file = '/usr/local/lib/python'+psv+'/dist-packages'+pkg_folder+'/'+version_file
+
     if not os.path.isfile(icon_file): icon_file = home+'/.local/'+pkg_folder+'/'+icon_file
     if not os.path.isfile(font_file): font_file = home+'/.local/'+pkg_folder+'/'+font_file
     if not os.path.isfile(lvls_folder+'/0.lv'): lvls_folder = home+'/.local/'+pkg_folder+'/'+lvls_folder

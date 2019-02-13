@@ -1,4 +1,4 @@
 @echo off
 cd fmind
-python main.py %*
+python fastmind.py %*
 cd ..
