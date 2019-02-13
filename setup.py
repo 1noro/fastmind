@@ -44,17 +44,17 @@ setup(
 
     data_files=[
         ('', [
-            'fastmind.py',
-            '__init__.py',
-            'version.txt',
-            'node.ttf',
-            'icon.ico'
+            'version.txt'
         ]),
         ('lvls', [
             'lvls/0.lv',
             'lvls/1.lv',
             'lvls/2.lv',
             'lvls/3.lv'
+        ]),
+        ('media', [
+            'media/icon.ico',
+            'media/node.ttf'
         ])
     ],
 
@@ -62,7 +62,7 @@ setup(
         "console_scripts": [
             # 'sample=sample:main',
             # "fastmind=fmind:main"
-            "fastmind=fastmind"
+            "fastmind=start:main"
         ]
     },
 
