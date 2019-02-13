@@ -260,7 +260,7 @@ def main():
     )
     parser.add_option(
         "-p", "--play", dest="lvshortname",
-        help="play the instantly."
+        help="play the LEVEL instantly.", metavar="LEVEL"
     )
     parser.add_option(
         "-s", "--show", dest="show_level_list",
