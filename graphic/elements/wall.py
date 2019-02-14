@@ -1,4 +1,4 @@
-#bin.graphic.elements.wall
+#graphic.elements.wall
 #by boot1110001
 
 ### IMPORTS ####################################################################

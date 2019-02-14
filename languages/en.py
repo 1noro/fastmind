@@ -1,4 +1,4 @@
-#package bin.languages.english __init__
+#package languages.en
 #by boot1110001
 
 ### CLASSES ####################################################################

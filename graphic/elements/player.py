@@ -1,4 +1,4 @@
-#bin.graphic.elements.player
+#graphic.elements.player
 #by boot1110001
 
 ### IMPORTS ####################################################################

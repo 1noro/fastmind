@@ -1,4 +1,4 @@
-#package bin.languages.spanish __init__
+#package languages.es
 #by boot1110001
 
 ### IMPORTS ####################################################################

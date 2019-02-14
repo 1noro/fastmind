@@ -1,4 +1,4 @@
-#package fmind.languages __init__
+#package languages __init__
 #by boot1110001
 
 ### IMPORTS ####################################################################

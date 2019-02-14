@@ -1,4 +1,4 @@
-#bin.graphic.elements.rectangle
+#graphic.elements.rectangle
 #by boot1110001
 
 ### IMPORTS ####################################################################
