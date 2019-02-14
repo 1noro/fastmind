@@ -128,6 +128,9 @@ Created, programmed and maintained by [boot1110001](https://github.com/boot11100
 
 ## Licenses
 
+[![GPL3](https://img.shields.io/badge/license-GPL3-green.svg)](https://www.gnu.org/licenses/gpl.txt)
+[![CC BY 4.0](https://img.shields.io/badge/license-CC%20BY%204.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 - Project under the __[GNU General Public License version 3](https://www.gnu.org/licenses/gpl.txt)__.
 - The icons sets are under the __[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)__ (CC BY 4.0) license .
 
