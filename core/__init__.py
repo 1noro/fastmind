@@ -88,6 +88,7 @@ verbose = False
 hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
+# move into map class
 def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
     # Consider turning this into a class
     global wmap, womap, goal, player
