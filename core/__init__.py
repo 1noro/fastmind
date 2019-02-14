@@ -43,8 +43,8 @@ psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.ver
 # --- Files and folders
 main_pkg = 'core'
 version_file = 'version.txt'
-# icon_file = 'media/icon.ico'
-icon_file = 'media/icon.png'
+icon_file = 'media/icon.ico'
+# icon_file = 'media/icon.png'
 font_file = 'media/node.ttf'
 lvls_folder = 'lvls'
 
