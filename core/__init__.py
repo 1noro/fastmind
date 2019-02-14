@@ -62,7 +62,7 @@ player = 0 # player object
 
 # --- Time control
 old_time = 0
-lvl_time = 0
+# lvl_time = 0
 
 # --- Window dimensions
 width = 0
@@ -88,14 +88,17 @@ verbose = False
 hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
-def checkvictory():
-    global victory, lvl_time
-    if (not victory and (player.x, player.y) == (goal.x, goal.y)):
+def checkvictory(map, victoryin, old_time, lang):
+    # global victory, lvl_time
+    victoryout = victoryin
+    lvl_time = 0
+    if (not victoryin and (map.player.x, map.player.y) == (map.goal.x, map.goal.y)):
         new_time = datetime.now()
         lvl_time = new_time - old_time
         print('[INFO] '+lang.time_stopped_at, new_time)
         print('[GOAL] '+lang.you_pass_the_level_in, lvl_time)
-        victory = True
+        victoryout = True
+    return (victoryout, lvl_time)
 
 def ongamekey(event, map):
     xcell, ycell = player.xcell, player.ycell
@@ -152,7 +155,7 @@ def onlevelkey(event):
         if verbose : print('[RIGH] lselect = '+str(lselect))
 
 def reset_level():
-    global victory, wmap, womap, goal, player, old_time, lvl_time
+    global victory, wmap, womap, goal, player, old_time
 
     victory = False
 
@@ -164,7 +167,7 @@ def reset_level():
 
     # --- Time control ---
     old_time = 0
-    lvl_time = 0
+    #lvl_time = 0
 
 def play_level(lvname):
     global old_time, wmap, womap, goal, player # temporal
@@ -362,7 +365,7 @@ def main():
                 ]
             )
         elif (display_state == 1):
-            checkvictory()
+            if not victory: victory, lvl_time = checkvictory(map, victory, old_time, lang)
             displays.displaygame(
                 screen, womap, goal, player, victory,
                 stdsize, width, height, lvl_time, font_file,
