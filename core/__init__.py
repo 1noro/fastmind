@@ -50,10 +50,6 @@ lvls_folder = 'lvls'
 version = ""
 shortversion = ""
 
-# --- Window dimensions
-width = 0
-height = 0
-
 # --- State control
 # 0 - menu
 # 1 - game
@@ -61,17 +57,11 @@ height = 0
 # 3 - credits
 display_state = 0
 
-mselect = 0
-mmaxselect = 4
-
-lselect = 0
-lmaxselect = 0
-
 # --- Run options
 verbose = False
 
 ### FUNCTIONS ##################################################################
-def ongamekey(event, map):
+def ongamekey(event, map, lang):
     xcell, ycell = map.player.xcell, map.player.ycell
     _xcell, _ycell = xcell, ycell
     if (event.key == pygame.K_UP):
@@ -103,8 +93,7 @@ def ongamekey(event, map):
             map.move_left()
             if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
-def onmenukey(event):
-    global mselect
+def onmenukey(event, mselect, mmaxselect):
     if (event.key == pygame.K_UP):
         mselect = mselect - 1
         if mselect < 0: mselect = mmaxselect
@@ -113,9 +102,9 @@ def onmenukey(event):
         mselect = mselect + 1
         if mselect > mmaxselect: mselect=0
         if verbose : print('[DOWN] mselect = '+str(mselect))
+    return mselect
 
-def onlevelkey(event):
-    global lselect
+def onlevelkey(event, lselect, lmaxselect):
     if (event.key == pygame.K_LEFT):
         lselect-=1
         if lselect < 0: lselect = lmaxselect
@@ -124,8 +113,9 @@ def onlevelkey(event):
         lselect+=1
         if lselect > lmaxselect: lselect = 0
         if verbose : print('[RIGH] lselect = '+str(lselect))
+    return lselect
 
-def play_level(lvname):
+def play_level(lvname, width, height):
     victory = False
     old_time = datetime.now()
     map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
@@ -156,10 +146,15 @@ def print_file_vars():
 ### MAIN #######################################################################
 def main():
     # --- GLOBAL VARIABLES -----------------------------------------------------
-    global lvlist, width, height, verbose, lmaxselect, version, shortversion, display_state
+    global lvlist, verbose, lmaxselect, version, shortversion, display_state
 
     # --- MAIN VARIABLES -------------------------------------------------------
     width, height = pxscope, pxscope # window size
+
+    mselect = 0
+    mmaxselect = 4
+    lselect = 0
+    lmaxselect = 0
 
     # --- game variables
     map = 0
@@ -219,7 +214,7 @@ def main():
             print(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
-        plout = play_level(lvname)
+        plout = play_level(lvname, width, height)
         map = plout[0]
         old_time = plout[1]
         victory = plout[2]
@@ -261,7 +256,7 @@ def main():
                         if (mselect == 0):
                             print('[ENTR] '+lang.play_level)
                             display_state = 1
-                            plout = play_level(lvname)
+                            plout = play_level(lvname, width, height)
                             map = plout[0]
                             old_time = plout[1]
                             victory = plout[2]
@@ -281,7 +276,7 @@ def main():
                             print('[ENTR] '+lang.nothing)
                             pass
                     else:
-                        onmenukey(event)
+                        mselect = onmenukey(event, mselect, mmaxselect)
             elif (display_state == 1): # on game
                 if not victory:
                     if event.type == pygame.KEYDOWN:
@@ -289,7 +284,7 @@ def main():
                             print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
-                            ongamekey(event, map)
+                            ongamekey(event, map, lang)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
@@ -304,12 +299,12 @@ def main():
                         print('[ENTR] '+lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
-                        plout = play_level(lvname)
+                        plout = play_level(lvname, width, height)
                         map = plout[0]
                         old_time = plout[1]
                         victory = plout[2]
                     else:
-                        onlevelkey(event)
+                        lselect = onlevelkey(event, lselect, lmaxselect)
         # --- Logic
         # --- Drawing
         if (display_state == 0):
