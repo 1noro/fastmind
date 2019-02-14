@@ -149,7 +149,7 @@ def main():
         cf.print_level_list(lvlist)
         sys.exit()
 
-    # --- Post-parameters ------------------------------------------------------
+    # --- Post-options parameters ----------------------------------------------
     if verbose: cf.print_file_vars(version_file, icon_file, font_file, lvls_folder)
 
     # --- PYGAME INIT ----------------------------------------------------------
