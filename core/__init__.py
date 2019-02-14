@@ -167,7 +167,7 @@ def main():
 
     # -------- Main Program Loop -----------------------------------------------
     while not done:
-        # --- Event Processing
+        # --- Event Processing & logic
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -229,7 +229,6 @@ def main():
                         victory = plout[2]
                     else:
                         lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
-        # --- Logic
         # --- Drawing
         if (display_state == 0):
             displays.displaymenu(
