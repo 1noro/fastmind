@@ -106,7 +106,7 @@ Options:
   -s, --show            show the available levels.
 ```
 
-### Languages avaliable
+## Languages avaliable
 
 - __en.EN__ English (UK).
 - __es.ES__ Spanish (Spain).
