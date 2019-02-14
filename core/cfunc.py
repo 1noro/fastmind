@@ -21,10 +21,3 @@ def print_level_list(lvlist):
 
 def draw_map(womap, screen):
     for o in womap: o.draw(screen)
-
-def checkmove(x, y, wmap, verbose, txt):
-    out=True
-    if ([x,y] in wmap):
-        if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') '+txt)
-        out=False
-    return out

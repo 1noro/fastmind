@@ -12,11 +12,14 @@ with contextlib.redirect_stdout(None):
     import pygame
 
 import core
-from core import cfunc as cf
+from core import key
 from core.map import Map
+from core import cfunc as cf
+
 import graphic
 from graphic import color
 from graphic import displays
+
 import languages
 from languages import *
 
@@ -61,60 +64,6 @@ display_state = 0
 verbose = False
 
 ### FUNCTIONS ##################################################################
-def ongamekey(event, map, lang):
-    xcell, ycell = map.player.xcell, map.player.ycell
-    _xcell, _ycell = xcell, ycell
-    if (event.key == pygame.K_UP):
-        _ycell-=1
-        if (cf.checkmove(xcell, _ycell, map.wmap, verbose, lang.no_move_wall)):
-            map.player.move_up()
-            map.goal.move_down()
-            map.move_down()
-            if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_DOWN):
-        _ycell+=1
-        if (cf.checkmove(xcell, _ycell, map.wmap, verbose, lang.no_move_wall)):
-            map.player.move_down()
-            map.goal.move_up()
-            map.move_up()
-            if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_LEFT):
-        _xcell-=1
-        if (cf.checkmove(_xcell, ycell, map.wmap, verbose, lang.no_move_wall)):
-            map.player.move_left()
-            map.goal.move_right()
-            map.move_right()
-            if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_RIGHT):
-        _xcell+=1
-        if (cf.checkmove(_xcell, ycell, map.wmap, verbose, lang.no_move_wall)):
-            map.player.move_right()
-            map.goal.move_left()
-            map.move_left()
-            if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
-
-def onmenukey(event, mselect, mmaxselect):
-    if (event.key == pygame.K_UP):
-        mselect = mselect - 1
-        if mselect < 0: mselect = mmaxselect
-        if verbose : print('[ UP ] mselect = '+str(mselect))
-    elif (event.key == pygame.K_DOWN):
-        mselect = mselect + 1
-        if mselect > mmaxselect: mselect=0
-        if verbose : print('[DOWN] mselect = '+str(mselect))
-    return mselect
-
-def onlevelkey(event, lselect, lmaxselect):
-    if (event.key == pygame.K_LEFT):
-        lselect-=1
-        if lselect < 0: lselect = lmaxselect
-        if verbose : print('[LEFT] lselect = '+str(lselect))
-    elif (event.key == pygame.K_RIGHT):
-        lselect+=1
-        if lselect > lmaxselect: lselect = 0
-        if verbose : print('[RIGH] lselect = '+str(lselect))
-    return lselect
-
 def play_level(lvname, width, height):
     victory = False
     old_time = datetime.now()
@@ -276,7 +225,7 @@ def main():
                             print('[ENTR] '+lang.nothing)
                             pass
                     else:
-                        mselect = onmenukey(event, mselect, mmaxselect)
+                        mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
             elif (display_state == 1): # on game
                 if not victory:
                     if event.type == pygame.KEYDOWN:
@@ -284,7 +233,7 @@ def main():
                             print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
-                            ongamekey(event, map, lang)
+                            key.ongamekey(event, map, lang, verbose)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
@@ -304,7 +253,7 @@ def main():
                         old_time = plout[1]
                         victory = plout[2]
                     else:
-                        lselect = onlevelkey(event, lselect, lmaxselect)
+                        lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
         # --- Logic
         # --- Drawing
         if (display_state == 0):

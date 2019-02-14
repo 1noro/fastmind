@@ -93,6 +93,13 @@ class Map:
     def move_down(self):
         for o in self.womap: o.move_down()
 
+    def checkmove(self, x, y, verbose, lang):
+        out=True
+        if ([x,y] in self.wmap):
+            if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') '+lang.no_move_wall)
+            out=False
+        return out
+
     def checkvictory(self, victoryin, old_time, lang):
         victoryout = victoryin
         lvl_time = 0
