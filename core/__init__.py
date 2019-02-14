@@ -17,9 +17,6 @@ from core.map import Map
 import graphic
 from graphic import color
 from graphic import displays
-# from graphic.elements.wall import Wall
-# from graphic.elements.goal import Goal
-# from graphic.elements.player import Player
 import languages
 from languages import *
 
@@ -53,16 +50,8 @@ lvls_folder = 'lvls'
 version = ""
 shortversion = ""
 
-# --- Level atributes
-# lvlist = [] # level file list
-# wmap = [] # wall list
-# womap = [] # wall object list
-# goal = 0 # goal object
-# player = 0 # player object
-
 # --- Time control
 old_time = 0
-# lvl_time = 0
 
 # --- Window dimensions
 width = 0
@@ -142,35 +131,12 @@ def onlevelkey(event):
         if lselect > lmaxselect: lselect = 0
         if verbose : print('[RIGH] lselect = '+str(lselect))
 
-# def reset_level():
-#     global victory, wmap, womap, goal, player, old_time
-#
-#     victory = False
-#
-#     # --- Level atributes ---
-#     wmap = [] # wall list
-#     womap = [] # wall object list
-#     goal = 0 # goal object
-#     player = 0 # player object
-#
-#     # --- Time control ---
-#     old_time = 0
-#     #lvl_time = 0
-
 def play_level(lvname):
-    global old_time, victory #, wmap, womap, goal, player
+    global old_time, victory
 
-    # reset_level()
     victory = False
     old_time = datetime.now()
-
     map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
-
-    # wmap = map.wmap
-    # womap = map.womap
-    # goal = map.goal
-    # player = map.player
-
     print('[INFO] '+lang.playing+map.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
     return map

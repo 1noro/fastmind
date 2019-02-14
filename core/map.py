@@ -78,6 +78,9 @@ class Map:
             x=0
             y+=stdsize
 
+    def draw(self, screen):
+        for o in self.womap: o.draw(screen)
+
     def move_left(self):
         for o in self.womap: o.move_left()
 

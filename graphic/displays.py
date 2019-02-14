@@ -3,7 +3,6 @@
 
 ### IMPORTS ####################################################################
 import pygame
-from . import gfunc as gf
 
 ### FUNCTIONS ##################################################################
 def displaymenu(screen, width, stdsize, pxcenter, mselect, font_file, color1, color2, colorbg, names):
@@ -118,7 +117,7 @@ def displaygame(screen, map, victory, stdsize, width, height, lvl_time, font_fil
     # Set the screen background
     screen.fill(colorbg)
 
-    gf.draw_map(map.womap, screen)
+    map.draw(screen)
     map.goal.draw(screen)
     if not victory:
         map.player.draw(screen)
