@@ -34,13 +34,15 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 - Open a terminal and navigate to the folder where the content of the `.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `sudo python3 setup.py install` for __GNU/Linux__ or `python setup.py install` for __Windows__.
 
-## Requirements
+## Manual installation
+
+### Requirements
 
 The program uses the __pygame__ library for its full operation, so it is mandatory to install it on your computer before running the program.
 
 > For more questions, go to the official pygame website: https://www.pygame.org/wiki/GettingStarted
 
-### Generic Unix pygame installation
+#### Generic Unix pygame installation
 
 ```
 python3 -m pip install -U pygame --user
@@ -48,19 +50,19 @@ python3 -m pip install -U pygame --user
 
 > If you do not have pip installed for python3 in Debian/Ubuntu/Mint: `sudo apt-get install python3-pip`
 
-#### Another option for Debian/Ubuntu/Mint
+##### Another option for Debian/Ubuntu/Mint
 
 ```
 sudo apt-get install python3-pygame
 ```
 
-#### Another option for Fedora/Red Hat
+##### Another option for Fedora/Red Hat
 
 ```
 sudo yum install python3-pygame
 ```
 
-### Windows
+#### Windows
 
 Make sure you [__install python3.x__](https://www.python.org/downloads/windows/) with the _"Add python 3.x to PATH"_ option selected. This means that python, and pip will work for you from the command line.
 
@@ -68,13 +70,13 @@ Make sure you [__install python3.x__](https://www.python.org/downloads/windows/)
 python -m pip install -U pygame --user
 ```
 
-## Get and run the program :rocket:
+### Get and run the program :rocket:
 
 Currently the project is at a very early stage of its development (_alpha_), you can install it on your PC, but future versions may delete previous configurations in the program.
 
 > At the moment this program has not been tested in __Mac OS__, so I still can not specify whether it works or how to install it correctly.
 
-### Assuming you have git installed
+#### Assuming you have git installed
 
 ```
 git clone https://github.com/boot1110001/fastmind
@@ -82,25 +84,29 @@ cd fastmind
 python3 fastmind
 ```
 
-### Getting a .zip or a .tar.gz file from GitHub
+#### Getting a .zip or a .tar.gz file from GitHub
 
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `python3 fastmind`.
 
-### Run options
+## Run options
 
 > At this time they do not work.
 
 ```
- -h			--help			Show this help.
- -v			--verbose		Enables verbose mode.
- -l <lang_name>		--lang=<lang_name>	Change the language.
- -p <level_name>	--play=<level_name>	Play the level directly.
- -s			--show			Show the available levels.
+Usage: fastmind [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -v, --verbose         print status messages to stdout.
+  -l LANG, --lang=LANG  changes the default language.
+  -p LEVEL, --play=LEVEL
+                        play the LEVEL instantly.
+  -s, --show            show the available levels.
 ```
 
-#### Languages avaliable
+### Languages avaliable
 
 - __en.EN__ English (UK).
 - __es.ES__ Spanish (Spain).
