@@ -49,13 +49,13 @@ setup(
         ]),
         ('media', [
             'media/icon.ico',
+            'media/icon.png',
             'media/node.ttf'
         ])
     ],
 
     entry_points={  # Optional
         "console_scripts": [
-            # 'sample=sample:main',
             "fastmind=core:main"
         ]
     },
