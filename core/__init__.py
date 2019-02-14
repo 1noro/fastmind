@@ -13,7 +13,6 @@ with contextlib.redirect_stdout(None):
 
 import core
 from core import key
-from core.map import Map
 from core import cfunc as cf
 
 import graphic
@@ -39,29 +38,23 @@ pxscope = cellscope * stdsize
 cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
-home = os.path.expanduser("~")
 psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
 
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
+main_pkg = 'core'
 version_file = 'version.txt'
 icon_file = 'media/icon.ico'
 font_file = 'media/node.ttf'
 lvls_folder = 'lvls'
 
 ### FUNCTIONS ##################################################################
-def play_level(lvname, width, height):
-    victory = False
-    old_time = datetime.now()
-    map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
-    print('[INFO] '+lang.playing+map.lvrealname+' ('+lvname+')')
-    print('[INFO] '+lang.time_started_at, old_time)
-    return [map, old_time, victory]
+
 
 ### MAIN #######################################################################
 def main():
     # --- GLOBAL VARIABLES -----------------------------------------------------
-    global verbose, lang
+    global verbose, lang, version_file, icon_file, font_file, lvls_folder
 
     # --- MAIN VARIABLES -------------------------------------------------------
     width, height = pxscope, pxscope # window size
@@ -70,6 +63,13 @@ def main():
     mmaxselect = 4
     lselect = 0
     lmaxselect = 0
+
+    # --- file variables
+    rootpath = os.path.dirname(os.path.abspath(__file__)).replace(main_pkg,'')
+    version_file = rootpath+version_file
+    icon_file = rootpath+icon_file
+    font_file = rootpath+font_file
+    lvls_folder = rootpath+lvls_folder
 
     # --- game variables
     map = 0
@@ -138,7 +138,7 @@ def main():
             print(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
-        plout = play_level(lvname, width, height)
+        plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
         map = plout[0]
         old_time = plout[1]
         victory = plout[2]
@@ -180,7 +180,7 @@ def main():
                         if (mselect == 0):
                             print('[ENTR] '+lang.play_level)
                             display_state = 1
-                            plout = play_level(lvname, width, height)
+                            plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
                             map = plout[0]
                             old_time = plout[1]
                             victory = plout[2]
@@ -223,7 +223,7 @@ def main():
                         print('[ENTR] '+lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
-                        plout = play_level(lvname, width, height)
+                        plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
                         map = plout[0]
                         old_time = plout[1]
                         victory = plout[2]

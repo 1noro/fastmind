@@ -4,6 +4,9 @@
 ### IMPORTS ####################################################################
 from os import listdir
 from os.path import isfile, join
+from datetime import datetime
+
+from core.map import Map
 
 ### FUNCTIONS ##################################################################
 def get_lvls(dir):
@@ -27,3 +30,11 @@ def print_file_vars(version_file, icon_file, font_file, lvls_folder):
     print("[INFO] icon_file = '"+icon_file+"'")
     print("[INFO] font_file = '"+font_file+"'")
     print("[INFO] lvls_folder = '"+lvls_folder+"'")
+
+def play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder):
+    victory = False
+    old_time = datetime.now()
+    map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
+    print('[INFO] '+lang.playing+map.lvrealname+' ('+lvname+')')
+    print('[INFO] '+lang.time_started_at, old_time)
+    return [map, old_time, victory]
