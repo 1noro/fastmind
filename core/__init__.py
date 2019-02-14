@@ -50,9 +50,6 @@ lvls_folder = 'lvls'
 version = ""
 shortversion = ""
 
-# --- Time control
-# old_time = 0
-
 # --- Window dimensions
 width = 0
 height = 0
@@ -70,11 +67,8 @@ mmaxselect = 4
 lselect = 0
 lmaxselect = 0
 
-# victory = False
-
 # --- Run options
 verbose = False
-hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
 def ongamekey(event, map):
@@ -161,8 +155,23 @@ def print_file_vars():
 
 ### MAIN #######################################################################
 def main():
+    # --- GLOBAL VARIABLES -----------------------------------------------------
     global lvlist, width, height, verbose, lmaxselect, version, shortversion, display_state
 
+    # --- MAIN VARIABLES -------------------------------------------------------
+    width, height = pxscope, pxscope # window size
+
+    # --- game variables
+    map = 0
+    old_time = 0
+    victory = False
+
+    # --- level_list variables
+    lvlist = cf.get_lvls(lvls_folder)
+    lmaxselect = len(lvlist) - 1
+    lvname = '1.lv'
+
+    # --- version variables
     try:
         version = open(version_file, 'r').read().replace('\n','')
         patron = re.compile(r'(.*\..*\..*)\.')
@@ -173,16 +182,6 @@ def main():
     # --- CMD INIT -------------------------------------------------------------
     print(lang.wellcome_msg+version+")")
     print(lang.wellcome_info+pygame.version.ver+")")
-
-    lvlist = cf.get_lvls(lvls_folder)
-    lmaxselect = len(lvlist) - 1
-    lvname = '1.lv'
-
-    map = 0
-    old_time = 0
-    victory = False
-
-    width, height = pxscope, pxscope # window size
 
     # --- Parameters -----------------------------------------------------------
     parser = OptionParser()
