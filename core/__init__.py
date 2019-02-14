@@ -89,34 +89,33 @@ hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
 # move into map class
-def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
-    # Consider turning this into a class
-    global wmap, womap, goal, player
-
-    xcellgap = cellcenter - startx
-    ycellgap = cellcenter - starty
-    xgap = int((xcellgap * width) / (width / stdsize))
-    ygap = int((ycellgap * height) / (height / stdsize))
-
-    maxx = stdsize * lw
-    maxy = stdsize * lh
-    x = y = i = 0
-
-    while (y < maxy):
-        while (x < maxx):
-            xcell = int((x * (width / stdsize)) / width) + 1
-            ycell = int((y * (height / stdsize)) / height) + 1
-            if (maplist[i] == '#'):
-                wmap.append([xcell, ycell])
-                womap.append(Wall(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.WALL))
-            elif (maplist[i] == '$'):
-                goal = Goal(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.GOAL)
-            elif (maplist[i] == '@'):
-                player = Player(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.PLAYER1, game_color_scheme.PLAYER2)
-            i+=1
-            x+=stdsize
-        x=0
-        y+=stdsize
+# def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
+#     global wmap, womap, goal, player
+#
+#     xcellgap = cellcenter - startx
+#     ycellgap = cellcenter - starty
+#     xgap = int((xcellgap * width) / (width / stdsize))
+#     ygap = int((ycellgap * height) / (height / stdsize))
+#
+#     maxx = stdsize * lw
+#     maxy = stdsize * lh
+#     x = y = i = 0
+#
+#     while (y < maxy):
+#         while (x < maxx):
+#             xcell = int((x * (width / stdsize)) / width) + 1
+#             ycell = int((y * (height / stdsize)) / height) + 1
+#             if (maplist[i] == '#'):
+#                 wmap.append([xcell, ycell])
+#                 womap.append(Wall(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.WALL))
+#             elif (maplist[i] == '$'):
+#                 goal = Goal(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.GOAL)
+#             elif (maplist[i] == '@'):
+#                 player = Player(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.PLAYER1, game_color_scheme.PLAYER2)
+#             i+=1
+#             x+=stdsize
+#         x=0
+#         y+=stdsize
 
 def checkvictory():
     global victory, lvl_time
@@ -197,13 +196,19 @@ def reset_level():
     lvl_time = 0
 
 def play_level(lvname):
-    global old_time
+    global old_time, wmap, womap, goal, player # temporal
 
     reset_level()
     old_time = datetime.now()
 
-    m = Map(open(lvls_folder+'/'+lvname, 'r').read())
-    pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
+    m = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
+    # pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
+
+    wmap = m.wmap
+    womap = m.womap
+    goal = m.goal
+    player = m.player
+
     print('[INFO] '+lang.playing+m.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
 

@@ -2,10 +2,13 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
+from graphic.elements.wall import Wall
+from graphic.elements.goal import Goal
+from graphic.elements.player import Player
 
 ### CLASSES ####################################################################
 class Map:
-    def __init__(self, str):
+    def __init__(self, str, stdsize, cellcenter, width, height, game_color_scheme):
         self.str=str
 
         lv_info=str.split('\n', 1)[0].split('::')
@@ -42,6 +45,37 @@ class Map:
 
         self.startx = x
         self.starty = y
+
+        # --- pre_draw_map -----------------------------------------------------
+        self.wmap = [] # wall list
+        self.womap = [] # wall object list
+        self.goal = 0 # goal object
+        self.player = 0 # player object
+
+        xcellgap = cellcenter - self.startx
+        ycellgap = cellcenter - self.starty
+        xgap = int((xcellgap * width) / (width / stdsize))
+        ygap = int((ycellgap * height) / (height / stdsize))
+
+        maxx = stdsize * self.lvwidth
+        maxy = stdsize * self.lvheight
+        x = y = i = 0
+
+        while (y < maxy):
+            while (x < maxx):
+                xcell = int((x * (width / stdsize)) / width) + 1
+                ycell = int((y * (height / stdsize)) / height) + 1
+                if (self.maplist[i] == '#'):
+                    self.wmap.append([xcell, ycell])
+                    self.womap.append(Wall(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.WALL))
+                elif (self.maplist[i] == '$'):
+                    self.goal = Goal(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.GOAL)
+                elif (self.maplist[i] == '@'):
+                    self.player = Player(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.PLAYER1, game_color_scheme.PLAYER2)
+                i+=1
+                x+=stdsize
+            x=0
+            y+=stdsize
 
     def __eq__(self,other):
         out=False
