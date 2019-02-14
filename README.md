@@ -18,10 +18,21 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 
 </div>
 
-## Requirements
+## Easy installation :smile:
 
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![pygame 1.8.0](https://img.shields.io/badge/pygame-%3E1.8.0-blue.svg)](https://www.pygame.org/wiki/GettingStarted)
+
+> If you use __Windows__, you must previously [__install python3.x__](https://www.python.org/downloads/windows/) on your PC.
+
+> In some distributions of __GNU/Linux__ PIP for python3 is not installed by default in the system. If you have this problem run: `sudo apt-get install python3-pip` (for Debian/Ubuntu/Mint).
+
+- Get the latest release, [.zip](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.zip) or [.tar.gz](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.tar.gz).
+- Extract the `.zip/.tar.gz` in the current folder.
+- Open a terminal and navigate to the folder where the content of the `.zip/.tar.gz` has been extracted (using the `cd` command).
+- Execute the following command: `sudo python3 setup.py install` for __GNU/Linux__ or `python setup.py install` for __Windows__.
+
+## Requirements
 
 The program uses the __pygame__ library for its full operation, so it is mandatory to install it on your computer before running the program.
 
@@ -66,14 +77,14 @@ Currently the project is at a very early stage of its development (_alpha_), you
 ```
 git clone https://github.com/boot1110001/fastmind
 cd fastmind
-python3 fastmind.py
+python3 fastmind
 ```
 
 ### Getting a .zip or a .tar.gz file from GitHub
 
 - Extract the `fastmind-x.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `python3 fastmind.py`.
+- Execute the following command: `python3 fastmind`.
 
 ### Run options
 
