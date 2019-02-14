@@ -12,19 +12,20 @@ with contextlib.redirect_stdout(None):
     import pygame
 
 import core
-from core import cfunc as cf
+from core import key
 from core.map import Map
+from core import cfunc as cf
+
 import graphic
 from graphic import color
 from graphic import displays
-from graphic.elements.wall import Wall
-from graphic.elements.goal import Goal
-from graphic.elements.player import Player
+
 import languages
 from languages import *
 
 ### EDITABLE VARIABLES #########################################################
 lang = en.EN
+verbose = False
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
@@ -41,7 +42,6 @@ pxcenter = (pxscope / 2) - (stdsize / 2)
 home = os.path.expanduser("~")
 psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
 
-
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
 version_file = 'version.txt'
@@ -49,188 +49,48 @@ icon_file = 'media/icon.ico'
 font_file = 'media/node.ttf'
 lvls_folder = 'lvls'
 
-# --- Version
-version = ""
-shortversion = ""
-
-# --- Level atributes
-lvlist = [] # level file list
-wmap = [] # wall list
-womap = [] # wall object list
-goal = 0 # goal object
-player = 0 # player object
-
-# --- Time control
-old_time = 0
-lvl_time = 0
-
-# --- Window dimensions
-width = 0
-height = 0
-
-# --- State control
-# 0 - menu
-# 1 - game
-# 2 - level menu
-# 3 - credits
-display_state = 0
-
-mselect = 0
-mmaxselect = 4
-
-lselect = 0
-lmaxselect = 0
-
-victory = False
-
-# --- Run options
-verbose = False
-hstr = lang.help_string
-
 ### FUNCTIONS ##################################################################
-def pre_draw_map(maplist, lw, lh, stdsize, startx, starty):
-    # Consider turning this into a class
-    global wmap, womap, goal, player
-
-    xcellgap = cellcenter - startx
-    ycellgap = cellcenter - starty
-    xgap = int((xcellgap * width) / (width / stdsize))
-    ygap = int((ycellgap * height) / (height / stdsize))
-
-    maxx = stdsize * lw
-    maxy = stdsize * lh
-    x = y = i = 0
-
-    while (y < maxy):
-        while (x < maxx):
-            xcell = int((x * (width / stdsize)) / width) + 1
-            ycell = int((y * (height / stdsize)) / height) + 1
-            if (maplist[i] == '#'):
-                wmap.append([xcell, ycell])
-                womap.append(Wall(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.WALL))
-            elif (maplist[i] == '$'):
-                goal = Goal(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.GOAL)
-            elif (maplist[i] == '@'):
-                player = Player(x+xgap, y+ygap, xcell, ycell, stdsize, game_color_scheme.PLAYER1, game_color_scheme.PLAYER2)
-            i+=1
-            x+=stdsize
-        x=0
-        y+=stdsize
-
-def checkvictory():
-    global victory, lvl_time
-    if (not victory and (player.x, player.y) == (goal.x, goal.y)):
-        new_time = datetime.now()
-        lvl_time = new_time - old_time
-        print('[INFO] '+lang.time_stopped_at, new_time)
-        print('[GOAL] '+lang.you_pass_the_level_in, lvl_time)
-        victory = True
-
-def ongamekey(event):
-    xcell, ycell = player.xcell, player.ycell
-    _xcell, _ycell = xcell, ycell
-    if (event.key == pygame.K_UP):
-        _ycell-=1
-        if (cf.checkmove(xcell, _ycell, wmap, verbose, lang.no_move_wall)):
-            player.move_up()
-            goal.move_down()
-            cf.move_map_down(womap)
-            if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_DOWN):
-        _ycell+=1
-        if (cf.checkmove(xcell, _ycell, wmap, verbose, lang.no_move_wall)):
-            player.move_down()
-            goal.move_up()
-            cf.move_map_up(womap)
-            if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_LEFT):
-        _xcell-=1
-        if (cf.checkmove(_xcell, ycell, wmap, verbose, lang.no_move_wall)):
-            player.move_left()
-            goal.move_right()
-            cf.move_map_right(womap)
-            if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_RIGHT):
-        _xcell+=1
-        if (cf.checkmove(_xcell, ycell, wmap, verbose, lang.no_move_wall)):
-            player.move_right()
-            goal.move_left()
-            cf.move_map_left(womap)
-            if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
-
-def onmenukey(event):
-    global mselect
-    if (event.key == pygame.K_UP):
-        mselect = mselect - 1
-        if mselect < 0: mselect = mmaxselect
-        if verbose : print('[ UP ] mselect = '+str(mselect))
-    elif (event.key == pygame.K_DOWN):
-        mselect = mselect + 1
-        if mselect > mmaxselect: mselect=0
-        if verbose : print('[DOWN] mselect = '+str(mselect))
-
-def onlevelkey(event):
-    global lselect
-    if (event.key == pygame.K_LEFT):
-        lselect-=1
-        if lselect < 0: lselect = lmaxselect
-        if verbose : print('[LEFT] lselect = '+str(lselect))
-    elif (event.key == pygame.K_RIGHT):
-        lselect+=1
-        if lselect > lmaxselect: lselect = 0
-        if verbose : print('[RIGH] lselect = '+str(lselect))
-
-def reset_level():
-    global victory, wmap, womap, goal, player, old_time, lvl_time
-
+def play_level(lvname, width, height):
     victory = False
-
-    # --- Level atributes ---
-    wmap = [] # wall list
-    womap = [] # wall object list
-    goal = 0 # goal object
-    player = 0 # player object
-
-    # --- Time control ---
-    old_time = 0
-    lvl_time = 0
-
-def play_level(lvname):
-    global old_time
-
-    reset_level()
     old_time = datetime.now()
-
-    m = Map(open(lvls_folder+'/'+lvname, 'r').read())
-    pre_draw_map(m.maplist, m.lvwidth, m.lvheight, stdsize, m.startx, m.starty) # Consider turning this into a class
-    print('[INFO] '+lang.playing+m.lvrealname+' ('+lvname+')')
+    map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
+    print('[INFO] '+lang.playing+map.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
-
-def set_lang(str):
-    global lang
-    if str == "en.EN":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = en.EN
-    elif str == "es.ES":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = es.ES
-    elif str == "es.GL":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = es.GL
-    else:
-        print("[FAIL] '"+str+"' "+lang.set_lang_error)
-
-def print_file_vars():
-    print("[INFO] version_file = '"+version_file+"'")
-    print("[INFO] icon_file = '"+icon_file+"'")
-    print("[INFO] font_file = '"+font_file+"'")
-    print("[INFO] lvls_folder = '"+lvls_folder+"'")
+    return [map, old_time, victory]
 
 ### MAIN #######################################################################
 def main():
-    argv = '' # temporal
-    global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
+    # --- GLOBAL VARIABLES -----------------------------------------------------
+    global verbose, lang
 
+    # --- MAIN VARIABLES -------------------------------------------------------
+    width, height = pxscope, pxscope # window size
+
+    mselect = 0
+    mmaxselect = 4
+    lselect = 0
+    lmaxselect = 0
+
+    # --- game variables
+    map = 0
+    old_time = 0
+    victory = False
+
+    # --- level_list variables
+    lvlist = cf.get_lvls(lvls_folder)
+    lmaxselect = len(lvlist) - 1
+    lvname = '1.lv'
+
+    # --- state control
+    # 0 - menu
+    # 1 - game
+    # 2 - level menu
+    # 3 - credits
+    display_state = 0
+
+    # --- version variables
+    version = ""
+    shortversion = ""
     try:
         version = open(version_file, 'r').read().replace('\n','')
         patron = re.compile(r'(.*\..*\..*)\.')
@@ -241,12 +101,6 @@ def main():
     # --- CMD INIT -------------------------------------------------------------
     print(lang.wellcome_msg+version+")")
     print(lang.wellcome_info+pygame.version.ver+")")
-
-    lvlist = cf.get_lvls(lvls_folder)
-    lmaxselect = len(lvlist) - 1
-    lvname = '1.lv'
-
-    width, height = pxscope, pxscope # window size
 
     # --- Parameters -----------------------------------------------------------
     parser = OptionParser()
@@ -274,7 +128,7 @@ def main():
 
     # --- Language
     if options.lang:
-        set_lang(options.lang)
+        lang = languages.set_lang(options.lang)
 
     # --- Play instantly
     if options.lvshortname:
@@ -284,7 +138,10 @@ def main():
             print(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
-        play_level(lvname)
+        plout = play_level(lvname, width, height)
+        map = plout[0]
+        old_time = plout[1]
+        victory = plout[2]
 
     # --- Show level-list
     if  options.show_level_list:
@@ -293,7 +150,7 @@ def main():
         sys.exit()
 
     # --- Post-parameters ------------------------------------------------------
-    if verbose: print_file_vars()
+    if verbose: cf.print_file_vars(version_file, icon_file, font_file, lvls_folder)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()
@@ -323,7 +180,10 @@ def main():
                         if (mselect == 0):
                             print('[ENTR] '+lang.play_level)
                             display_state = 1
-                            play_level(lvname)
+                            plout = play_level(lvname, width, height)
+                            map = plout[0]
+                            old_time = plout[1]
+                            victory = plout[2]
                         elif (mselect == 1):
                             print('[ENTR] '+lang.select_level)
                             display_state = 2
@@ -340,7 +200,7 @@ def main():
                             print('[ENTR] '+lang.nothing)
                             pass
                     else:
-                        onmenukey(event)
+                        mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
             elif (display_state == 1): # on game
                 if not victory:
                     if event.type == pygame.KEYDOWN:
@@ -348,7 +208,7 @@ def main():
                             print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
-                            ongamekey(event)
+                            key.ongamekey(event, map, lang, verbose)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
@@ -363,9 +223,12 @@ def main():
                         print('[ENTR] '+lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
-                        play_level(lvname)
+                        plout = play_level(lvname, width, height)
+                        map = plout[0]
+                        old_time = plout[1]
+                        victory = plout[2]
                     else:
-                        onlevelkey(event)
+                        lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
         # --- Logic
         # --- Drawing
         if (display_state == 0):
@@ -382,9 +245,9 @@ def main():
                 ]
             )
         elif (display_state == 1):
-            checkvictory()
+            if not victory: victory, lvl_time = map.checkvictory(victory, old_time, lang)
             displays.displaygame(
-                screen, womap, goal, player, victory,
+                screen, map, victory,
                 stdsize, width, height, lvl_time, font_file,
                 game_color_scheme.RESULT1,
                 game_color_scheme.RESULT2,

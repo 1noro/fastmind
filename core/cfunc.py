@@ -22,21 +22,8 @@ def print_level_list(lvlist):
 def draw_map(womap, screen):
     for o in womap: o.draw(screen)
 
-def move_map_left(womap):
-    for o in womap: o.move_left()
-
-def move_map_right(womap):
-    for o in womap: o.move_right()
-
-def move_map_up(womap):
-    for o in womap: o.move_up()
-
-def move_map_down(womap):
-    for o in womap: o.move_down()
-
-def checkmove(x, y, wmap, verbose, txt):
-    out=True
-    if ([x,y] in wmap):
-        if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') '+txt)
-        out=False
-    return out
+def print_file_vars(version_file, icon_file, font_file, lvls_folder):
+    print("[INFO] version_file = '"+version_file+"'")
+    print("[INFO] icon_file = '"+icon_file+"'")
+    print("[INFO] font_file = '"+font_file+"'")
+    print("[INFO] lvls_folder = '"+lvls_folder+"'")

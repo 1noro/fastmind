@@ -3,7 +3,6 @@
 
 ### IMPORTS ####################################################################
 import pygame
-from . import gfunc as gf
 
 ### FUNCTIONS ##################################################################
 def displaymenu(screen, width, stdsize, pxcenter, mselect, font_file, color1, color2, colorbg, names):
@@ -114,13 +113,13 @@ def print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt, 
     textrect.centery = screen.get_rect().centery+(stdsize/2)+2
     screen.blit(text, textrect)
 
-def displaygame(screen, womap, goal, player, victory, stdsize, width, height, lvl_time, font_file, color1, color2, colorbg, txt):
+def displaygame(screen, map, victory, stdsize, width, height, lvl_time, font_file, color1, color2, colorbg, txt):
     # Set the screen background
     screen.fill(colorbg)
 
-    gf.draw_map(womap, screen)
-    goal.draw(screen)
+    map.draw(screen)
+    map.goal.draw(screen)
     if not victory:
-        player.draw(screen)
+        map.player.draw(screen)
     else:
         print_result(screen, stdsize, width, height, lvl_time, color1, color2, txt, font_file)
