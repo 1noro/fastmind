@@ -88,18 +88,6 @@ verbose = False
 hstr = lang.help_string
 
 ### FUNCTIONS ##################################################################
-def checkvictory(map, victoryin, old_time, lang):
-    # global victory, lvl_time
-    victoryout = victoryin
-    lvl_time = 0
-    if (not victoryin and (map.player.x, map.player.y) == (map.goal.x, map.goal.y)):
-        new_time = datetime.now()
-        lvl_time = new_time - old_time
-        print('[INFO] '+lang.time_stopped_at, new_time)
-        print('[GOAL] '+lang.you_pass_the_level_in, lvl_time)
-        victoryout = True
-    return (victoryout, lvl_time)
-
 def ongamekey(event, map):
     xcell, ycell = player.xcell, player.ycell
     _xcell, _ycell = xcell, ycell
@@ -108,28 +96,28 @@ def ongamekey(event, map):
         if (cf.checkmove(xcell, _ycell, map.wmap, verbose, lang.no_move_wall)):
             map.player.move_up()
             map.goal.move_down()
-            cf.move_map_down(map.womap)
+            map.move_down()
             if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_DOWN):
         _ycell+=1
         if (cf.checkmove(xcell, _ycell, map.wmap, verbose, lang.no_move_wall)):
             map.player.move_down()
             map.goal.move_up()
-            cf.move_map_up(map.womap)
+            map.move_up()
             if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_LEFT):
         _xcell-=1
         if (cf.checkmove(_xcell, ycell, map.wmap, verbose, lang.no_move_wall)):
             map.player.move_left()
             map.goal.move_right()
-            cf.move_map_right(map.womap)
+            map.move_right()
             if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
     elif (event.key == pygame.K_RIGHT):
         _xcell+=1
         if (cf.checkmove(_xcell, ycell, map.wmap, verbose, lang.no_move_wall)):
             map.player.move_right()
             map.goal.move_left()
-            cf.move_map_left(map.womap)
+            map.move_left()
             if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
 
 def onmenukey(event):
@@ -365,7 +353,7 @@ def main():
                 ]
             )
         elif (display_state == 1):
-            if not victory: victory, lvl_time = checkvictory(map, victory, old_time, lang)
+            if not victory: victory, lvl_time = map.checkvictory(victory, old_time, lang)
             displays.displaygame(
                 screen, womap, goal, player, victory,
                 stdsize, width, height, lvl_time, font_file,

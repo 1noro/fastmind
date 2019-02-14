@@ -2,6 +2,7 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
+from datetime import datetime
 from graphic.elements.wall import Wall
 from graphic.elements.goal import Goal
 from graphic.elements.player import Player
@@ -76,6 +77,29 @@ class Map:
                 x+=stdsize
             x=0
             y+=stdsize
+
+    def move_left(self):
+        for o in self.womap: o.move_left()
+
+    def move_right(self):
+        for o in self.womap: o.move_right()
+
+    def move_up(self):
+        for o in self.womap: o.move_up()
+
+    def move_down(self):
+        for o in self.womap: o.move_down()
+
+    def checkvictory(self, victoryin, old_time, lang):
+        victoryout = victoryin
+        lvl_time = 0
+        if (not victoryin and (self.player.x, self.player.y) == (self.goal.x, self.goal.y)):
+            new_time = datetime.now()
+            lvl_time = new_time - old_time
+            print('[INFO] '+lang.time_stopped_at, new_time)
+            print('[GOAL] '+lang.you_pass_the_level_in, lvl_time)
+            victoryout = True
+        return (victoryout, lvl_time)
 
     def __eq__(self,other):
         out=False
