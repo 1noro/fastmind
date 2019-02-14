@@ -25,9 +25,11 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 
 > If you use __Windows__, you must previously [__install python3.x__](https://www.python.org/downloads/windows/) on your PC.
 
-> In some distributions of __GNU/Linux__ PIP for python3 is not installed by default in the system. If you have this problem run: `sudo apt-get install python3-pip` (for Debian/Ubuntu/Mint).
+> In some distributions of __GNU/Linux__ PIP for python3 is not installed by default in the system. If you have this problem run: `sudo apt-get install python3-pip` for Debian/Ubuntu/Mint.
 
-- Get the latest release, [.zip](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.zip) or [.tar.gz](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.tar.gz).
+- Get the latest release:
+    - [fastmind.zip](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.zip)
+    - [fastmind.tar.gz](https://github.com/boot1110001/fastmind/releases/download/0.0.4.201902133/fastmind-0.0.4.201902133.tar.gz)
 - Extract the `.zip/.tar.gz` in the current folder.
 - Open a terminal and navigate to the folder where the content of the `.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `sudo python3 setup.py install` for __GNU/Linux__ or `python setup.py install` for __Windows__.
