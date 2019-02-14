@@ -20,7 +20,7 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 
 ## Easy installation :smile:
 
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python >=3.5](https://img.shields.io/badge/python-%3E%3D3.5-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![pygame 1.8.0](https://img.shields.io/badge/pygame-%3E1.8.0-blue.svg)](https://www.pygame.org/wiki/GettingStarted)
 
 > If you use __Windows__, you must previously [__install python3.x__](https://www.python.org/downloads/windows/) on your PC.
