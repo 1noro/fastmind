@@ -2,10 +2,10 @@
 #by boot1110001
 
 ### IMPORTS ####################################################################
-from .__init__ import default
+from .__init__ import default_lang
 
 ### CLASSES ####################################################################
-class ES(default):
+class ES(default_lang):
     # --- Graphic --------------------------------------------------------------
     menu_play =         " JUGAR "
     menu_levels =       " NIVELES "
@@ -47,7 +47,7 @@ opciones del juego:
  -p <nombre_nivel>\t--play=<nombre_nivel>\tJuega el nivel directamente.
  -s\t\t\t--show\t\t\tMuestra los nveles disponibles.'''
 
-class GL(default):
+class GL(default_lang):
     # --- Graphic --------------------------------------------------------------
     menu_play =         " XOGO "
     menu_levels =       " NIVEIS "

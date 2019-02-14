@@ -25,6 +25,7 @@ from languages import *
 
 ### EDITABLE VARIABLES #########################################################
 lang = en.EN
+verbose = False
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
@@ -41,27 +42,12 @@ pxcenter = (pxscope / 2) - (stdsize / 2)
 home = os.path.expanduser("~")
 psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
 
-
 ### NON EDITABLE VARIABLES #####################################################
 # --- Files and folders
 version_file = 'version.txt'
 icon_file = 'media/icon.ico'
 font_file = 'media/node.ttf'
 lvls_folder = 'lvls'
-
-# --- Version
-version = ""
-shortversion = ""
-
-# --- State control
-# 0 - menu
-# 1 - game
-# 2 - level menu
-# 3 - credits
-display_state = 0
-
-# --- Run options
-verbose = False
 
 ### FUNCTIONS ##################################################################
 def play_level(lvname, width, height):
@@ -72,30 +58,10 @@ def play_level(lvname, width, height):
     print('[INFO] '+lang.time_started_at, old_time)
     return [map, old_time, victory]
 
-def set_lang(str):
-    global lang
-    if str == "en.EN":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = en.EN
-    elif str == "es.ES":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = es.ES
-    elif str == "es.GL":
-        print("[INFO] "+lang.set_lang_info+" '"+str+"'")
-        lang = es.GL
-    else:
-        print("[FAIL] '"+str+"' "+lang.set_lang_error)
-
-def print_file_vars():
-    print("[INFO] version_file = '"+version_file+"'")
-    print("[INFO] icon_file = '"+icon_file+"'")
-    print("[INFO] font_file = '"+font_file+"'")
-    print("[INFO] lvls_folder = '"+lvls_folder+"'")
-
 ### MAIN #######################################################################
 def main():
     # --- GLOBAL VARIABLES -----------------------------------------------------
-    global lvlist, verbose, lmaxselect, version, shortversion, display_state
+    global verbose, lang
 
     # --- MAIN VARIABLES -------------------------------------------------------
     width, height = pxscope, pxscope # window size
@@ -115,7 +81,16 @@ def main():
     lmaxselect = len(lvlist) - 1
     lvname = '1.lv'
 
+    # --- state control
+    # 0 - menu
+    # 1 - game
+    # 2 - level menu
+    # 3 - credits
+    display_state = 0
+
     # --- version variables
+    version = ""
+    shortversion = ""
     try:
         version = open(version_file, 'r').read().replace('\n','')
         patron = re.compile(r'(.*\..*\..*)\.')
@@ -153,7 +128,7 @@ def main():
 
     # --- Language
     if options.lang:
-        set_lang(options.lang)
+        lang = languages.set_lang(options.lang)
 
     # --- Play instantly
     if options.lvshortname:
@@ -175,7 +150,7 @@ def main():
         sys.exit()
 
     # --- Post-parameters ------------------------------------------------------
-    if verbose: print_file_vars()
+    if verbose: cf.print_file_vars(version_file, icon_file, font_file, lvls_folder)
 
     # --- PYGAME INIT ----------------------------------------------------------
     pygame.init()

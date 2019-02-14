@@ -21,3 +21,9 @@ def print_level_list(lvlist):
 
 def draw_map(womap, screen):
     for o in womap: o.draw(screen)
+
+def print_file_vars(version_file, icon_file, font_file, lvls_folder):
+    print("[INFO] version_file = '"+version_file+"'")
+    print("[INFO] icon_file = '"+icon_file+"'")
+    print("[INFO] font_file = '"+font_file+"'")
+    print("[INFO] lvls_folder = '"+lvls_folder+"'")
