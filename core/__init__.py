@@ -51,7 +51,7 @@ version = ""
 shortversion = ""
 
 # --- Time control
-old_time = 0
+# old_time = 0
 
 # --- Window dimensions
 width = 0
@@ -70,7 +70,7 @@ mmaxselect = 4
 lselect = 0
 lmaxselect = 0
 
-victory = False
+# victory = False
 
 # --- Run options
 verbose = False
@@ -132,14 +132,12 @@ def onlevelkey(event):
         if verbose : print('[RIGH] lselect = '+str(lselect))
 
 def play_level(lvname):
-    global old_time, victory
-
     victory = False
     old_time = datetime.now()
     map = Map(open(lvls_folder+'/'+lvname, 'r').read(), stdsize, cellcenter, width, height, game_color_scheme)
     print('[INFO] '+lang.playing+map.lvrealname+' ('+lvname+')')
     print('[INFO] '+lang.time_started_at, old_time)
-    return map
+    return [map, old_time, victory]
 
 def set_lang(str):
     global lang
@@ -163,7 +161,7 @@ def print_file_vars():
 
 ### MAIN #######################################################################
 def main():
-    global old_time, lvlist, width, height, verbose, lmaxselect, victory, version, shortversion, display_state
+    global lvlist, width, height, verbose, lmaxselect, version, shortversion, display_state
 
     try:
         version = open(version_file, 'r').read().replace('\n','')
@@ -181,6 +179,8 @@ def main():
     lvname = '1.lv'
 
     map = 0
+    old_time = 0
+    victory = False
 
     width, height = pxscope, pxscope # window size
 
@@ -220,7 +220,10 @@ def main():
             print(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
-        map = play_level(lvname)
+        plout = play_level(lvname)
+        map = plout[0]
+        old_time = plout[1]
+        victory = plout[2]
 
     # --- Show level-list
     if  options.show_level_list:
@@ -259,7 +262,10 @@ def main():
                         if (mselect == 0):
                             print('[ENTR] '+lang.play_level)
                             display_state = 1
-                            map = play_level(lvname)
+                            plout = play_level(lvname)
+                            map = plout[0]
+                            old_time = plout[1]
+                            victory = plout[2]
                         elif (mselect == 1):
                             print('[ENTR] '+lang.select_level)
                             display_state = 2
@@ -299,7 +305,10 @@ def main():
                         print('[ENTR] '+lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
-                        map = play_level(lvname)
+                        plout = play_level(lvname)
+                        map = plout[0]
+                        old_time = plout[1]
+                        victory = plout[2]
                     else:
                         onlevelkey(event)
         # --- Logic
