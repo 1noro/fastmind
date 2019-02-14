@@ -34,7 +34,9 @@ Fragment of the poem <i>Laberinto</i> of <i>Jorge Luis Borges</i>.
 - Open a terminal and navigate to the folder where the content of the `.zip/.tar.gz` has been extracted (using the `cd` command).
 - Execute the following command: `sudo python3 setup.py install` for __GNU/Linux__ or `python setup.py install` for __Windows__.
 
-## Manual installation
+## Manual installation :cold_sweat:
+
+If the easy installation has not worked for you, you can try this.
 
 ### Requirements
 
