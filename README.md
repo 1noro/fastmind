@@ -84,15 +84,13 @@ cd fastmind
 python3 fastmind
 ```
 
-#### Getting a .zip or a .tar.gz file from GitHub
+#### Getting a .zip file from GitHub
 
-- Extract the `fastmind-x.zip/.tar.gz` in the current folder.
-- Open a terminal and navigate to the folder where the content of the `fastmind-x.zip/.tar.gz` has been extracted (using the `cd` command).
-- Execute the following command: `python3 fastmind`.
+- Extract the `.zip` in the current folder.
+- Open a terminal and navigate to the folder where the content of the `.zip` has been extracted (using the `cd` command).
+- Execute the following command: `python3 fastmind` for __GNU/Linux__ or `python fastmind` for __Windows__.
 
 ## Run options
-
-> At this time they do not work.
 
 ```
 Usage: fastmind [options]
