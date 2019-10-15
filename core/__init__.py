@@ -211,7 +211,7 @@ def main():
                     else:
                         mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
 
-            elif ((display_state == 1) and (game_key_mode == 0)): # on game
+            elif ((display_state == 1) and (game_key_mode == 0)): # on game (game_key_mode: 0)
                 if not victory:
                     if event.type == pygame.KEYDOWN:
                         pressed_keys = pygame.key.get_pressed()
@@ -219,7 +219,7 @@ def main():
                             print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
-                            key.ongamekey2(pressed_keys, map, lang, verbose)
+                            key.ongamekey(pressed_keys, map, lang, verbose)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
@@ -242,7 +242,7 @@ def main():
                     else:
                         lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
 
-        if ((display_state == 1) and (game_key_mode == 1)): # on game
+        if ((display_state == 1) and (game_key_mode == 1)): # on game (game_key_mode: 1)
             if not victory:
                 if event.type == pygame.KEYDOWN:
                     pressed_keys = pygame.key.get_pressed()
@@ -251,7 +251,7 @@ def main():
                         display_state = 0
                     else:
                         if (in_game_key_delay == 0):
-                            key.ongamekey2(pressed_keys, map, lang, verbose)
+                            key.ongamekey(pressed_keys, map, lang, verbose)
                             in_game_key_delay = def_in_game_key_delay
                         else:
                             if (in_game_key_delay > 0): in_game_key_delay-=1

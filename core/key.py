@@ -5,39 +5,7 @@
 import pygame
 
 ### FUNCTIONS ##################################################################
-def ongamekey(event, map, lang, verbose):
-    xcell, ycell = map.player.xcell, map.player.ycell
-    _xcell, _ycell = xcell, ycell
-    if (event.key == pygame.K_UP):
-        _ycell-=1
-        if (map.checkmove(xcell, _ycell, verbose, lang)):
-            map.player.move_up()
-            map.goal.move_down()
-            map.move_down()
-            if verbose : print('[ UP ] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_DOWN):
-        _ycell+=1
-        if (map.checkmove(xcell, _ycell, verbose, lang)):
-            map.player.move_down()
-            map.goal.move_up()
-            map.move_up()
-            if verbose : print('[DOWN] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_LEFT):
-        _xcell-=1
-        if (map.checkmove(_xcell, ycell, verbose, lang)):
-            map.player.move_left()
-            map.goal.move_right()
-            map.move_right()
-            if verbose : print('[LEFT] ('+str(_xcell)+', '+str(ycell)+')')
-    elif (event.key == pygame.K_RIGHT):
-        _xcell+=1
-        if (map.checkmove(_xcell, ycell, verbose, lang)):
-            map.player.move_right()
-            map.goal.move_left()
-            map.move_left()
-            if verbose : print('[RIGH] ('+str(_xcell)+', '+str(ycell)+')')
-
-def ongamekey2(pressed_keys, map, lang, verbose):
+def ongamekey(pressed_keys, map, lang, verbose):
     xcell, ycell = map.player.xcell, map.player.ycell
     _xcell, _ycell = xcell, ycell
     if pressed_keys[pygame.K_UP]:
