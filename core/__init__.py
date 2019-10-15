@@ -23,7 +23,7 @@ from languages import *
 
 ### EDITABLE VARIABLES #########################################################
 lang = en.EN
-verbose = False
+verbose = True
 
 menu_color_scheme = color.Scheme2
 level_color_scheme = color.Scheme2
@@ -36,6 +36,9 @@ cellscope = 15 # ODD NUMBER def=15
 pxscope = cellscope * stdsize
 cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
+
+in_game_key_delay = 3
+last_key = 0
 
 psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
 
@@ -54,7 +57,7 @@ lvls_folder = 'lvls'
 ### MAIN #######################################################################
 def main():
     # --- GLOBAL VARIABLES -----------------------------------------------------
-    global verbose, lang, version_file, icon_file, font_file, lvls_folder
+    global verbose, lang, version_file, icon_file, font_file, lvls_folder, in_game_key_delay, last_key
 
     # --- MAIN VARIABLES -------------------------------------------------------
     width, height = pxscope, pxscope # window size
@@ -171,6 +174,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_LEFT]:
+        #     print('[INFO] LEFT PRESED')
+
             elif (display_state == 0): # on menu
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
@@ -201,19 +209,7 @@ def main():
                             pass
                     else:
                         mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
-            elif (display_state == 1): # on game
-                if not victory:
-                    if event.type == pygame.KEYDOWN:
-                        if (event.key == pygame.K_ESCAPE):
-                            print('[ESCP] '+lang.return_to_menu)
-                            display_state = 0
-                        else:
-                            key.ongamekey(event, map, lang, verbose)
-                else:
-                    if (event.type == pygame.KEYDOWN):
-                        if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
-                            print('[INFO] '+lang.key_pressed_return_to_menu)
-                            display_state = 0
+
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
@@ -229,6 +225,36 @@ def main():
                         victory = plout[2]
                     else:
                         lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
+
+
+        # modificar para: keys = pygame.key.get_pressed()
+        if (display_state == 1): # on game
+            if not victory:
+                if event.type == pygame.KEYDOWN:
+
+                    if (event.key == pygame.K_ESCAPE):
+                        print('[ESCP] '+lang.return_to_menu)
+                        display_state = 0
+                    else:
+                        if (event.key != last_key): in_game_key_delay = 0
+                        if ((event.key == pygame.K_UP) or
+                            (event.key == pygame.K_DOWN) or
+                            (event.key == pygame.K_LEFT) or
+                            (event.key == pygame.K_RIGHT)) and (in_game_key_delay == 0):
+
+                            key.ongamekey(event, map, lang, verbose)
+                            in_game_key_delay = 3
+                            last_key = event.key
+                        else:
+                            if (in_game_key_delay > 0): in_game_key_delay-=1
+                            print('[INFO] in_game_key_delay: '+str(in_game_key_delay))
+                            print('[INFO] last_key: '+str(last_key))
+            else:
+                if (event.type == pygame.KEYDOWN):
+                    if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
+                        print('[INFO] '+lang.key_pressed_return_to_menu)
+                        display_state = 0
+
         # --- Drawing
         if (display_state == 0):
             displays.displaymenu(
@@ -243,6 +269,7 @@ def main():
                     lang.menu_exit
                 ]
             )
+
         elif (display_state == 1):
             if not victory: victory, lvl_time = map.checkvictory(victory, old_time, lang)
             displays.displaygame(
@@ -253,6 +280,7 @@ def main():
                 game_color_scheme.BG,
                 [lang.result_txt, lang.result_seconds]
             )
+
         elif (display_state == 2):
             displays.displaylevel(
                 screen, lvlist, lselect, stdsize, cellscope,
@@ -260,9 +288,9 @@ def main():
                 level_color_scheme.LEVEL2,
                 level_color_scheme.BG_LEVEL
             )
+
         # --- Wrap-up
-        # Limit to 60 frames per second
-        clock.tick(60)
+        clock.tick(60) # Limit to 60 frames per second
 
         pygame.display.flip()
 
