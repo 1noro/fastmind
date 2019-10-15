@@ -37,8 +37,11 @@ pxscope = cellscope * stdsize
 cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
-in_game_key_delay = 3
-last_key = 0
+# --- Game Keys
+game_key_mode = 1
+def_in_game_key_delay = 4
+in_game_key_delay = def_in_game_key_delay
+
 
 psv = python_short_version = re.compile(r'([0-9]\.[0-9])\.[0-9] ').match(sys.version).group(1)
 
@@ -57,7 +60,7 @@ lvls_folder = 'lvls'
 ### MAIN #######################################################################
 def main():
     # --- GLOBAL VARIABLES -----------------------------------------------------
-    global verbose, lang, version_file, icon_file, font_file, lvls_folder, in_game_key_delay, last_key
+    global verbose, lang, version_file, icon_file, font_file, lvls_folder, game_key_mode, def_in_game_key_delay, in_game_key_delay
 
     # --- MAIN VARIABLES -------------------------------------------------------
     width, height = pxscope, pxscope # window size
@@ -210,6 +213,20 @@ def main():
                     else:
                         mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
 
+            elif ((display_state == 1) and (game_key_mode == 0)): # on game
+                if not victory:
+                    if event.type == pygame.KEYDOWN:
+                        if (event.key == pygame.K_ESCAPE):
+                            print('[ESCP] '+lang.return_to_menu)
+                            display_state = 0
+                        else:
+                            key.ongamekey(event, map, lang, verbose)
+                else:
+                    if (event.type == pygame.KEYDOWN):
+                        if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
+                            print('[INFO] '+lang.key_pressed_return_to_menu)
+                            display_state = 0
+
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
@@ -228,27 +245,26 @@ def main():
 
 
         # modificar para: keys = pygame.key.get_pressed()
-        if (display_state == 1): # on game
+        if ((display_state == 1) and (game_key_mode == 1)): # on game
             if not victory:
                 if event.type == pygame.KEYDOWN:
-
-                    if (event.key == pygame.K_ESCAPE):
+                    pressed_keys = pygame.key.get_pressed()
+                    if (pressed_keys[pygame.K_ESCAPE]):
                         print('[ESCP] '+lang.return_to_menu)
                         display_state = 0
                     else:
-                        if (event.key != last_key): in_game_key_delay = 0
-                        if ((event.key == pygame.K_UP) or
-                            (event.key == pygame.K_DOWN) or
-                            (event.key == pygame.K_LEFT) or
-                            (event.key == pygame.K_RIGHT)) and (in_game_key_delay == 0):
+                        # if (pressed_keys != last_pressed_keys): in_game_key_delay = 0
+                        if (pressed_keys[pygame.K_UP] or
+                            pressed_keys[pygame.K_DOWN] or
+                            pressed_keys[pygame.K_LEFT] or
+                            pressed_keys[pygame.K_RIGHT]) and (in_game_key_delay == 0):
 
-                            key.ongamekey(event, map, lang, verbose)
-                            in_game_key_delay = 3
-                            last_key = event.key
+                            key.ongamekey2(pressed_keys, map, lang, verbose)
+                            in_game_key_delay = def_in_game_key_delay
+                            # last_pressed_keys = pressed_keys
                         else:
                             if (in_game_key_delay > 0): in_game_key_delay-=1
-                            print('[INFO] in_game_key_delay: '+str(in_game_key_delay))
-                            print('[INFO] last_key: '+str(last_key))
+                            # print('[INFO] in_game_key_delay: '+str(in_game_key_delay))
             else:
                 if (event.type == pygame.KEYDOWN):
                     if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
