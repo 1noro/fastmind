@@ -38,7 +38,7 @@ cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
 # --- Game Keys
-game_key_mode = 1
+game_key_mode = 0
 def_in_game_key_delay = 4
 in_game_key_delay = def_in_game_key_delay
 
@@ -216,11 +216,12 @@ def main():
             elif ((display_state == 1) and (game_key_mode == 0)): # on game
                 if not victory:
                     if event.type == pygame.KEYDOWN:
-                        if (event.key == pygame.K_ESCAPE):
+                        pressed_keys = pygame.key.get_pressed()
+                        if (pressed_keys[pygame.K_ESCAPE]):
                             print('[ESCP] '+lang.return_to_menu)
                             display_state = 0
                         else:
-                            key.ongamekey(event, map, lang, verbose)
+                            key.ongamekey2(pressed_keys, map, lang, verbose)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
@@ -243,8 +244,6 @@ def main():
                     else:
                         lselect = key.onlevelkey(event, lselect, lmaxselect, verbose)
 
-
-        # modificar para: keys = pygame.key.get_pressed()
         if ((display_state == 1) and (game_key_mode == 1)): # on game
             if not victory:
                 if event.type == pygame.KEYDOWN:
@@ -253,18 +252,11 @@ def main():
                         print('[ESCP] '+lang.return_to_menu)
                         display_state = 0
                     else:
-                        # if (pressed_keys != last_pressed_keys): in_game_key_delay = 0
-                        if (pressed_keys[pygame.K_UP] or
-                            pressed_keys[pygame.K_DOWN] or
-                            pressed_keys[pygame.K_LEFT] or
-                            pressed_keys[pygame.K_RIGHT]) and (in_game_key_delay == 0):
-
+                        if (in_game_key_delay == 0):
                             key.ongamekey2(pressed_keys, map, lang, verbose)
                             in_game_key_delay = def_in_game_key_delay
-                            # last_pressed_keys = pressed_keys
                         else:
                             if (in_game_key_delay > 0): in_game_key_delay-=1
-                            # print('[INFO] in_game_key_delay: '+str(in_game_key_delay))
             else:
                 if (event.type == pygame.KEYDOWN):
                     if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
