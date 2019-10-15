@@ -120,7 +120,7 @@ Options:
 - Show results table after each level and be able to compare with others.
 - Add teleports.
 - Add original music.
-- Put the most efficient and understandable code.
+- Modify the code in order to get the most efficient way.
 
 ## Credits
 
