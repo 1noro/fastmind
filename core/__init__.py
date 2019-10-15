@@ -38,7 +38,7 @@ cellcenter = int((cellscope / 2) + 0.5)
 pxcenter = (pxscope / 2) - (stdsize / 2)
 
 # --- Game Keys
-game_key_mode = 0
+game_key_mode = 1
 def_in_game_key_delay = 4
 in_game_key_delay = def_in_game_key_delay
 
@@ -175,12 +175,10 @@ def main():
     while not done:
         # --- Event Processing & logic
         for event in pygame.event.get():
+
+            # ESTO HAY QUE MODULARLO
             if event.type == pygame.QUIT:
                 done = True
-
-        # keys = pygame.key.get_pressed()
-        # if keys[pygame.K_LEFT]:
-        #     print('[INFO] LEFT PRESED')
 
             elif (display_state == 0): # on menu
                 if event.type == pygame.KEYDOWN:
