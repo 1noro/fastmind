@@ -13,6 +13,14 @@ class bcolor:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    BLACKBG = '\033[40m'
+    REDBG = '\033[41m'
+    GREENBG = '\033[42m'
+    YELLOWBG = '\033[43m'
+    BLUEBG = '\033[44m'
+    PURPLEBG = '\033[45m'
+    CIANBG = '\033[46m'
+    WHITEBG = '\033[47m'
 
 class p:
     def init(txt):      print(bcolor.INFO + "[INIT] " + txt + bcolor.ENDC)
@@ -25,7 +33,7 @@ class p:
     def loop(txt):      print(bcolor.OKBLUE + "[LOOP] " + txt + bcolor.ENDC)
     def entr(txt):      print(bcolor.INFO + "[ENTR] " + txt + bcolor.ENDC)
     def escp(txt):      print(bcolor.INFO + "[ESCP] " + txt + bcolor.ENDC)
-    def up(txt):        print(bcolor.INFO + "[ UP ] " + txt + bcolor.ENDC)
-    def down(txt):      print(bcolor.INFO + "[DOWN] " + txt + bcolor.ENDC)
-    def left(txt):      print(bcolor.INFO + "[LEFT] " + txt + bcolor.ENDC)
-    def right(txt):     print(bcolor.INFO + "[RIGH] " + txt + bcolor.ENDC)
+    def up(txt):        print(bcolor.GREENBG + "[ UP ] " + txt + bcolor.ENDC)
+    def down(txt):      print(bcolor.YELLOWBG + "[DOWN] " + txt + bcolor.ENDC)
+    def left(txt):      print(bcolor.PURPLEBG + "[LEFT] " + txt + bcolor.ENDC)
+    def right(txt):     print(bcolor.CIANBG + "[RIGH] " + txt + bcolor.ENDC)
