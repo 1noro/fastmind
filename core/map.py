@@ -7,6 +7,9 @@ from graphic.elements.wall import Wall
 from graphic.elements.goal import Goal
 from graphic.elements.player import Player
 
+from core import log
+from datetime import datetime
+
 ### CLASSES ####################################################################
 class Map:
     def __init__(self, str, stdsize, cellcenter, width, height, game_color_scheme):
@@ -96,7 +99,7 @@ class Map:
     def checkmove(self, x, y, verbose, lang):
         out=True
         if ([x,y] in self.wmap):
-            if verbose : print('[FAIL] ('+str(x)+', '+str(y)+') '+lang.no_move_wall)
+            if verbose : log.p.fail('[' + datetime.now().strftime("%Y%m%d%H%M%S-%f") + '] ('+str(x)+', '+str(y)+') '+lang.no_move_wall)
             out=False
         return out
 
