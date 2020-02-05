@@ -14,12 +14,17 @@ class EN:
     result_seconds =    "s"
 
     # --- Shell ----------------------------------------------------------------
-    wellcome_msg = "[INIT] Wellcome to FASTMIND ("
-    wellcome_info = "[INFO] Using pygame ("
+    # wellcome_msg = "[INIT] Wellcome to FASTMIND ("
+    # wellcome_info = "[INFO] Using pygame ("
+    wellcome_msg = "Wellcome to FASTMIND ("
+    wellcome_info = "Using pygame ("
 
-    version_warning = "[WARN] The 'version.txt' file could not be read"
-    select_level_fail = "[FAIL] The selected level isn't in the list:"
-    level_list_msg = "[INFO] Level list:"
+    # version_warning = "[WARN] The 'version.txt' file could not be read"
+    # select_level_fail = "[FAIL] The selected level isn't in the list:"
+    # level_list_msg = "[INFO] Level list:"
+    version_warning = "The 'version.txt' file could not be read"
+    select_level_fail = "The selected level isn't in the list:"
+    level_list_msg = "Level list:"
     set_lang_error = "is not a recognizable language, reassigned the language by default"
     set_lang_info = "Changing language to:"
 

@@ -17,12 +17,17 @@ class ES(default_lang):
     result_seconds =    "s"
 
     # --- Shell ----------------------------------------------------------------
-    wellcome_msg = "[INIT] Bienvenido a FASTMIND ("
-    wellcome_info = "[INFO] Usando pygame ("
+    # wellcome_msg = "[INIT] Bienvenido a FASTMIND ("
+    # wellcome_info = "[INFO] Usando pygame ("
+    wellcome_msg = "Bienvenido a FASTMIND ("
+    wellcome_info = "Usando pygame ("
 
-    version_warning = "[WARN] El archivo 'version.txt' no se pudo leer"
-    select_level_fail = "[FAIL] El nivel seleccionado no está en la lista:"
-    level_list_msg = "[INFO] Lista de niveles:"
+    # version_warning = "[WARN] El archivo 'version.txt' no se pudo leer"
+    version_warning = "El archivo 'version.txt' no se pudo leer"
+    # select_level_fail = "[FAIL] El nivel seleccionado no está en la lista:"
+    select_level_fail = "El nivel seleccionado no está en la lista:"
+    # level_list_msg = "[INFO] Lista de niveles:"
+    level_list_msg = "Lista de niveles:"
 
     exiting = "Saliendo..."
     play_level = "Juagar nivel"
@@ -59,12 +64,19 @@ class GL(default_lang):
     result_seconds =    "s"
 
     # --- Shell ----------------------------------------------------------------
-    wellcome_msg = "[INIT] Benvido a FASTMIND ("
-    wellcome_info = "[INFO] Usando pygame ("
+    # wellcome_msg = "[INIT] Benvido a FASTMIND ("
+    # wellcome_info = "[INFO] Usando pygame ("
+    #
+    # version_warning = "[WARN] Non se pode ler o arquivo 'version.txt'"
+    # select_level_fail = "[FAIL] O nivel seleccionado non se atopa na lista:"
+    # level_list_msg = "[INFO] Lista de niveis:"
 
-    version_warning = "[WARN] Non se pode ler o arquivo 'version.txt'"
-    select_level_fail = "[FAIL] O nivel seleccionado non se atopa na lista:"
-    level_list_msg = "[INFO] Lista de niveis:"
+    wellcome_msg = "Benvido a FASTMIND ("
+    wellcome_info = "Usando pygame ("
+
+    version_warning = "Non se pode ler o arquivo 'version.txt'"
+    select_level_fail = "O nivel seleccionado non se atopa na lista:"
+    level_list_msg = "Lista de niveis:"
 
     exiting = "Saíndo..."
     play_level = "Xogar nivel"

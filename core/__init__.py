@@ -12,6 +12,7 @@ with contextlib.redirect_stdout(None):
 
 import core
 from core import key
+from core import log
 from core import cfunc as cf
 
 import graphic
@@ -102,11 +103,11 @@ def main():
         patron = re.compile(r'(.*\..*\..*)\.')
         shortversion = patron.search(version).group(1)
     except:
-        print(lang.version_warning)
+        log.p.warning(lang.version_warning)
 
     # --- CMD INIT -------------------------------------------------------------
-    print(lang.wellcome_msg+version+")")
-    print(lang.wellcome_info+pygame.version.ver+")")
+    log.p.init(lang.wellcome_msg+version+")")
+    log.p.info(lang.wellcome_info+pygame.version.ver+")")
 
     # --- Parameters -----------------------------------------------------------
     parser = OptionParser()
@@ -141,7 +142,8 @@ def main():
         lvname = options.lvshortname+".lv"
         display_state = 1
         if not (lvname in lvlist):
-            print(lang.select_level_fail)
+            # print(lang.select_level_fail)
+            log.p.fail(lang.select_level_fail)
             cf.print_level_list(lvlist)
             sys.exit()
         plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
@@ -151,7 +153,8 @@ def main():
 
     # --- Show level-list
     if  options.show_level_list:
-        print(lang.level_list_msg)
+        # print(lang.level_list_msg)
+        log.p.info(lang.level_list_msg)
         cf.print_level_list(lvlist)
         sys.exit()
 
@@ -183,30 +186,39 @@ def main():
             elif (display_state == 0): # on menu
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
-                        print('[ESCP] '+lang.exiting)
+                        # print('[ESCP] '+lang.exiting)
+                        log.p.escp(lang.exiting)
                         done = True
                     elif (event.key == pygame.K_RETURN):
                         if (mselect == 0):
-                            print('[ENTR] '+lang.play_level)
+                            # print('[ENTR] '+lang.play_level)
+                            log.p.entr(lang.play_level)
                             display_state = 1
                             plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
                             map = plout[0]
                             old_time = plout[1]
                             victory = plout[2]
                         elif (mselect == 1):
-                            print('[ENTR] '+lang.select_level)
+                            # print('[ENTR] '+lang.select_level)
+                            log.p.entr(lang.select_level)
                             display_state = 2
                         elif (mselect == 2):
-                            print('[ENTR] '+lang.credits)
-                            print('[FAIL] '+lang.not_implemented)
+                            # print('[ENTR] '+lang.credits)
+                            # print('[FAIL] '+lang.not_implemented)
+                            log.p.entr(lang.credits)
+                            log.p.fail(lang.not_implemented)
                         elif (mselect == 3):
-                            print('[ENTR] '+lang.config)
-                            print('[FAIL] '+lang.not_implemented)
+                            # print('[ENTR] '+lang.config)
+                            # print('[FAIL] '+lang.not_implemented)
+                            log.p.entr(lang.config)
+                            log.p.fail(lang.not_implemented)
                         elif (mselect == 4):
-                            print('[ENTR] '+lang.exiting)
+                            # print('[ENTR] '+lang.exiting)
+                            log.p.entr(lang.exiting)
                             done = True
                         else:
-                            print('[ENTR] '+lang.nothing)
+                            # print('[ENTR] '+lang.nothing)
+                            log.p.entr(lang.nothing)
                             pass
                     else:
                         mselect = key.onmenukey(event, mselect, mmaxselect, verbose)
@@ -216,23 +228,27 @@ def main():
                     if event.type == pygame.KEYDOWN:
                         pressed_keys = pygame.key.get_pressed()
                         if (pressed_keys[pygame.K_ESCAPE]):
-                            print('[ESCP] '+lang.return_to_menu)
+                            # print('[ESCP] '+lang.return_to_menu)
+                            log.p.escp(lang.return_to_menu)
                             display_state = 0
                         else:
                             key.ongamekey(pressed_keys, map, lang, verbose)
                 else:
                     if (event.type == pygame.KEYDOWN):
                         if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
-                            print('[INFO] '+lang.key_pressed_return_to_menu)
+                            # print('[INFO] '+lang.key_pressed_return_to_menu)
+                            log.p.info(lang.key_pressed_return_to_menu)
                             display_state = 0
 
             elif (display_state == 2): # on menu level
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_ESCAPE):
-                        print('[ESCP] '+lang.return_to_menu)
+                        # print('[ESCP] '+lang.return_to_menu)
+                        log.p.escp(lang.return_to_menu)
                         display_state = 0
                     elif (event.key == pygame.K_RETURN):
-                        print('[ENTR] '+lang.play_level)
+                        # print('[ENTR] '+lang.play_level)
+                        log.p.entr(lang.play_level)
                         display_state = 1
                         lvname = str(lselect)+'.lv'
                         plout = cf.play_level(lvname, width, height, lang, stdsize, cellcenter, game_color_scheme, lvls_folder)
@@ -247,7 +263,8 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     pressed_keys = pygame.key.get_pressed()
                     if (pressed_keys[pygame.K_ESCAPE]):
-                        print('[ESCP] '+lang.return_to_menu)
+                        # print('[ESCP] '+lang.return_to_menu)
+                        log.p.escp(lang.return_to_menu)
                         display_state = 0
                     else:
                         if (in_game_key_delay == 0):
@@ -258,7 +275,8 @@ def main():
             else:
                 if (event.type == pygame.KEYDOWN):
                     if not (event.key in [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]):
-                        print('[INFO] '+lang.key_pressed_return_to_menu)
+                        # print('[INFO] '+lang.key_pressed_return_to_menu)
+                        log.p.info(lang.key_pressed_return_to_menu)
                         display_state = 0
 
         # --- Drawing
