@@ -25,3 +25,7 @@ class p:
     def loop(txt):      print(bcolor.OKBLUE + "[LOOP] " + txt + bcolor.ENDC)
     def entr(txt):      print(bcolor.INFO + "[ENTR] " + txt + bcolor.ENDC)
     def escp(txt):      print(bcolor.INFO + "[ESCP] " + txt + bcolor.ENDC)
+    def up(txt):        print(bcolor.INFO + "[ UP ] " + txt + bcolor.ENDC)
+    def down(txt):      print(bcolor.INFO + "[DOWN] " + txt + bcolor.ENDC)
+    def left(txt):      print(bcolor.INFO + "[LEFT] " + txt + bcolor.ENDC)
+    def right(txt):     print(bcolor.INFO + "[RIGH] " + txt + bcolor.ENDC)
